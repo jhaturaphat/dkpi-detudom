@@ -1,9 +1,13 @@
 require('dotenv').config();
-const express = require('express');
 
+const express = require('express');
+const bodyParser = require('body-parser');
+const { urlencoded } = require('body-parser');
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(urlencoded({extended: true}));
 
 app.get('/',(req, res)=>{
     res.json({
