@@ -1,14 +1,18 @@
 
 const db = require('../config/db')
 
-async function group (){
-  let data = null
+const item = "";
+
+async function _group (){  
     await db.query('SELECT * FROM hdd', function (error, results, fields) {
         if (error) throw error;
-        return results;
+        item = results;
         //console.log('data from query: ', results); 
                
       });
 } 
 
-module.exports = group
+module.exports = {
+  item,
+  _group
+} 
