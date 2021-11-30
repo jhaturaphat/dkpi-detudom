@@ -3,16 +3,15 @@ const db = require('../config/db')
 
 const item = "";
 
-async function _group (){  
-    await db.query('SELECT * FROM hdd', function (error, results, fields) {
-        if (error) throw error;
-        item = results;
-        //console.log('data from query: ', results); 
-               
-      });
-} 
+function indi() {
+  db.query('SELECT * FROM hdd', function (error, results, fields) {
+    if (error) throw error;    
+    console.log('data from query: ', results); 
+    return item = results;               
+  });
+}
 
-module.exports = {
+exports = {
   item,
-  _group
-} 
+  indi
+}
