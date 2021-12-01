@@ -1,2 +1,33 @@
 */node_modules
 */.angular
+
+# compiled output
+*/dist
+*/tmp
+*/out-tsc
+# Only exists if Bazel was run
+*/bazel-out
+
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/frontend/.angular/cache
+/frontend//.sass-cache
+/frontend//connect.lock
+/frontend//coverage
+/frontend/libpeerconnection.log
+/frontend/npm-debug.log
+/frontend/yarn-error.log
+/frontend/testem.log
+/frontend/typings
+
+# System Files
+/frontend/.DS_Store
+/frontend/Thumbs.db
