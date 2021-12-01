@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(urlencoded({extended: true}));
 
 // route
-app.use('/api', indicator) 
+app.use('/indicator', indicator) 
 app.get('/',(req, res)=>{
     res.json({
         'message':'Hello World'

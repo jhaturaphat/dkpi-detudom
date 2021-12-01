@@ -1,8 +1,11 @@
+// router ของการจัดการกับตาราง indi_group ซึ่งอ้างอิงไปที่ indiController.js
+
 const express = require('express')
 const router = express.Router();
 
-const {create} = require('../controllers/indicatorController');
+const {AllGroup, createGroup} = require('../controllers/indicatorController');
 
-router.get('/indicator',create)
+router.get('/group',AllGroup)
+router.post('/group',createGroup)
 
 module.exports = router;
