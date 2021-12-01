@@ -5,14 +5,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { urlencoded } = require('body-parser');
 
-const indicator = require('./controllers/indicator.controller')
+const indicator = require('./routes/indicatorRouter')
+
 
 const app = express();
 
+// middleware
 app.use(cors())
 app.use(bodyParser.json());
 app.use(urlencoded({extended: true}));
 
+// route
 app.use('/api', indicator) 
 app.get('/',(req, res)=>{
     res.json({
