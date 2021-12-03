@@ -12,7 +12,7 @@ export class MenuLeftComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // JSsideBar.loadScript()
+    JSsideBar.loadScript()
   }
 
 }

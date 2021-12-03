@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../layout/header/header.component';
 import { MenuLeftComponent } from '../layout/menu-left/menu-left.component';
 import { ToggleMenuDirective } from 'src/app/directives/toggle-menu.directive';
-import { ToggleTreeviewDirective } from 'src/app/directives/toggle-treeview.directive';
+
 
 
 
@@ -11,8 +11,7 @@ import { ToggleTreeviewDirective } from 'src/app/directives/toggle-treeview.dire
   declarations: [
     HeaderComponent,
     MenuLeftComponent,
-    ToggleMenuDirective,
-    ToggleTreeviewDirective
+    ToggleMenuDirective
   ],
   imports: [
     CommonModule
