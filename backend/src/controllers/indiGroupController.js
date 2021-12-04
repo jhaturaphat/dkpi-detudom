@@ -1,13 +1,13 @@
 const db = require('../configs/db')
 
 // ดึงข้อมูลทุก recoard
-exports.AllGroup = async (req, res) =>{
+exports.findAll = async (req, res) =>{
    try{
       const result = await db.execute('SELECT * FROM indi_group');   
       res.json({
          error:false,
          message:"ยินดีตอนรับ",
-         data:result.length == 0 ? result.length[0] : null
+         data:result.length == 0 ? null : result[0]
       });
    }catch(err){
       res.status(500);
@@ -20,8 +20,29 @@ exports.AllGroup = async (req, res) =>{
    
 }
 
-// บันทึกข้อมูลลงตาราง  
-exports.createGroup = async (req,res)=>{  
+// ดึงข้อมูล 1 recoard
+exports.findOne = async (req, res) =>{
+   console.log(req.params.id);
+   try{
+      const result = await db.execute('SELECT * FROM indi_group WHERE id=?',[req.params.id]);   
+      res.json({
+         error:false,
+         message:"ยินดีตอนรับ",
+         data:result.length == 0 ? null : result[0]
+      });
+   }catch(err){
+      res.status(500);
+      res.json({
+         error:true, 
+         message:err.message,
+         data:err
+      });
+   }
+   
+}
+
+// บันทึกข้อมูลลงตาราง indi_g
+exports.save = async (req,res)=>{  
    let {id, name_th, name_en} = req.body;
    try{
       const result = await db.execute('INSERT INTO indi_group (id,name_th, name_en) VALUES (?,?,?)',[id,name_th,name_en]);   
@@ -37,6 +58,15 @@ exports.createGroup = async (req,res)=>{
          message:err.message,
          data:err
       });
-   }
-  
+   }  
+}
+
+// แก้ไขข้อมูล
+exports.update = async (req,res) => {
+
+}
+
+// ลบข้อมูล
+exports._delete = async (req,res) => {
+
 }

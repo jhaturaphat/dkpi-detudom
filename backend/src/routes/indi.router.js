@@ -2,14 +2,13 @@
 
 const router = require('express').Router()
 
-const {AllGroup, createGroup} = require('../controllers/indiGroupController');
+const {findAll, findOne, save, update, _delete} = require('../controllers/indiGroupController');
 
-const indiTypeController = require('../controllers/indiTypeController');
-indiType = new indiTypeController();
 
-router.get('/group',AllGroup)
-router.post('/group',createGroup)
-
-router.get('/type', (req, res) => res.sendAsyncApi(indiType.selectAll()))
+router.get('/findall',findAll)
+router.get('/findone/:id',findOne)
+router.post('/save',save)
+router.put('/update/:id',update)
+router.delete('/delete/:id',_delete)
 
 module.exports = router;
