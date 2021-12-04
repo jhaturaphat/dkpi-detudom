@@ -1,13 +1,25 @@
 const db = require('../configs/db')
 
+
+count = async () => {
+   try{
+      return await db.execute('SELECT COUNT(*) FROM indi_group');         
+   }catch(err){
+      throw(err);
+   }   
+}
+
 // ดึงข้อมูลทุก recoard
 exports.findAll = async (req, res) =>{
    try{
+      // const result = arr.reduce((obj, cur) => ({...obj, [cur.sid]: cur}), {})
+      const count = await db.execute('SELECT COUNT(*) AS count FROM indi_group');      
       const result = await db.execute('SELECT * FROM indi_group');   
       res.json({
          error:false,
          message:"ยินดีตอนรับ",
-         data:result.length == 0 ? null : result[0]
+         data:result.length == 0 ? null : result[0],
+         count: count[0][0]
       });
    }catch(err){
       res.status(500);
@@ -16,8 +28,7 @@ exports.findAll = async (req, res) =>{
          message:err.message,
          data:err
       });
-   }
-   
+   }   
 }
 
 // ดึงข้อมูล 1 recoard
@@ -28,7 +39,7 @@ exports.findOne = async (req, res) =>{
       res.json({
          error:false,
          message:"ยินดีตอนรับ",
-         data:result.length == 0 ? null : result[0]
+         data:result.length == 0 ? null : result[0][0]
       });
    }catch(err){
       res.status(500);
