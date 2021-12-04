@@ -10,13 +10,16 @@ const db = mysql.createConnection({
     database: process.env.DB_DATABASES
   }).promise();
 
+
+
+
 // ทำการเชื่อมต่อกับฐานข้อมูล 
-db.connect((err) =>{
-    if(err){ // กรณีเกิด error
-        console.error('error connecting: ' + err.message)
-        return
-    }
-    console.log('connected as id ' + db.threadId)
-})
+// db.connect((err) =>{
+//     if(err){ // กรณีเกิด error
+//         console.error('error connecting: ' + err.message)
+//         return
+//     }
+//     console.log('connected as id ' + db.threadId)
+// })
  
 module.exports = db; 

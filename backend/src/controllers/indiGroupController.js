@@ -1,4 +1,4 @@
-const db = require('../config/db')
+const db = require('../configs/db')
 
 // ดึงข้อมูลทุก recoard
 exports.AllGroup = async (req, res) =>{
@@ -7,7 +7,7 @@ exports.AllGroup = async (req, res) =>{
       res.json({
          error:false,
          message:"ยินดีตอนรับ",
-         data:result[0]
+         data:result.length == 0 ? result.length[0] : null
       });
    }catch(err){
       res.status(500);
@@ -20,7 +20,7 @@ exports.AllGroup = async (req, res) =>{
    
 }
 
-// บันทึกข้อมูลลงฐานข้อมูล
+// บันทึกข้อมูลลงตาราง  
 exports.createGroup = async (req,res)=>{  
    let {id, name_th, name_en} = req.body;
    try{
@@ -28,7 +28,7 @@ exports.createGroup = async (req,res)=>{
       res.json({
          error:false,
          message:"บันทึกข้อมูลสำเร็จ",
-         data:result[0]
+         data:result.length == 0 ? result.length[0] : null
       });
    }catch(err){
       res.status(500);
