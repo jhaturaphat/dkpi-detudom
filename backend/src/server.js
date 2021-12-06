@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(urlencoded({extended: true}));
 app.use(require('./configs/config'));
 // route
-app.use('/indi', require('./routes/indi.router')) 
+app.use('/indi/group', require('./routes/indi.group.router')) 
 app.get('/',(req, res)=>{
     res.json({
         'message':'Hello World'
