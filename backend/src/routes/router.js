@@ -6,6 +6,7 @@ const TypeController = require('../controllers/indicators/TypeController');
 
 const Group = new GroupController();
 router.get('/group',(req, res) => res.sendAsyncApi(Group.findAll()));
+router.get('/group/:id',(req, res) => res.sendAsyncApi(Group.findOne(req.params.id)));
 router.post('/group',(req, res) => res.sendAsyncApi(Group.save(req.body)));
 
 const Type = new TypeController();

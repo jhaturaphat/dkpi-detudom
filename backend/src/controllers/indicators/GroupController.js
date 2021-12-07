@@ -35,19 +35,19 @@ class GroupController {
         return this._databases.query('SELECT * FROM indi_group');
     }
 
-    findOne(id){
-        const item = this._databases.query('SELECT * FROM indi_group WHERE id=?',[id]);
+    async findOne(id){
+        const item = await this._databases.query('SELECT * FROM indi_group WHERE id=?',[id]);
         return item.length == 0 ? null : item[0];
     }
 
 
     async save(value){
-        const item = await this._databases.query('INSERT INTO indi_group VALUES (?,?,?)',[
+        const item = await this._databases.query('INSERT INTO indi_group (id,name_th, name_en) VALUES (?,?,?)',[
             value['id'],
             value['name_th'],
             value['name_en']
-        ]);
-        return await this.findAll(item.insertId);
+        ]);        
+        return await this.findOne(value['id']);
     }
 }
 
