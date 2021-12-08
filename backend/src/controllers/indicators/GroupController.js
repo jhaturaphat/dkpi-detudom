@@ -7,25 +7,27 @@ class GroupController {
         db = database.KpiDatabase
         ){
         this._databases = new db();
+        this._validate = valid;
         this.validate_rules = {
             id: {
                 presence: {
                     allowEmpty: false
                 },
                 format: {
-                    pattern: "[A-Z]+",
+                    pattern: "[A-Z]{1}",
                     flags: "i",
-                    message: "ตัวพิมพ์ใหญ่เท่านั้น"
+                    message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น"
                   }
             },
             name_th: {
                 presence: {
-                    allowEmpty: false
+                    allowEmpty: false,
+                    message:"ไม่สามารถเว้นว่างได้"
                 },                
             },
             name_en: {
                 presence: {
-                    allowEmpty: false
+                    allowEmpty: true
                 }
             }
         };
@@ -42,12 +44,28 @@ class GroupController {
 
 
     async save(value){
+        const errors = this._validate(value, this.validate_rules);
+        if (errors) throw { errors };
         const item = await this._databases.query('INSERT INTO indi_group (id,name_th, name_en) VALUES (?,?,?)',[
-            value['id'],
+            value['id'].toUpperCase(),
             value['name_th'],
             value['name_en']
         ]);        
         return await this.findOne(value['id']);
+    }
+
+    async update(id, value) {  
+        const errors = this._validate(value, this.validate_rules);        
+        const errorsId = this._validate({id} , { id: { format:{pattern:'[A-Z]{1}', message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น"} }});
+        console.log(value);
+        if (errors || errorsId) throw { errors: errorsId || errors };
+        
+        await this._databases.query("UPDATE indi_group SET name_th=?, name_en=? WHERE id=?",[
+            value['name_th'],
+            value['name_en'],
+            id
+        ])
+        return await this.findOne(id);
     }
 }
 

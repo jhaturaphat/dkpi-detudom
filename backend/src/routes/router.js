@@ -8,6 +8,7 @@ const Group = new GroupController();
 router.get('/group',(req, res) => res.sendAsyncApi(Group.findAll()));
 router.get('/group/:id',(req, res) => res.sendAsyncApi(Group.findOne(req.params.id)));
 router.post('/group',(req, res) => res.sendAsyncApi(Group.save(req.body)));
+router.put('/group/:id',(req, res) => res.sendAsyncApi(Group.update(req.params.id,req.body)));
 
 const Type = new TypeController();
 router.get('/type', (req, res) => res.sendAsyncApi(Type.findAll()));
