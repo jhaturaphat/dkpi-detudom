@@ -67,6 +67,13 @@ class GroupController {
         ])
         return await this.findOne(id);
     }
+
+    async delete(id){
+        const errors = this._validate({ id }, { id: { presence: {allowEmpty: false} } }); 
+        console.log(errors);       
+        if (errors) throw { errors };
+        return await this._database.query('DELETE FROM indi_group where id=?', [id]);
+    }
 }
 
 module.exports = GroupController;
