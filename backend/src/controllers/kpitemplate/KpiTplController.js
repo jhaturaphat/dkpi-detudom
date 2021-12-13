@@ -56,24 +56,24 @@ class KpiTplController {
       },
       benchmark: {
         presence: {
-          allowEmpty: true
+          allowEmpty: true,
         },
       },
       howtooper:{
         presence: {
-            allowEmpty: true
+            allowEmpty: true,
         },
       },
       ref:{
         presence: {
-            allowEmpty: true
+            allowEmpty: true,
         },
       },
       start_date:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
-          }, 
+        }, 
       },
       edit_date:{
         presence: {
@@ -83,31 +83,31 @@ class KpiTplController {
       },
       edit_note:{
         presence: {
-            allowEmpty: true
+            allowEmpty: true,
         },
       },
       note:{
         presence: {
-            allowEmpty: true
+            allowEmpty: true,
         },
       },
       dep_responsible:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
-          }, 
+        }, 
       },
       indi_name_id:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
-          },
+        },
       },
       freq_store_id:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
-          },
+        },
       }
     };
   }
