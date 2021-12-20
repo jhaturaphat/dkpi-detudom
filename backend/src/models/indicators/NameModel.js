@@ -1,7 +1,7 @@
 const validate = require('validate.js');
 const database = require('../../configs/KpiDatabaes');
 
-class TypeController {
+class NameModel{
     constructor(
         valid = validate,
         db = database.KpiDatabase
@@ -29,16 +29,22 @@ class TypeController {
                 presence: {
                     allowEmpty: true
                 }
+            },
+            indi_type_id:{
+                presence: {
+                    allowEmpty: false,
+                    message:"ไม่สามารถเว้นว่างได้"
+                },
             }
         };
     }
 
     findAll(){
-        return this._databases.query('SELECT * FROM indi_type');
+        return this._databases.query('SELECT * FROM indi_name');
     }
 
     async findOne(id){
-        const item = await this._databases.query('SELECT * FROM indi_type WHERE id=?',[id]);
+        const item = await this._databases.query('SELECT * FROM indi_name WHERE id=?',[id]);
         return item.length == 0 ? null : item[0];
     }
 
@@ -46,10 +52,11 @@ class TypeController {
     async save(value){
         const errors = this._validate(value, this.validate_rules);
         if (errors) throw { errors };
-        const item = await this._databases.query('INSERT INTO indi_type (id,name_th, name_en) VALUES (?,?,?)',[
+        const item = await this._databases.query('INSERT INTO indi_name (id,name_th, name_en, indi_type_id=?) VALUES (?,?,?,?)',[
             value['id'].toUpperCase(),
             value['name_th'],
-            value['name_en']
+            value['name_en'],
+            value['indi_type_id'].toUpperCase()
         ]);        
         return await this.findOne(value['id']);
     }
@@ -60,9 +67,10 @@ class TypeController {
         console.log(value);
         if (errors || errorsId) throw { errors: errorsId || errors };
         
-        await this._databases.query("UPDATE indi_type SET name_th=?, name_en=? WHERE id=?",[
+        await this._databases.query("UPDATE indi_name SET name_th=?, name_en=?, indi_type_id=? WHERE id=?",[
             value['name_th'],
             value['name_en'],
+            value['indi_type_id'].toUpperCase(),
             id
         ])
         return await this.findOne(id);
@@ -72,8 +80,8 @@ class TypeController {
         const errors = this._validate({ id }, { id: { presence: {allowEmpty: false} } }); 
         console.log(errors);       
         if (errors) throw { errors };
-        return await this._database.query('DELETE FROM indi_type where id=?', [id]);
+        return await this._databases.query('DELETE FROM indi_name where id=?', [id]);
     }
 }
 
-module.exports = TypeController;
+module.exports = NameModel;

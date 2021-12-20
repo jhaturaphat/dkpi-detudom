@@ -1,5 +1,8 @@
 const router = require('express').Router();
 
+router.use('/indi', require('../controllers/IndicatorsController'));
+
+/*
 const GroupController = require('../controllers/indicators/GroupController');
 const NameController = require('../controllers/indicators/NameController');
 const TypeController = require('../controllers/indicators/TypeController');
@@ -19,6 +22,6 @@ router.put('/type/:id',(req, res) => res.sendAsyncApi(Group.update(req.params.id
 router.delete('/type/:id',(req, res) => res.sendAsyncApi(Group.delete(req.params.id)));
 
 const Name = new NameController();
-router.get('/name', (req, res) => res.sendAsyncApi(Name.findAll()));
+router.get('/name', (req, res) => res.sendAsyncApi(Name.findAll()));*/
 
 module.exports = router;

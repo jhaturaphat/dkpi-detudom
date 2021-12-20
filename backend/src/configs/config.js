@@ -14,7 +14,10 @@ module.exports = function (req, res, next) {
     res.sendAsyncApi = function (promise) {
         promise
             .then(item => res.sendApi(item))
-            .catch(error => res.sendApi(error, 400));
+            .catch(error => {     
+                console.log(error);           
+                res.sendApi(error, 400);
+            });
     };
 
     next();

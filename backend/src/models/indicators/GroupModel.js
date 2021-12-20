@@ -1,7 +1,7 @@
 const validate = require('validate.js');
 const database = require('../../configs/KpiDatabaes');
 
-class TypeController {
+class GroupModel {
     constructor(
         valid = validate,
         db = database.KpiDatabase
@@ -34,11 +34,11 @@ class TypeController {
     }
 
     findAll(){
-        return this._databases.query('SELECT * FROM indi_type');
+        return this._databases.query('SELECT * FROM indi_group');
     }
 
     async findOne(id){
-        const item = await this._databases.query('SELECT * FROM indi_type WHERE id=?',[id]);
+        const item = await this._databases.query('SELECT * FROM indi_group WHERE id=?',[id]);
         return item.length == 0 ? null : item[0];
     }
 
@@ -46,7 +46,7 @@ class TypeController {
     async save(value){
         const errors = this._validate(value, this.validate_rules);
         if (errors) throw { errors };
-        const item = await this._databases.query('INSERT INTO indi_type (id,name_th, name_en) VALUES (?,?,?)',[
+        const item = await this._databases.query('INSERT INTO indi_group (id,name_th, name_en) VALUES (?,?,?)',[
             value['id'].toUpperCase(),
             value['name_th'],
             value['name_en']
@@ -60,7 +60,7 @@ class TypeController {
         console.log(value);
         if (errors || errorsId) throw { errors: errorsId || errors };
         
-        await this._databases.query("UPDATE indi_type SET name_th=?, name_en=? WHERE id=?",[
+        await this._databases.query("UPDATE indi_group SET name_th=?, name_en=? WHERE id=?",[
             value['name_th'],
             value['name_en'],
             id
@@ -69,11 +69,10 @@ class TypeController {
     }
 
     async delete(id){
-        const errors = this._validate({ id }, { id: { presence: {allowEmpty: false} } }); 
-        console.log(errors);       
-        if (errors) throw { errors };
-        return await this._database.query('DELETE FROM indi_type where id=?', [id]);
+        const errors = this._validate({ id }, { id: { presence: {allowEmpty: false} } });                
+        if (errors) throw { errors };          
+        return await this._databases.query("DELETE FROM indi_group WHERE id=?", [id]);        
     }
 }
 
-module.exports = TypeController;
+module.exports = GroupModel; 

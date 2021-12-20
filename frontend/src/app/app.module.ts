@@ -5,6 +5,7 @@ import { AppRoutingModule, AppRoutingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './shared/modules/layout.module';
 import { ContentComponent } from './shared/layout/content/content.component';
+import { IndicatorsModule } from './indicators/indicators.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,12 @@ import { ContentComponent } from './shared/layout/content/content.component';
     AppRoutingComponent,
     ContentComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, LayoutModule],
+  imports: [
+    BrowserModule, 
+    AppRoutingModule, 
+    LayoutModule,
+    IndicatorsModule
+  ],
   exports: [],
   providers: [],
   bootstrap: [AppComponent],

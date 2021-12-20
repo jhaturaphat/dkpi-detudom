@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mysql = require('mysql2'); // เรียกใช้งาน MySQL module
+const mysql = require('mysql'); // เรียกใช้งาน MySQL module
 
 class KpiDatabase {
 
@@ -23,6 +23,6 @@ class KpiDatabase {
             });
         });
     }
-}
+} 
 
 module.exports = {KpiDatabase}
