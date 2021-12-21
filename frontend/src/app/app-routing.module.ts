@@ -2,19 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
-import { GroupComponent } from './indicators/group/group.component';
-import { NameComponent } from './indicators/name/name.component';
-import { TypeComponent } from './indicators/type/type.component';
-
+import { AppUrl } from './url';
 const routes: Routes = [
-  {path:'', redirectTo:'/dashboard', pathMatch:'full'},
-  {path:'login',component:LoginComponent},
-  {path:'dashboard',component:DashboardComponent},
-  {path:'indicator',children:[
-    { path:'group', component:GroupComponent },
-    { path:'type', component:TypeComponent },
-    { path:'name', component:NameComponent },
-  ]}
+  {path:'', redirectTo:AppUrl.Dashboard, pathMatch:'full'},
+  {path:AppUrl.Login, component:LoginComponent},
+  {path:AppUrl.Dashboard, component:DashboardComponent},
+  {path:AppUrl.Kpi, loadChildren: ()=> import('./kpi/kpi.module').then(m=> m.KpiModule)},
 ];
 
 @NgModule({

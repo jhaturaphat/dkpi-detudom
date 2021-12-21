@@ -4,20 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, AppRoutingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './shared/modules/layout.module';
-import { ContentComponent } from './shared/layout/content/content.component';
-import { IndicatorsModule } from './indicators/indicators.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppRoutingComponent,
-    ContentComponent
+    AppRoutingComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,  
     AppRoutingModule, 
-    LayoutModule,
-    IndicatorsModule
+    LayoutModule
   ],
   exports: [],
   providers: [],

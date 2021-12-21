@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../layout/header/header.component';
 import { MenuLeftComponent } from '../layout/menu-left/menu-left.component';
 import { ToggleMenuDirective } from 'src/app/directives/toggle-menu.directive';
+import { ContentComponent } from '../layout/content/content.component';
 
 
 
@@ -12,15 +13,17 @@ import { ToggleMenuDirective } from 'src/app/directives/toggle-menu.directive';
   declarations: [
     HeaderComponent,
     MenuLeftComponent,
+    ContentComponent,
     ToggleMenuDirective
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   exports:[    
     HeaderComponent,
-    MenuLeftComponent
+    MenuLeftComponent,  
+    ContentComponent
   ]
 })
 export class LayoutModule { }
