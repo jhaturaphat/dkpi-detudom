@@ -45,12 +45,13 @@ class GroupModel {
 
     async save(value){
         const errors = this._validate(value, this.validate_rules);
-        if (errors) throw { errors };
+        if (errors) throw { errors };        
         const item = await this._databases.query('INSERT INTO indi_group (id,name_th, name_en) VALUES (?,?,?)',[
             value['id'].toUpperCase(),
             value['name_th'],
             value['name_en']
         ]);        
+                
         return await this.findOne(value['id']);
     }
 

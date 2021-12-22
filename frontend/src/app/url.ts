@@ -6,5 +6,8 @@ export const AppUrl = {
 }
 
 export const KpiUrl = {
-    Dashboard: 'dashboard'
+    Dashboard: 'dashboard',
+    Group:'group',
+    Type:'type',
+    Name:'name'
 }

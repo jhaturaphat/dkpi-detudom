@@ -1,1 +1,34 @@
-<p>groupkpi works!</p>
+<app-content>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">หมวดตัวชี้วัด</h3>
+                <div class="tile-body">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+                        <div class="form-group">
+                            <label class="control-label">รหัส</label>
+                            <input class="form-control" type="text" placeholder="CODE" formControlName="id">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">หมวดตัวชี้วัด (ภาษาไทย)</label>
+                            <input class="form-control" type="text" placeholder="ภาษาไทย" formControlName="name_th">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">หมวดตัวชี้วัด (ภาษาอังกฤษ)</label>
+                            <input class="form-control" type="text" placeholder="ภาษาอังกฤษ" formControlName="name_en">
+                        </div>
+                        <div class="tile-footer">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</app-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AppUrl, KpiUrl } from '../../../url'
 declare const JSsideBar:any;
 
 @Component({
@@ -10,6 +10,9 @@ declare const JSsideBar:any;
 export class MenuLeftComponent implements OnInit {
 
   constructor() { }
+
+  AppUrl = AppUrl;
+  KpiUrl = KpiUrl;
 
   ngOnInit(): void {
     JSsideBar.loadScript()
