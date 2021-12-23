@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="tile">
-                <h3 class="tile-title">หมวดตัวชี้วัด</h3>
+                <h3 class="tile-title">หมวดตัวชี้วัด เพิ่ม|ลบ|แก้ไข้</h3>
                 <div class="tile-body">
-                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="Form">
 
                         <div class="form-group">
                             <label class="control-label">รหัส</label>
-                            <input class="form-control" type="text" placeholder="CODE" formControlName="id">
+                            <input class="form-control" type="text" placeholder="CODE" formControlName="id" maxlength="1" style="text-transform:uppercase">
                         </div>
                         <div class="form-group">
                             <label class="control-label">หมวดตัวชี้วัด (ภาษาไทย)</label>
@@ -19,9 +19,10 @@
                             <input class="form-control" type="text" placeholder="ภาษาอังกฤษ" formControlName="name_en">
                         </div>
                         <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>
+                            <!-- [disabled]="!Form.valid" ปิดปุ่มไว้ไม่ให้กดถ้ากรอกข้มูลไม่ครบ -->
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                                <button class="btn btn-secondary" type="button" (click)="onReset()"><i class="fa fa-fw fa-lg fa-times-circle"></i>Reset</button>
                         </div>
                         
                     </form>
@@ -29,6 +30,34 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">รายการหมวดตัวชี้วัด</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>รหัส</th>
+                            <th>ชื่อภาษาไทย</th>
+                            <th>ชื่อภาษาอักฤษ</th>
+                            <th><i class="fa fa-cogs"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of indiGroup; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{item.id}}</td>                            
+                            <td>{{item.name_th}}</td>                            
+                            <td>{{item.name_en}}</td> 
+                            <td>
+                                <i class="fa fa-edit text-primary" (click)="onUpdate(item)"></i> |                               
+                                <i class="fa fa-trash text-danger" (click)="onDelete(item)"></i>
+                            </td>                           
+                                                      
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </app-content>

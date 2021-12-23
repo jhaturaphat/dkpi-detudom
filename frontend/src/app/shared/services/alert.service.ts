@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import Swal from 'sweetalert2'
 declare const $:any;
 
 @Injectable({
@@ -6,7 +7,7 @@ declare const $:any;
 })
 
 export class AlertService {
-    notify(message: string = "Null", type: string = 'warning') {
+    notify(message: string = "Null", type: string = 'success') {
         $.notify({
             // options
             title: 'แจ้งเตือนจากระบบ : ',
@@ -52,7 +53,21 @@ export class AlertService {
             });
     }
 
-    someting_wrong(message: string = 'ข้อมูลบางอย่างไม่ถูกต้อง กรุณาลองอีกครั้ง') {
-        this.notify(message);
+    someting_wrong(message: string = 'ข้อมูลบางอย่างไม่ถูกต้อง กรุณาลองอีกครั้ง', type:string = 'warning') {
+        this.notify(message, type);
+    }
+
+     // แจ้งเตือนยืนยันการทำรายการ
+    confirm(message: string = 'คุณต้องการจะทำรายการต่อไปหรือไม่ ?'):Promise<any> {
+        return Swal.fire({
+            title: 'คุณแน่ใจแล้วใช่ หรือ ไม่',
+            text: message,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่',
+            cancelButtonText: 'ไม่'
+          })
     }
 }

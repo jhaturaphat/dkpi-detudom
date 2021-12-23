@@ -55,13 +55,14 @@ class GroupModel {
         return await this.findOne(value['id']);
     }
 
-    async update(id, value) {  
+    async update(id, value) { 
+        console.log(id);
         const errors = this._validate(value, this.validate_rules);        
         const errorsId = this._validate({id} , { id: { format:{pattern:'[A-Z]{1}', message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น"} }});
         console.log(value);
         if (errors || errorsId) throw { errors: errorsId || errors };
         
-        await this._databases.query("UPDATE indi_group SET name_th=?, name_en=? WHERE id=?",[
+        await this._databases.query("UPDATE indi_group SET name_th=?, name_en=?, update_at=NOW() WHERE id=?",[
             value['name_th'],
             value['name_en'],
             id
