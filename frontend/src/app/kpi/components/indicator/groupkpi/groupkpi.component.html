@@ -5,7 +5,6 @@
                 <h3 class="tile-title">หมวดตัวชี้วัด เพิ่ม|ลบ|แก้ไข้</h3>
                 <div class="tile-body">
                     <form (ngSubmit)="onSubmit()" [formGroup]="Form">
-
                         <div class="form-group">
                             <label class="control-label">รหัส</label>
                             <input class="form-control" type="text" placeholder="CODE" formControlName="id" maxlength="1" style="text-transform:uppercase">
@@ -20,7 +19,8 @@
                         </div>
                         <div class="tile-footer">
                             <!-- [disabled]="!Form.valid" ปิดปุ่มไว้ไม่ให้กดถ้ากรอกข้มูลไม่ครบ -->
-                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid" *ngIf="!UpdateState"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>                            
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid" *ngIf="UpdateState"><i class="fa fa-fw fa-lg fa-check-circle"></i>อัพเดท</button>                            
                                 &nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-secondary" type="button" (click)="onReset()"><i class="fa fa-fw fa-lg fa-times-circle"></i>Reset</button>
                         </div>

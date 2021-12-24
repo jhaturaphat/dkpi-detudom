@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { IndicatorService } from 'src/app/shared/services/indicator.service';
-import { IGroupkpi } from './groupkpi.interface';
+import { IGroupkpi } from '../indicator.interface';
 
 @Component({
   selector: 'app-groupkpi',
@@ -30,9 +30,7 @@ export class GroupkpiComponent implements OnInit {
      this.indiAll();
   }
   public onReset():void{
-    this.UpdateState = false;
-    console.log("Reset Fome");
-    
+    this.UpdateState = false;    
     const form = this.Form;
     form.controls['id'].setValue(''); 
     form.controls['name_th'].setValue(''); 
@@ -53,7 +51,9 @@ export class GroupkpiComponent implements OnInit {
       })
     }else{
       this.indiService.onGroupSave(this.Form.value).then((item)=>{
-        console.log(item);      
+        this.alert.notify('บันทึกสำเร็จ');
+        this.indiAll();  
+        this.onReset();     
       }).catch((err)=>{
         console.log(err.error.errors); 
         this.alert.notify(err.error.errors.sqlMessage, 'danger');
@@ -69,7 +69,7 @@ export class GroupkpiComponent implements OnInit {
   }
 
   public onUpdate(item:IGroupkpi){
-    this.UpdateState = true;
+    this.UpdateState = true; 
     const form = this.Form;
     form.controls['id'].setValue(item.id.toUpperCase()); 
     form.controls['name_th'].setValue(item.name_th); 

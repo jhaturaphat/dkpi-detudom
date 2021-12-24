@@ -14,9 +14,9 @@ class NameModel{
                     allowEmpty: false
                 },
                 format: {
-                    pattern: "[A-Z]{1}",
+                    pattern: "[0-9]{4}",
                     flags: "i",
-                    message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น"
+                    message: "4 ตัวเลข 0-9 เท่านั้น"
                   }
             },
             name_th: {
@@ -40,7 +40,10 @@ class NameModel{
     }
 
     findAll(){
-        return this._databases.query('SELECT * FROM indi_name');
+        return this._databases.query(`SELECT n.*, t.indi_group_id AS gid , t.name_th AS tname_th, t.name_en AS tname_en, g.name_th AS gname_th, g.name_en AS gname_en
+        FROM indi_name AS n
+        INNER JOIN indi_type AS t ON n.indi_type_id = t.id
+        INNER JOIN indi_group AS g ON t.indi_group_id = g.id`);
     }
 
     async findOne(id){
@@ -52,8 +55,8 @@ class NameModel{
     async save(value){
         const errors = this._validate(value, this.validate_rules);
         if (errors) throw { errors };
-        const item = await this._databases.query('INSERT INTO indi_name (id,name_th, name_en, indi_type_id=?) VALUES (?,?,?,?)',[
-            value['id'].toUpperCase(),
+        const item = await this._databases.query('INSERT INTO indi_name (id,name_th, name_en, indi_type_id) VALUES (?,?,?,?)',[
+            value['id'],
             value['name_th'],
             value['name_en'],
             value['indi_type_id'].toUpperCase()
@@ -63,7 +66,7 @@ class NameModel{
 
     async update(id, value) {  
         const errors = this._validate(value, this.validate_rules);        
-        const errorsId = this._validate({id} , { id: { format:{pattern:'[A-Z]{1}', message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น"} }});
+        const errorsId = this._validate({id} , { id: { format:{pattern:'[0-9]{4}', message: "4 ตัวเลข 0-9 เท่านั้น"} }});
         console.log(value);
         if (errors || errorsId) throw { errors: errorsId || errors };
         

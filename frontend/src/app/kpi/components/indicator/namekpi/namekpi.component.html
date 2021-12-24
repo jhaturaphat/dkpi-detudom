@@ -1,41 +1,68 @@
 <app-content>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="tile">
                 <h3 class="tile-title">ชื่อตัวชี้วัด</h3>
                 <div class="tile-body">
-                    <form action="">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="Form">
+                        <div class="form-group">
+                            <label for="exampleSelect1">ประเภทตัวชี้วัด</label>
+                            <select class="form-control" id="exampleSelect1" formControlName="indi_type_id">
+                                <option value="">---กรุณาเลือกประเภทตัวชี้วัด---</option>
+                                <option *ngFor="let item of indiTypeItems" [value]=item.id >{{item.id}} {{item.name_th}}</option>  
+                              </select>
+                        </div>
                         <div class="form-group">
                             <label class="control-label">รหัส</label>
-                            <input class="form-control" type="text" placeholder="CODE">
+                            <input class="form-control" type="text" placeholder="CODE" formControlName="id">
                         </div>
                         <div class="form-group">
                             <label class="control-label">หมวดตัวชี้วัด (ภาษาไทย)</label>
-                            <input class="form-control" type="text" placeholder="ภาษาไทย">
+                            <input class="form-control" type="text" placeholder="ภาษาไทย" formControlName="name_th">
                         </div>
                         <div class="form-group">
                             <label class="control-label">หมวดตัวชี้วัด (ภาษาอังกฤษ)</label>
-                            <input class="form-control" type="text" placeholder="ภาษาอังกฤษ">
+                            <input class="form-control" type="text" placeholder="ภาษาอังกฤษ" formControlName="name_en">
+                        </div>                        
+                        <div class="tile-footer">
+                            <!-- [disabled]="!Form.valid" ปิดปุ่มไว้ไม่ให้กดถ้ากรอกข้มูลไม่ครบ -->
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid" *ngIf="!UpdateState"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>                            
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid" *ngIf="UpdateState"><i class="fa fa-fw fa-lg fa-check-circle"></i>อัพเดท</button>                            
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-secondary" type="button" (click)="onReset()"><i class="fa fa-fw fa-lg fa-times-circle"></i>Reset</button>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleSelect1">ประเภทตัวชี้วัด</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                              </select>
-                        </div>
-                    </form>
-                    <div class="tile-footer">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>
-                            &nbsp;&nbsp;&nbsp;
-                            <a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-                    </div>
+                    </form>                    
                 </div>
             </div>
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-7">
+            <div class="tile">
+                <h3 class="tile-title">รายการหมวดตัวชี้วัด</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>รหัส</th>
+                            <th>ชื่อภาษาไทย</th>
+                            <th>ชื่อภาษาอักฤษ</th>
+                            <th><i class="fa fa-cogs"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of NameAll; index as i">
+                            <td>{{i+1}}</td>
+                            <td><b>{{item.gid}}{{item.indi_type_id}}</b>{{item.id}}</td>                            
+                            <td>{{item.name_th}}</td>                            
+                            <td>{{item.name_en}}</td> 
+                            <td>
+                                <i class="fa fa-edit text-primary" (click)="onUpdate(item)"></i> |                               
+                                <i class="fa fa-trash text-danger" (click)="onDelete(item)"></i>
+                            </td>                           
+                                                      
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </app-content>
