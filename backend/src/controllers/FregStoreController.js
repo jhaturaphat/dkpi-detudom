@@ -1,7 +1,7 @@
 const validate = require("validate.js");
-const database = require("../../configs/KpiDatabaes");
+const database = require("../configs/KpiDatabaes");
 
-class DepResponsibleController {
+class FregStoreComtroller {
   constructor(valid = validate, db = database.KpiDatabase) {
     this._database = new db();
     this._validate = valid;
@@ -31,12 +31,12 @@ class DepResponsibleController {
   }
 
   findAll() {
-    return this._databases.query("SELECT * FROM dep_responsible");
+    return this._databases.query("SELECT * FROM freq_store");
   }
 
   async findOne(id) {
     const item = await this._databases.query(
-      "SELECT * FROM dep_responsible WHERE id=?",
+      "SELECT * FROM freq_store WHERE id=?",
       [id]
     );
     return item.length == 0 ? null : item[0];
@@ -46,7 +46,7 @@ class DepResponsibleController {
     const errors = this._validate(value, this.validate_rules);
     if (errors) throw { errors };
     const item = await this._databases.query(
-      "INSERT INTO dep_responsible (id,name_th, name_en) VALUES (?,?,?)",
+      "INSERT INTO freq_store (id,name_th, name_en) VALUES (?,?,?)",
       [value["id"].toUpperCase(), value["name_th"], value["name_en"]]
     );
     return await this.findOne(value["id"]);
@@ -69,7 +69,7 @@ class DepResponsibleController {
     if (errors || errorsId) throw { errors: errorsId || errors };
 
     await this._databases.query(
-      "UPDATE dep_responsible SET name_th=?, name_en=? WHERE id=?",
+      "UPDATE freq_store SET name_th=?, name_en=? WHERE id=?",
       [value["name_th"], value["name_en"], id]
     );
     return await this.findOne(id);
@@ -82,8 +82,8 @@ class DepResponsibleController {
     );
     console.log(errors);
     if (errors) throw { errors };
-    return await this._database.query("DELETE FROM dep_responsible where id=?", [id]);
+    return await this._database.query("DELETE FROM freq_store where id=?", [id]);
   }
 }
 
-module.exports = DepResponsibleController;
+module.exports = FregStoreComtroller;
