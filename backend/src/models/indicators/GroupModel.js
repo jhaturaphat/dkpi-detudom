@@ -33,8 +33,8 @@ class GroupModel {
         };
     }
 
-    findAll(){
-        return this._databases.query('SELECT * FROM indi_group');
+    async findAll(){
+        return await this._databases.query('SELECT * FROM indi_group');
     }
 
     async findOne(id){

@@ -1,28 +1,18 @@
 const validate = require("validate.js");
-const database = require("../../configs/KpiDatabaes");
+const databases = require("../../configs/KpiDatabaes");
 
 class DepResponsibleModel {
-  constructor(valid = validate, db = database.KpiDatabase) {
-    this._database = new db();
+  constructor(valid = validate, db = databases.KpiDatabase) {
+    this._databases = new db();
     this._validate = valid;
-    this.validate_rules = {
-      id: {
-        presence: {
-          allowEmpty: false,
-        },
-        format: {
-          pattern: "[A-Z]{1}",
-          flags: "i",
-          message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น",
-        },
-      },
-      name_th: {
+    this.validate_rules = {      
+      fname: {
         presence: {
           allowEmpty: false,
           message: "ไม่สามารถเว้นว่างได้",
         },
       },
-      name_en: {
+      lname: {
         presence: {
           allowEmpty: true,
         },
@@ -30,8 +20,8 @@ class DepResponsibleModel {
     };
   }
 
-  findAll() {
-    return this._databases.query("SELECT * FROM dep_responsible");
+  async findAll() {
+    return await this._databases.query("SELECT * FROM dep_responsible");
   }
 
   async findOne(id) {
@@ -45,11 +35,11 @@ class DepResponsibleModel {
   async save(value) {
     const errors = this._validate(value, this.validate_rules);
     if (errors) throw { errors };
-    const item = await this._databases.query(
-      "INSERT INTO dep_responsible (id,name_th, name_en) VALUES (?,?,?)",
-      [value["id"].toUpperCase(), value["name_th"], value["name_en"]]
+    const result = await this._databases.query(
+      "INSERT INTO dep_responsible (fname, lname, job) VALUES (?,?,?)",
+      [value["fname"], value["lname"],value["job"]]
     );
-    return await this.findOne(value["id"]);
+    return await this.findOne(result.insertId);
   }
 
   async update(id, value) {
@@ -58,9 +48,8 @@ class DepResponsibleModel {
       { id },
       {
         id: {
-          format: {
-            pattern: "[A-Z]{1}",
-            message: "1 ตัวพิมพ์ใหญ่ A-Z เท่านั้น",
+          presence: {
+            allowEmpty: true,
           },
         },
       }
@@ -69,8 +58,8 @@ class DepResponsibleModel {
     if (errors || errorsId) throw { errors: errorsId || errors };
 
     await this._databases.query(
-      "UPDATE dep_responsible SET name_th=?, name_en=? WHERE id=?",
-      [value["name_th"], value["name_en"], id]
+      "UPDATE dep_responsible SET fname=?, lname=?, job=? WHERE id=?",
+      [value["fname"], value["lname"], value["job"], id]
     );
     return await this.findOne(id);
   }

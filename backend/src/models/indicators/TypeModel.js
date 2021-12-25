@@ -39,8 +39,8 @@ class TypeModel {
         };
     }
 
-    findAll(){        
-        return this._databases.query("SELECT t.*, g.name_th AS gname_th, g.name_en AS gname_en FROM indi_type AS t INNER JOIN indi_group AS g ON t.indi_group_id = g.id");
+    async findAll(){        
+        return await this._databases.query("SELECT t.*, g.name_th AS gname_th, g.name_en AS gname_en FROM indi_type AS t INNER JOIN indi_group AS g ON t.indi_group_id = g.id");
     }
 
     async findOne(id){

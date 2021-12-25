@@ -39,8 +39,8 @@ class NameModel{
         };
     }
 
-    findAll(){
-        return this._databases.query(`SELECT n.*, t.indi_group_id AS gid , t.name_th AS tname_th, t.name_en AS tname_en, g.name_th AS gname_th, g.name_en AS gname_en
+    async findAll(){
+        return await this._databases.query(`SELECT n.*, t.indi_group_id AS gid , t.name_th AS tname_th, t.name_en AS tname_en, g.name_th AS gname_th, g.name_en AS gname_en
         FROM indi_name AS n
         INNER JOIN indi_type AS t ON n.indi_type_id = t.id
         INNER JOIN indi_group AS g ON t.indi_group_id = g.id`);
