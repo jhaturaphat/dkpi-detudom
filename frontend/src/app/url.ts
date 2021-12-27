@@ -9,5 +9,7 @@ export const KpiUrl = {
     Dashboard: 'dashboard',
     Group:'group',
     Type:'type',
-    Name:'name'
+    Name:'name',
+    KpiTemplate:'template',
+    KpiItem:'item'
 }

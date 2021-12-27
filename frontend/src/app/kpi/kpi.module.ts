@@ -4,19 +4,22 @@ import { CommonModule } from '@angular/common';
 import { KpiRoutingModule } from './kpi-routing.module';
 import { KpiComponent } from './kpi.component';
 import { LayoutModule } from '../shared/modules/layout.module';
-import { KpitemplateComponent } from './components/kpitemplate/kpitemplate.component';
+
 import { TypekpiComponent } from './components/indicator/typekpi/typekpi.component';
 import { GroupkpiComponent } from './components/indicator/groupkpi/groupkpi.component';
 import { NamekpiComponent } from './components/indicator/namekpi/namekpi.component';
+import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
+import { KpiTemplateItemComponent } from './components/kpi-template-item/kpi-template-item.component';
 
 
 @NgModule({
   declarations: [
-    KpiComponent,
-    KpitemplateComponent,
+    KpiComponent,    
     TypekpiComponent,
     GroupkpiComponent,
     NamekpiComponent,
+    KpiTemplateComponent,
+    KpiTemplateItemComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,9 @@ import { NamekpiComponent } from './components/indicator/namekpi/namekpi.compone
     LayoutModule  
   ],
   exports:[
-    KpiComponent
+    KpiComponent,
+    KpiTemplateComponent,
+    KpiTemplateItemComponent
   ]
 })
 export class KpiModule { }
