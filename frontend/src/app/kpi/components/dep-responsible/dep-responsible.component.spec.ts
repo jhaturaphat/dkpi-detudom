@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KpiTemplateItemComponent } from './kpi-template-item.component';
+import { DepResponsibleComponent } from './dep-responsible.component';
 
-describe('KpiTemplateItemComponent', () => {
-  let component: KpiTemplateItemComponent;
-  let fixture: ComponentFixture<KpiTemplateItemComponent>;
+describe('DepResponsibleComponent', () => {
+  let component: DepResponsibleComponent;
+  let fixture: ComponentFixture<DepResponsibleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KpiTemplateItemComponent ]
+      declarations: [ DepResponsibleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KpiTemplateItemComponent);
+    fixture = TestBed.createComponent(DepResponsibleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
