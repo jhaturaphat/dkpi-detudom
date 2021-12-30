@@ -20,7 +20,7 @@ export class IndicatorService {
     return lastValueFrom(this.http.get(this.url+'/group')) as Promise<IGroupkpi>;
   }
   onGroupSave(model:IGroupkpi){    
-    return lastValueFrom(this.http.post(this.url+'/group',model)) as Promise<IGroupkpi>;;
+    return lastValueFrom(this.http.post(this.url+'/group',model)) as Promise<IGroupkpi>;
   }
   onGroupUpdate(model:IGroupkpi, id:any){    
     return lastValueFrom(this.http.put(this.url+'/group/'+id, model)) as Promise<IGroupkpi>;

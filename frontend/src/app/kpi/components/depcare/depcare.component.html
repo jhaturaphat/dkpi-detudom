@@ -1,0 +1,57 @@
+<app-content>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">หน่วยงานผู้รับผิดชอบ เพิ่ม|ลบ|แก้ไข้</h3>
+                <div class="tile-body">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="Form">    
+                        <input type="hidden" formControlName="id">                    
+                        <div class="form-group">
+                            <label class="control-label">หน่วยงาน ภาษาไทย</label>
+                            <input class="form-control" type="text" placeholder="ภาษาไทย" formControlName="name_th" >
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">หน่วยงาน ภาษาอังกฤษ</label>
+                            <input class="form-control" type="text" placeholder="ภาษาอังกฤษ" formControlName="name_en">
+                        </div>
+                        <div class="tile-footer">
+                            <!-- [disabled]="!Form.valid" ปิดปุ่มไว้ไม่ให้กดถ้ากรอกข้มูลไม่ครบ -->
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid" *ngIf="!UpdateState"><i class="fa fa-fw fa-lg fa-check-circle"></i>บันทึก</button>                            
+                            <button class="btn btn-primary" type="submit" [disabled]="!Form.valid" *ngIf="UpdateState"><i class="fa fa-fw fa-lg fa-check-circle"></i>อัพเดท</button>                            
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-secondary" type="button" (click)="onReset()"><i class="fa fa-fw fa-lg fa-times-circle"></i>Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- data table -->
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">รายการหน่วยงานผู้รับผิดชอบ</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>                            
+                            <th>ชื่อภาษาไทย</th>
+                            <th>ชื่อภาษาอักฤษ</th>
+                            <th><i class="fa fa-cogs"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of items; index as i">
+                            <td>{{i+1}}</td>                                                    
+                            <td>{{item.name_th}}</td>                            
+                            <td>{{item.name_en}}</td> 
+                            <td>
+                                <i class="fa fa-edit text-primary" (click)="onUpdate(item)"></i> |                               
+                                <i class="fa fa-trash text-danger" (click)="onDelete(item)"></i>
+                            </td>                           
+                                                      
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</app-content>

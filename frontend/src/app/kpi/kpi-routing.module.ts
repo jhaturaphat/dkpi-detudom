@@ -6,7 +6,7 @@ import { GroupkpiComponent } from './components/indicator/groupkpi/groupkpi.comp
 import { TypekpiComponent } from './components/indicator/typekpi/typekpi.component';
 import { NamekpiComponent } from './components/indicator/namekpi/namekpi.component';
 import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
-import { DepResponsibleComponent } from './components/dep-responsible/dep-responsible.component';
+import { DepcareComponent } from './components/depcare/depcare.component';
 
 const routes: Routes = [
   { path: '', component: KpiComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: KpiUrl.Type, component: TypekpiComponent },
   { path: KpiUrl.Name, component: NamekpiComponent },
   { path: KpiUrl.KpiTemplate, component: KpiTemplateComponent },
-  { path: KpiUrl.DepResponsible, component: DepResponsibleComponent },
+  { path: KpiUrl.DepCare, component: DepcareComponent },
 ];
 
 @NgModule({

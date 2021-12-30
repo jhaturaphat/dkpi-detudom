@@ -10,7 +10,7 @@ export const KpiUrl = {
     Group:'group',
     Type:'type',
     Name:'name',
-    DepResponsible:'dep-responsible',
+    DepCare:'depcare',
     KpiTemplate:'template',
     
 }

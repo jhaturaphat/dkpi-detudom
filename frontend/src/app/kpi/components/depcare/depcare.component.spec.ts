@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DepResponsibleComponent } from './dep-responsible.component';
+import { DepcareComponent } from './depcare.component';
 
-describe('DepResponsibleComponent', () => {
-  let component: DepResponsibleComponent;
-  let fixture: ComponentFixture<DepResponsibleComponent>;
+describe('DepcareComponent', () => {
+  let component: DepcareComponent;
+  let fixture: ComponentFixture<DepcareComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DepResponsibleComponent ]
+      declarations: [ DepcareComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DepResponsibleComponent);
+    fixture = TestBed.createComponent(DepcareComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

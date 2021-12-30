@@ -9,7 +9,7 @@ import { TypekpiComponent } from './components/indicator/typekpi/typekpi.compone
 import { GroupkpiComponent } from './components/indicator/groupkpi/groupkpi.component';
 import { NamekpiComponent } from './components/indicator/namekpi/namekpi.component';
 import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
-import { DepResponsibleComponent } from './components/dep-responsible/dep-responsible.component';
+import { DepcareComponent } from './components/depcare/depcare.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { DepResponsibleComponent } from './components/dep-responsible/dep-respon
     GroupkpiComponent,
     NamekpiComponent,
     KpiTemplateComponent,
-    DepResponsibleComponent,
+    DepcareComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,6 @@ import { DepResponsibleComponent } from './components/dep-responsible/dep-respon
   exports:[
     KpiComponent,
     KpiTemplateComponent,
-    DepResponsibleComponent,
   ]
 })
 export class KpiModule { }

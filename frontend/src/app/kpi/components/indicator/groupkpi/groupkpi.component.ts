@@ -39,7 +39,7 @@ export class GroupkpiComponent implements OnInit {
 
   onSubmit(): void{  
     if(!this.Form.valid) return this.alert.someting_wrong();  
-    if(this.UpdateState){
+    if(this.UpdateState){ 
       const id = this.Form.value['id'];
       this.indiService.onGroupUpdate(this.Form.value, id).then((item)=>{
         this.alert.notify('บันทึกสำเร็จ');
@@ -77,7 +77,7 @@ export class GroupkpiComponent implements OnInit {
   }
 
   public async onDelete(item:IGroupkpi){
-    const alert = await this.alert.confirm().then(status=>{
+    this.alert.confirm().then(status=>{
       if(!status.isConfirmed) return;
       this.indiService.onGroupDelete(item).then((item)=> {
         this.indiAll();
