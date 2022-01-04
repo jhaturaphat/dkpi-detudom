@@ -44,7 +44,11 @@
         <span class="app-menu__label">ลงข้อมูล KPI</span>
         <i class="treeview-indicator fa fa-angle-right"></i>
       </a>
-      <ul class="treeview-menu">        
+      <ul class="treeview-menu">   
+        <li>
+          <a class="treeview-item" [routerLink]="['/',AppUrl.Kpi, KpiUrl.KpiTemplate]" routerLinkActive="active">
+            <i class="icon fa fa-long-arrow-right "></i> เทมเพลต kpi</a>
+        </li>     
         <li>
           <a class="treeview-item" [routerLink]="['/',AppUrl.Kpi, KpiUrl.DepCare]" routerLinkActive="active">
             <i class="icon fa fa-long-arrow-right "></i> หน่วยงานที่รับผิดชอบ</a>

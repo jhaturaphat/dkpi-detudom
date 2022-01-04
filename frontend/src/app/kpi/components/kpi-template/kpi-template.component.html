@@ -1,3 +1,93 @@
 <app-content>
-    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form action="">
+                            <div class="form-group">
+                                <label for="indiname">ชื่อตัวชี้วัด</label>
+                                <select class="form-control" id="indiname">                                    
+                                    <option *ngFor="let item of nameKpi" vlaue="item.id">{{item.name_th}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="label">นิยามคำอธิบายความหมาย ตัวชี้วัด</label>                                
+                                <textarea class="form-control" id="label" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="objective">วัตถุประสงค์ ตังชี้วัด</label>
+                                <input type="text" id="objective" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="formular">สูตรคำนวณ (a/b) x 10000</label>
+                                <input type="text" id="formular" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_a">(ขอมูลข้อความ) ข้อมูลที่ต้องการ / ตัวตั้ง</label>
+                                <input type="text" id="txt_a" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_b">(ขอมูลข้อความ) ข้อมูลที่ต้องการ / ตัวหาร</label>
+                                <input type="text" id="txt_b" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="diag_a">(ขอมูลข้อความ) รหัสโรค/หัตถการที่เกี่ยวข้องในการดึงข้อมูล(ตัวตั้ง)</label>
+                                <input type="text" id="diag_a" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="diag_b">(ขอมูลข้อความ) รหัสโรค/หัตถการที่เกี่ยวข้องในการดึงข้อมูล(ตัวหาร)</label>
+                                <input type="text" id="diag_b" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="freq_store_id">ความถี่ในการจัดทำข้อมูล</label>
+                                <select class="form-control" id="freq_store_id">
+                                    <option value="item.id" *ngFor="let item of freq_store">{{item.name_th}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="measure">หน่วยวัด</label>
+                                <input type="text" id="measure" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="benchmark">การเปรียบเทียบสรรถนะ</label>
+                                <input type="text" id="benchmark" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="howtooper">วิธีการแปลผล</label>
+                                <input type="text" id="howtooper" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="ref">ที่มา Referance</label>
+                                <input type="text" id="ref" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="active_date">เริ่มใช้งานเมื่อ</label>
+                                <input type="date" id="active_date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_date">ปรับปรุงเมื่อ</label>
+                                <input type="date" id="edit_date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_date">เหตุผลของการปรับปรุง</label>                                
+                                <textarea id="edit_date" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="note">หมายเหตุ</label>                                
+                                <textarea id="note" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="freq_store_id">ผู้รับผิดชอบ</label>
+                                <select class="form-control" id="freq_store_id">
+                                    <option value="item.id" *ngFor="let item of depCare">{{item.name_th}}</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </app-content>

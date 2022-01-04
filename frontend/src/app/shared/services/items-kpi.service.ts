@@ -12,6 +12,12 @@ export class ItemsKpiService {
   constructor(private http: HttpClient) { }
   url = environment.apiUrl+'/itemkpi';
 
+
+  //ความถี่ในการจัดเก็บ  
+  onFindAllFreqStore(){
+    return lastValueFrom(this.http.get(this.url+'/freqstore')) as Promise<any>;
+  }
+
   //  หมวดตัวชี้วัด
   findAllDepCare(){    
     return lastValueFrom(this.http.get(this.url+'/depcare')) as Promise<IDepcare>;
