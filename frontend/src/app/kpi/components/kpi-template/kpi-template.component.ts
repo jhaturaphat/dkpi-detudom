@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { IndicatorService } from 'src/app/shared/services/indicator.service';
 import { ItemsKpiService } from 'src/app/shared/services/items-kpi.service';
+import { INamekpi } from '../../components/indicator/indicator.interface';
 
+declare const $:any;
 @Component({
   selector: 'app-kpi-template',
   templateUrl: './kpi-template.component.html',
@@ -13,15 +17,41 @@ export class KpiTemplateComponent implements OnInit {
   constructor(
     private IndicatorService:IndicatorService,
     private ItemKpiService:ItemsKpiService,
-    private alert:AlertService
-  ) { }
+    private alert:AlertService,
+    private formBuilder: FormBuilder,
+  ) {
+    this.Form = this.formBuilder.group({    
+      indi_name_id:['',[Validators.required]],  
+      label:['',[Validators.required]],
+      objective:['', [Validators.required]],
+      formular:['', [Validators.required]],
+      txt_a:['', [Validators.required]],
+      txt_b:['', [Validators.required]],
+      diag_a:['', [Validators.required]],
+      diag_b:['', [Validators.required]],
+      measure:['', [Validators.required]],
+      benchmark:['', [Validators.required]],
+      howtooper:['', [Validators.required]],
+      ref:['', [Validators.required]],
+      active_date:['', [Validators.required]],
+      edit_date:['', []],
+      edit_note:['', []],
+      note:['', []],
+      dep_care_id:['', [Validators.required]],
+      freq_store_id:['', [Validators.required]],
+      status:['', []],
+    });
+   }
 
+  Form:FormGroup;
   nameKpi:any = "";
   freq_store:any = '';
   depCare:any = '';
 
+
   ngOnInit(): void {
     this.loadIndicator();
+    $('#demoSelect').select2();
   }
 
   loadIndicator():void{
