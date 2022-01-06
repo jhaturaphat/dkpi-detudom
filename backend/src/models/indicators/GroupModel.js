@@ -33,6 +33,10 @@ class GroupModel {
         };
     }
 
+    async findItem(term){
+        return await this._databases.query(`SELECT * FROM indi_group WHERE name_th LIKE '%{term}%' `);
+    }
+
     async findAll(){
         return await this._databases.query('SELECT * FROM indi_group');
     }

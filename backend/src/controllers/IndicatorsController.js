@@ -21,8 +21,10 @@ router.delete('/type/:id',(req, res) => res.sendAsyncApi(Type.delete(req.params.
 const Name = new NameModel();
 router.get('/name', (req, res) => res.sendAsyncApi(Name.findAll()));
 router.get('/name/:id',(req, res) => res.sendAsyncApi(Name.findOne(req.params.id)));
+router.get('/search-name/:term',(req, res)=>res.sendAsyncApi(Name.findItem(req.params.term)));
 router.post('/name',(req, res) => res.sendAsyncApi(Name.save(req.body)));
 router.put('/name/:id',(req, res) => res.sendAsyncApi(Name.update(req.params.id,req.body)));
 router.delete('/name/:id',(req, res) => res.sendAsyncApi(Name.delete(req.params.id)));
+
 
 module.exports = router;

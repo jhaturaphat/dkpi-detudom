@@ -13,7 +13,7 @@ export class IndicatorService {
     private http: HttpClient
   ) {}
 
-   url = environment.apiUrl+'/indi';
+  url = environment.apiUrl+'/indi';
 
   //  หมวดตัวชี้วัด
   onGroupAll(){    
@@ -27,6 +27,10 @@ export class IndicatorService {
   }
   onGroupDelete(model:IGroupkpi){
     return lastValueFrom(this.http.delete(this.url+'/group/'+model.id))
+  }
+
+  onGroupSearch(term:any){
+    return lastValueFrom(this.http.get(this.url+'/groupsearch',term))
   }
 
   // ประเภทตัวชี้วัด  
@@ -44,6 +48,9 @@ export class IndicatorService {
   }
 
   // ชื่อตัวชี้วัด  
+  onNameFindItem(){
+    return lastValueFrom(this.http.get(this.url+'/search-name')) as Promise<IGroupkpi>;
+  }
   onNameAll(){    
     return lastValueFrom(this.http.get(this.url+'/name')) as Promise<IGroupkpi>;
   }

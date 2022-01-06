@@ -15,6 +15,9 @@ export class MenuLeftComponent implements OnInit {
   KpiUrl = KpiUrl;
 
   ngOnInit(): void {
+    
+  }
+  ngAfterViewInit():void{
     JSsideBar.loadScript()
   }
 

@@ -4,37 +4,7 @@
             <div class="tile">
                 <div class="row">
                     <div class="col-md-4">
-                        <form [formGroup]="Form">
-                            <div class="form-group">
-                                <label for="">Select 2</label>
-                                <select class="form-control" id="demoSelect">
-                                    <optgroup label="Select Cities">
-                                        <option>Ahmedabad</option>
-                                        <option>Surat</option>
-                                        <option>Vadodara</option>
-                                        <option>Rajkot</option>
-                                        <option>Bhavnagar</option>
-                                        <option>Jamnagar</option>
-                                        <option>Gandhinagar</option>
-                                        <option>Nadiad</option>
-                                        <option>Morvi</option>
-                                        <option>Surendranagar</option>
-                                        <option>Junagadh</option>
-                                        <option>Gandhidham</option>
-                                        <option>Veraval</option>
-                                        <option>Ghatlodiya</option>
-                                        <option>Bharuch</option>
-                                        <option>Anand</option>
-                                        <option>Porbandar</option>
-                                        <option>Godhra</option>
-                                        <option>Navsari</option>
-                                        <option>Dahod</option>
-                                        <option>Botad</option>
-                                        <option>Kapadwanj</option>
-                                      </optgroup>
-                                </select>
-                            </div>
-                            
+                        <form [formGroup]="Form" (ngSubmit)="onSubmit()">
                             <div class="form-group">
                                 <label for="indi_name_id">ชื่อตัวชี้วัด</label>
                                 <select class="form-control" id="indi_name_id" formControlName="indi_name_id">                                    
@@ -121,6 +91,8 @@
                                     <option value="INACTIVE">ไม่ใช้งาน</option>
                                 </select>
                             </div>
+
+                            <button type="submit" class="btn btn-primary">บันทึก</button>
                         </form>
                     </div>
                     <div class="col-md-8"></div>

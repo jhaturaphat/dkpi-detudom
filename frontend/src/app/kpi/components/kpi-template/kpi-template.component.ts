@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { IndicatorService } from 'src/app/shared/services/indicator.service';
 import { ItemsKpiService } from 'src/app/shared/services/items-kpi.service';
 import { INamekpi } from '../../components/indicator/indicator.interface';
 
 declare const $:any;
+
 @Component({
   selector: 'app-kpi-template',
   templateUrl: './kpi-template.component.html',
@@ -51,7 +51,14 @@ export class KpiTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadIndicator();
-    $('#demoSelect').select2();
+    
+  }
+  ngAfterViewInit(){
+     $('#indi_name_id').select2();
+  }
+
+  onSubmit():void{
+    console.log(this.Form.value);    
   }
 
   loadIndicator():void{
@@ -61,14 +68,14 @@ export class KpiTemplateComponent implements OnInit {
       this.nameKpi = result
     }).catch(err=>{
       console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.erros.sqlMessage);
+      this.alert.someting_wrong(err.error.errors.sqlMessage);
     });
     // ดึงข้อมูลความถี่ในการจัดเก็บ
     this.ItemKpiService.onFindAllFreqStore().then(result=>{
       this.freq_store = result;      
     }).catch(err=>{
       console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.erros.sqlMessage);
+      this.alert.someting_wrong(err.error.errors.sqlMessage);
     });
 
     // ดึงข้อมูลผู้รับผิดชอบ
@@ -76,7 +83,7 @@ export class KpiTemplateComponent implements OnInit {
       this.depCare = result;      
     }).catch(err=>{
       console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.erros.sqlMessage);
+      this.alert.someting_wrong(err.error.errors.sqlMessage);
     });
   }
 

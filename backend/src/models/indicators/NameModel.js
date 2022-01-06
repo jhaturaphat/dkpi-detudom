@@ -45,6 +45,10 @@ class NameModel{
         INNER JOIN indi_type AS t ON n.indi_type_id = t.id
         INNER JOIN indi_group AS g ON t.indi_group_id = g.id`);
     }
+    async findItem(term){        
+        const keyword = ("%" + term + "%")
+        return await this._databases.query("SELECT * FROM indi_name WHERE name_th LIKE ? LIMIT 7",[keyword]);
+    }
 
     async findOne(id){
         const item = await this._databases.query('SELECT * FROM indi_name WHERE id=?',[id]);
@@ -55,7 +59,7 @@ class NameModel{
     async save(value){
         const errors = this._validate(value, this.validate_rules);
         if (errors) throw { errors };
-        const item = await this._databases.query('INSERT INTO indi_name (id,name_th, name_en, indi_type_id) VALUES (?,?,?,?)',[
+        await this._databases.query('INSERT INTO indi_name (id,name_th, name_en, indi_type_id) VALUES (?,?,?,?)',[
             value['id'],
             value['name_th'],
             value['name_en'],
