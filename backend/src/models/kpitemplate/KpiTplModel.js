@@ -38,13 +38,13 @@ class KpiTplModel {
       },
       diag_a: {
         presence: {
-          allowEmpty: false,
+          allowEmpty: true,
           message: "ไม่สามารถเว้นว่างได้",
         },
       },
       diag_b: {
         presence: {
-          allowEmpty: false,
+          allowEmpty: true,
           message: "ไม่สามารถเว้นว่างได้",
         },
       },
@@ -69,7 +69,7 @@ class KpiTplModel {
             allowEmpty: true,
         },
       },
-      start_date:{
+      active_date:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
@@ -91,7 +91,7 @@ class KpiTplModel {
             allowEmpty: true,
         },
       },
-      dep_responsible:{
+      dep_care_id:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
@@ -112,11 +112,46 @@ class KpiTplModel {
     };
   }
 
-  findAll() {}
+  async findAll() {
+   return await this._database.query('SELECT * FROM kpi_tpl');
+  }
 
-  async findOne(id) {}
+  async findOne(id) {
+    return await this._database.query('SELECT * FROM kpi_tpl WHERE id= ?',[id]);
+  }
 
-  async save(value) {}
+  async save(value) {   
+    // ตรวจสอบ Form
+    const errors = this._validate(value, this.validate_rules);
+    if(errors) throw {errors};
+    // บันทึกข้อมูล
+    const result = await this._database.query(
+      "INSERT INTO kpi_tpl (label, objective, formular, txt_a, txt_b,diag_a, diag_b,measure, benchmark, howtooper, ref, active_date, edit_date, edit_note, note, dep_care_id, indi_name_id, freq_store_id, status) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      [
+        value['label'],
+        value['objective'],
+        value['formular'],
+        value['txt_a'],
+        value['txt_b'],
+        value['diag_a'],
+        value['diag_b'],
+        value['measure'],
+        value['benchmark'],
+        value['howtooper'],
+        value['ref'],
+        value['active_date'],
+        value['edit_date'],
+        value['edit_note'],
+        value['note'],
+        value['dep_care_id'],
+        value['indi_name_id'],
+        value['freq_store_id'],
+        value['status']
+      ]
+    );
+    return this.findOne(result.insertId);
+
+  }
 
   async update(id, value) {}
 

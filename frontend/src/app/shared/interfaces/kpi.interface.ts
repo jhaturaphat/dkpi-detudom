@@ -1,3 +1,22 @@
-export interface IKpi {
-
+export interface IKpiTpl {
+    id?:number,
+    indi_name_id: string,
+    label: string,
+    objective: string,
+    formular: string,
+    txt_a: string,
+    txt_b: string,
+    diag_a: string,
+    diag_b: string,
+    measure: string,
+    benchmark:string ,
+    howtooper: string,
+    ref:string,
+    active_date: string,
+    edit_date: string,
+    edit_note:string ,
+    note:string ,
+    dep_care_id:number,
+    freq_store_id:string,
+    status: string
 }
