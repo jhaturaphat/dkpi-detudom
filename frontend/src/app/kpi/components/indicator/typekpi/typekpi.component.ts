@@ -56,7 +56,7 @@ export class TypekpiComponent implements OnInit {
       }).catch((err)=>{
         console.log(err.error.errors); 
         this.alert.notify(err.error.errors.sqlMessage, 'danger');
-      })
+      });      
     }else{
       this.service.onTypeSave(this.Form.value).then((item)=>{
         this.alert.notify('บันทึกสำเร็จ'); 

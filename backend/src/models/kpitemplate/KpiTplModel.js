@@ -153,7 +153,38 @@ class KpiTplModel {
 
   }
 
-  async update(id, value) {}
+  async update(id, value) {
+    // ตรวจสอบ Form
+    const errors = this._validate(value, this.validate_rules);
+    if(errors) throw {errors};
+    // บันทึกข้อมูล
+    const result = await this._database.query(
+      "UPDATE kpi_tpl SET label=?, objective=?, formular=?, txt_a=?, txt_b=?,diag_a=?, diag_b=?,measure=?, benchmark=?, howtooper=?, ref=?, active_date=?, edit_date=?, edit_note=?, note=?, dep_care_id=?, indi_name_id=?, freq_store_id=?, status=? WHERE id=?",
+      [
+        value['label'],
+        value['objective'],
+        value['formular'],
+        value['txt_a'],
+        value['txt_b'],
+        value['diag_a'],
+        value['diag_b'],
+        value['measure'],
+        value['benchmark'],
+        value['howtooper'],
+        value['ref'],
+        value['active_date'],
+        value['edit_date'],
+        value['edit_note'],
+        value['note'],
+        value['dep_care_id'],
+        value['indi_name_id'],
+        value['freq_store_id'],
+        value['status'],
+        id
+      ]
+    );
+    return this.findOne(result.insertId);
+  }
 
   async delete(id) {}
 }
