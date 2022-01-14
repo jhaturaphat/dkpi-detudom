@@ -59,9 +59,7 @@ export class KpiTemplateComponent implements OnInit {
   ngOnInit(): void {    
     this.findAll();    
   }
-  ngAfterViewInit(){
-    //  $('#indi_name_id').select2();
-  }
+  
 
   onSubmit():void{       
     if(!this.Form.valid) return this.alert.someting_wrong();  
@@ -87,6 +85,7 @@ export class KpiTemplateComponent implements OnInit {
   
   private findAll():void{
     this.UpdateState = false;
+    this.resetForm();
     this.loadIndicator();    
     this.service.findAll().then(result=>{
       this.ListkpiTpl = result;      
@@ -131,6 +130,30 @@ export class KpiTemplateComponent implements OnInit {
   }
   onDelete(item:IKpiTpl){
 
+  }
+
+  resetForm(){        
+    const form = this.Form; 
+    // form.controls['id'].setValue('');
+    form.controls['indi_name_id'].setValue('');
+    form.controls['label'].setValue('');
+    form.controls['objective'].setValue('');
+    form.controls['formular'].setValue('');
+    form.controls['txt_a'].setValue('');
+    form.controls['txt_b'].setValue('');
+    form.controls['diag_a'].setValue('');
+    form.controls['diag_b'].setValue('');
+    form.controls['measure'].setValue('');
+    form.controls['benchmark'].setValue('');
+    form.controls['howtooper'].setValue('');
+    form.controls['ref'].setValue('');
+    form.controls['active_date'].setValue('');
+    form.controls['edit_date'].setValue('');
+    form.controls['edit_note'].setValue('');
+    form.controls['note'].setValue('');
+    form.controls['dep_care_id'].setValue('');
+    form.controls['freq_store_id'].setValue('');
+    form.controls['status'].setValue('');
   }
 
   loadIndicator():void{

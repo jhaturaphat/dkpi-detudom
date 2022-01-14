@@ -7,6 +7,9 @@ import { MenuLeftComponent } from '../layout/menu-left/menu-left.component';
 import { ToggleMenuDirective } from 'src/app/directives/toggle-menu.directive';
 import { ContentComponent } from '../layout/content/content.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+ 
 
 
 @NgModule({
@@ -22,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    TooltipModule,
+    TabsModule
   ],
   exports:[    
     HttpClientModule,
@@ -29,7 +34,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MenuLeftComponent,  
     ContentComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TooltipModule,
+    TabsModule
   ],
   providers:[
     
