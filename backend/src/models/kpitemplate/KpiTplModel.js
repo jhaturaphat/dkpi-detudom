@@ -186,7 +186,9 @@ class KpiTplModel {
     return this.findOne(result.insertId);
   }
 
-  async delete(id) {}
+  async delete(id) {
+    return await this._database.query("DELETE FROM kpi_tpl WHERE id=?",[id]);
+  }
 }
 
 module.exports = KpiTplModel;

@@ -128,8 +128,18 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['freq_store_id'].setValue(item.freq_store_id);
     form.controls['status'].setValue(item.status);
   }
-  onDelete(item:IKpiTpl){
 
+  onDelete(item:IKpiTpl){   
+    this.alert.confirm().then(status=>{
+      if(!status.isConfirmed) return;
+          this.service.delete(item.id).then(()=>{   
+          this.alert.notify('ลบรายการสำเร็จ');
+          this.findAll();
+      }).catch(err=>{
+          console.log(err.error.errors);
+          this.alert.someting_wrong(err.error.errors.sqlMessage);
+        });
+      })   
   }
 
   resetForm(){        
