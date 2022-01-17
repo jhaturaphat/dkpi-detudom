@@ -10,6 +10,7 @@ import { GroupkpiComponent } from './components/indicator/groupkpi/groupkpi.comp
 import { NamekpiComponent } from './components/indicator/namekpi/namekpi.component';
 import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
 import { DepcareComponent } from './components/depcare/depcare.component';
+import { KpiStorageComponent } from './components/kpi-storage/kpi-storage.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { DepcareComponent } from './components/depcare/depcare.component';
     NamekpiComponent,
     KpiTemplateComponent,
     DepcareComponent,
+    KpiStorageComponent,
   ],
   imports: [
     CommonModule,
