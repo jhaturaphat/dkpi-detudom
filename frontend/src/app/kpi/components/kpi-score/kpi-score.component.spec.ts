@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KpiStorageComponent } from './kpi-storage.component';
+import { KpiScoreComponent } from './kpi-score.component';
 
-describe('KpiStorageComponent', () => {
-  let component: KpiStorageComponent;
-  let fixture: ComponentFixture<KpiStorageComponent>;
+describe('KpiScoreComponent', () => {
+  let component: KpiScoreComponent;
+  let fixture: ComponentFixture<KpiScoreComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KpiStorageComponent ]
+      declarations: [ KpiScoreComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KpiStorageComponent);
+    fixture = TestBed.createComponent(KpiScoreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

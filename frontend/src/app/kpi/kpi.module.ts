@@ -11,6 +11,7 @@ import { NamekpiComponent } from './components/indicator/namekpi/namekpi.compone
 import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
 import { DepcareComponent } from './components/depcare/depcare.component';
 import { KpiStorageComponent } from './components/kpi-storage/kpi-storage.component';
+import { KpiScoreComponent } from './components/kpi-score/kpi-score.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { KpiStorageComponent } from './components/kpi-storage/kpi-storage.compon
     KpiTemplateComponent,
     DepcareComponent,
     KpiStorageComponent,
+    KpiScoreComponent,
   ],
   imports: [
     CommonModule,
