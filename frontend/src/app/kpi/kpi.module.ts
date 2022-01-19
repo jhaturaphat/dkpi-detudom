@@ -10,7 +10,7 @@ import { GroupkpiComponent } from './components/indicator/groupkpi/groupkpi.comp
 import { NamekpiComponent } from './components/indicator/namekpi/namekpi.component';
 import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
 import { DepcareComponent } from './components/depcare/depcare.component';
-import { KpiStorageComponent } from './components/kpi-storage/kpi-storage.component';
+
 import { KpiScoreComponent } from './components/kpi-score/kpi-score.component';
 
 
@@ -21,8 +21,7 @@ import { KpiScoreComponent } from './components/kpi-score/kpi-score.component';
     GroupkpiComponent,
     NamekpiComponent,
     KpiTemplateComponent,
-    DepcareComponent,
-    KpiStorageComponent,
+    DepcareComponent,    
     KpiScoreComponent,
   ],
   imports: [

@@ -7,7 +7,8 @@ import { TypekpiComponent } from './components/indicator/typekpi/typekpi.compone
 import { NamekpiComponent } from './components/indicator/namekpi/namekpi.component';
 import { KpiTemplateComponent } from './components/kpi-template/kpi-template.component';
 import { DepcareComponent } from './components/depcare/depcare.component';
-import { KpiStorageComponent } from './components/kpi-storage/kpi-storage.component';
+
+import { KpiScoreComponent } from './components/kpi-score/kpi-score.component';
 
 const routes: Routes = [
   { path: '', component: KpiComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: KpiUrl.Name, component: NamekpiComponent },
   { path: KpiUrl.KpiTemplate, component: KpiTemplateComponent },
   { path: KpiUrl.DepCare, component: DepcareComponent },
-  { path: KpiUrl.KpiStorage, component: KpiStorageComponent },
+  { path: KpiUrl.KpiScore, component: KpiScoreComponent },
 ];
 
 @NgModule({
