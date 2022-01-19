@@ -5,7 +5,7 @@ class FreqStoreModel {
         this._databases = new db();
     }
     async findAll() {
-        return await this._databases.query("SELECT * FROM freq_store");
+        return await this._databases.query("SELECT * FROM frequency");
       }
 }
 
