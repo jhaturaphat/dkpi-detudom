@@ -51,7 +51,7 @@ export class KpiTemplateComponent implements OnInit {
   private id:any;
   Form:FormGroup;
   nameKpi:any = "";
-  freq_store:any = '';
+  frequency:any = '';
   depCare:any = '';
   ListkpiTpl:IKpiTpl[] = [];
   UpdateState:boolean = false;
@@ -125,7 +125,7 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['edit_note'].setValue(item.edit_note);
     form.controls['note'].setValue(item.note);
     form.controls['dep_care_id'].setValue(item.dep_care_id);
-    form.controls['freq_store_id'].setValue(item.freq_store_id);
+    form.controls['frequency_id'].setValue(item.frequency_id);
     form.controls['status'].setValue(item.status);
   }
 
@@ -176,7 +176,7 @@ export class KpiTemplateComponent implements OnInit {
     });
     // ดึงข้อมูลความถี่ในการจัดเก็บ
     this.ItemKpiService.onFindAllFreqStore().then(result=>{
-      this.freq_store = result;      
+      this.frequency = result;      
     }).catch(err=>{
       console.log(err.error.errors);
       this.alert.someting_wrong(err.error.errors.sqlMessage);

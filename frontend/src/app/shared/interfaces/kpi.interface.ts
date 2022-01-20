@@ -17,6 +17,24 @@ export interface IKpiTpl {
     edit_note:string ,
     note:string ,
     dep_care_id:number,
-    freq_store_id:string,
-    status: string
+    frequency_id:string,
+    fq_name_th?:string,
+    status: string,
+    idn_id?:any,
+    idn_name_th?:string,
+    idn_name_en?:string,
+    idt_name_th?:string,
+    idg_id?:any,
+    idg_name_th?:string,
+    score?:IKpiScore[]
+}
+
+
+export interface IKpiScore{
+    id:number,
+    loop_id:number,
+    target_score:number,
+    score_unit:string,
+    score:number,
+
 }

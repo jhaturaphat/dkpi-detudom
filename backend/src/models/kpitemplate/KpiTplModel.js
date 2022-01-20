@@ -113,11 +113,52 @@ class KpiTplModel {
   }
 
   async findAll() {
-   return await this._database.query('SELECT * FROM kpi_tpl');
+    const sql = `
+    SELECT 
+        kpi_tpl.*,
+        indi.*,
+        fq.name_th as fq_name_th
+      FROM kpi_tpl
+      INNER JOIN frequency AS fq ON kpi_tpl.frequency_id = fq.id
+      INNER JOIN (
+          SELECT 
+          idn.id as idn_id,
+          idn.name_th as idn_name_th,
+          idn.name_en as idn_name_en,
+          idt.name_th as idt_name_th,
+          idg.id as idg_id,
+          idg.name_th as idg_name_th
+          FROM indi_name AS idn
+          INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
+          INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
+      ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
+    `;
+   return await this._database.query(sql);
   }
 
   async findOne(id) {
-    return await this._database.query('SELECT * FROM kpi_tpl WHERE id= ?',[id]);
+    const sql = `
+    SELECT 
+      kpi_tpl.*,
+      indi.*,
+      fq.name_th as fq_name_th
+    FROM kpi_tpl
+    INNER JOIN frequency AS fq ON kpi_tpl.frequency_id = fq.id
+    INNER JOIN (
+        SELECT 
+        idn.id as idn_id,
+        idn.name_th as idn_name_th,
+        idn.name_en as idn_name_en,
+        idt.name_th as idt_name_th,
+        idg.id as idg_id,
+        idg.name_th as idg_name_th
+        FROM indi_name AS idn
+        INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
+        INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
+    ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
+    WHERE kpi_tpl.id = ?
+    `;
+    return await this._database.query(sql,[id]);
   }
 
   async save(value) {   

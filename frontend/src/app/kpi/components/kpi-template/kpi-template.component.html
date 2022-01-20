@@ -44,10 +44,10 @@
                                         <input type="text" id="diag_b" class="form-control" formControlName="diag_b">
                                     </div>
                                     <div class="form-group">
-                                        <label for="freq_store_id">ความถี่ในการจัดทำข้อมูล</label>
-                                        <select class="form-control" id="freq_store_id" formControlName="freq_store_id">
+                                        <label for="frequency_id">ความถี่ในการจัดทำข้อมูล</label>
+                                        <select class="form-control" id="frequency_id" formControlName="frequency_id">
                                             <option value=""></option>
-                                            <option [value]="item.id" *ngFor="let item of freq_store">{{item.name_th}}</option>
+                                            <option [value]="item.id" *ngFor="let item of frequency">{{item.name_th}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -108,19 +108,19 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>รหัส</th>
                                             <th>ชื่อตัวชี้วัด</th>
-                                            <th>วัตถุประสงค์ ตังชี้วัด</th>
-                                            <th>ความถี่ในการจัดทำข้อมูล</th>
+                                            <th>ความถี่ข้อมูล</th>
                                             <th>เริ่มใช้งานเมื่อ</th>
-                                            <th>ผู้รับผิดชอบ</th>
+                                            <th>สถานะ</th>
                                             <th><i class="fa fa-cogs"></i></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let item of ListkpiTpl; index as i">
-                                            <td>{{item.indi_name_id}}</td>                                            
-                                            <td>{{item.objective}}</td>                                            
-                                            <td>{{item.freq_store_id}}</td>                                            
+                                            <td>{{item.idg_id}}{{item.indi_name_id}}</td>                                            
+                                            <td>{{item.idt_name_th}}</td>                                            
+                                            <td>{{item.fq_name_th}}</td>                                            
                                             <td>{{item.active_date}}</td>                                            
                                             <td>{{item.status}}</td>  
                                             <td>
