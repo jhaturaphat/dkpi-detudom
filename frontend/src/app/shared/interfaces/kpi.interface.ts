@@ -36,5 +36,14 @@ export interface IKpiScore{
     target_score:number,
     score_unit:string,
     score:number,
+}
 
+export interface IKpiRangeYear {
+    year_id:string,
+    year_label:string,
+    date_begin:string,
+    date_end:string,
+    status:string,
+    create_at?:string,
+    update_at?:string
 }

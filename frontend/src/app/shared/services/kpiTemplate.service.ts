@@ -26,4 +26,6 @@ export class KpiTemplateService{
     delete(id:any){
         return lastValueFrom(this.http.delete(this.url+'/template/'+id)) as Promise<IKpiTpl>;
     }
+
+    
 }

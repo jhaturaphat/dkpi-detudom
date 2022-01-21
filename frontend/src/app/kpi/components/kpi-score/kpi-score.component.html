@@ -1,10 +1,21 @@
 <app-content>
     <div class="row">
         <div class="col-md-12">
-            <div class="tile">
-                <h3 class="tile-title">จัดเก็บ ข้อมูล KPI Score</h3>  
-                <p>ช่วงเวลาจัดเก็บ </p>    
-                
+            <div class="tile">                
+                <div class="tile-title-w-btn">
+                    <h3 class="title">จัดเก็บ ข้อมูล KPI Score</h3>
+                    <div class="btn-group" dropdown>
+                        <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                aria-controls="dropdown-animated">
+                          ปีงบประมาณ <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+                            <li role="menuitem" *ngFor="let item of year">
+                              <a class="dropdown-item">{{item.year_id+543}}</a>
+                            </li>   
+                        </ul>
+                    </div>
+                </div>            
                 <div class="tile-body">
                     <table class="table">
                         <thead>
@@ -12,7 +23,7 @@
                                 <th>#</th>                                                   
                                 <th>ชื่อตัวชี้วัด</th>                                
                                 <th>เป้าหมาย</th>
-                                <th>คะแนน</th>
+                                <th>ปีงบ</th>
                                 <th><i class="fa fa-clock-o"></i> เวลาจัดเก็บ</th> 
                             </tr>
                         </thead>

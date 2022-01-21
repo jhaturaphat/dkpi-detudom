@@ -7,8 +7,10 @@ import { MenuLeftComponent } from '../layout/menu-left/menu-left.component';
 import { ToggleMenuDirective } from 'src/app/directives/toggle-menu.directive';
 import { ContentComponent } from '../layout/content/content.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// ngx-boostrap
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
  
 
 
@@ -26,7 +28,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ReactiveFormsModule,
     FormsModule,
     TooltipModule,
-    TabsModule
+    TabsModule,
+    BsDropdownModule
   ],
   exports:[    
     HttpClientModule,
@@ -36,7 +39,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ReactiveFormsModule,
     FormsModule,
     TooltipModule,
-    TabsModule
+    TabsModule,
+    BsDropdownModule
   ],
   providers:[
     

@@ -43,7 +43,7 @@ export class KpiTemplateComponent implements OnInit {
       edit_note:['', []],
       note:['', []],
       dep_care_id:['', [Validators.required]],
-      freq_store_id:['', [Validators.required]],
+      frequency_id:['', [Validators.required]],
       status:['', [Validators.required]],
     });
    }
@@ -162,7 +162,7 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['edit_note'].setValue('');
     form.controls['note'].setValue('');
     form.controls['dep_care_id'].setValue('');
-    form.controls['freq_store_id'].setValue('');
+    form.controls['frequency_id'].setValue('');
     form.controls['status'].setValue('');
   }
 
@@ -181,7 +181,6 @@ export class KpiTemplateComponent implements OnInit {
       console.log(err.error.errors);
       this.alert.someting_wrong(err.error.errors.sqlMessage);
     });
-
     // ดึงข้อมูลผู้รับผิดชอบ
     this.over();
     
