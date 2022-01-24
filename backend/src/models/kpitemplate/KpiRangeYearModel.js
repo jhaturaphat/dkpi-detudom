@@ -16,8 +16,10 @@ class KpiRangeYear {
       }
 
     async findAll() {
-        return await this._database.query("SELECT * FROM kpi_range_year");
+        return await this._database.query("SELECT * FROM kpi_range_year ORDER BY year_id DESC");
     }
+
+    
 }
 
 

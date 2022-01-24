@@ -15,7 +15,7 @@ router.put('/template/:id',(req, res)=> res.sendAsyncApi(model.update(req.params
 router.delete('/template/:id',(req, res)=> res.sendAsyncApi(model.delete(req.params.id, req.body)));
 // คะแนน
 router.get('/score/:year',(req, res)=> res.sendAsyncApi(score.findAll(req.params.year)));
-router.get('/score/:id&:year',(req, res)=> res.sendAsyncApi(score.findOne(req.params.id, req.params.year)));
+router.get('/score/:id/:year',(req, res)=> res.sendAsyncApi(score.findOne(req.params.id, req.params.year)));
 
 // items
 router.get('/year', (req, res)=> res.sendAsyncApi(year.findAll()));

@@ -25,17 +25,39 @@ export interface IKpiTpl {
     idn_name_en?:string,
     idt_name_th?:string,
     idg_id?:any,
-    idg_name_th?:string,
-    score?:IKpiScore[]
+    idg_name_th?:string,    
 }
 
 
 export interface IKpiScore{
     id:number,
-    loop_id:number,
-    target_score:number,
-    score_unit:string,
-    score:number,
+    idn_id:string,
+    idn_name_th:string,
+    idn_name_en:string,
+    idt_name_th:string,
+    idg_id:string,
+    idg_name_th:string,
+    label:string,
+    objective:string,
+    formular:string,
+    txt_a:string,
+    txt_b:string,
+    diag_a:string,
+    diag_b:string,
+    measure:string,
+    benchmark:string,
+    howtooper:string,
+    ref:string,
+    active_date:string,
+    edit_date:string,
+    edit_note:string,
+    note:string,
+    dep_care_id:number,
+    indi_name_id:string,
+    status:string,
+    frequency_id:string,
+    depname_th:string,
+    freqname_th:string
 }
 
 export interface IKpiRangeYear {

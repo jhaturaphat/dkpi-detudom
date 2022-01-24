@@ -14,9 +14,9 @@ export class KpiRangeYearService{
     url = environment.apiUrl+'/kpi';
 
     findAll(){
-        return lastValueFrom(this.http.get(this.url+'/year')) as Promise<IKpiRangeYear[]>
+        return lastValueFrom(this.http.get(this.url+'/year/')) as Promise<IKpiRangeYear[]>
     }
-    findAllOne(id:any){
+    findAllOne(id:any, year:any){
         return lastValueFrom(this.http.get(this.url+'/year/'+id)) as Promise<IKpiRangeYear[]>
     }
     save(body:IKpiRangeYear){

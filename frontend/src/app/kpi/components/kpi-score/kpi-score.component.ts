@@ -13,11 +13,16 @@ export class KpiScoreComponent implements OnInit {
     private yearService:KpiRangeYearService
   ) { }
 
-  year:IKpiRangeYear[] = []
+  year:IKpiRangeYear[] = []  
+  year_id:string = 'ปีงบประมาณ';
   ngOnInit(): void {
     this.yearService.findAll().then(result => {
       this.year = result;
     })
   }
 
+  kpiSearchYear(item:IKpiRangeYear){
+    this.year_id = item.year_id + 543;    
+    
+  }
 }
