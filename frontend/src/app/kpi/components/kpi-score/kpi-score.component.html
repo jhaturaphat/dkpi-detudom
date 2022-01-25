@@ -20,20 +20,25 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>                                                   
+                                <th>รหัส</th>                                                   
                                 <th>ชื่อตัวชี้วัด</th>                                
-                                <th>เป้าหมาย</th>
-                                <th>ปีงบ</th>
+                                <th>ผู้รับผิดชอบ</th>  
                                 <th><i class="fa fa-clock-o"></i> เวลาจัดเก็บ</th> 
+                                <th><i class="fa fa-cog"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr *ngFor="let item of kpiScore; index as i">
+                                <td>{{item.idg_id}}{{item.idn_id}}</td>
+                                <td>{{item.idn_name_th}}</td>
+                                <td>{{item.depname_th}}</td>                                                     
+                                <td>{{item.freqname_th}}</td>
+                                <td>
+                                    <i class="fa fa-line-chart text-success"></i> | 
+                                    <i class="fa fa-save text-danger"></i> | 
+                                    <i class="fa fa-edit text-danger"></i> |
+                                    <i class="fa fa-trash text-danger"></i> |                                     
+                                </td>
                             </tr>
                         </tbody>
                     </table>

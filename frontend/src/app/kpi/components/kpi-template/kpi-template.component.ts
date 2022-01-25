@@ -62,7 +62,11 @@ export class KpiTemplateComponent implements OnInit {
   
 
   onSubmit():void{       
-    if(!this.Form.valid) return this.alert.someting_wrong();  
+    if(!this.Form.valid){
+      console.log(this.Form);
+      
+      return this.alert.someting_wrong();  
+    }  
     if(this.UpdateState){
       this.service.update(this.Form.value, this.id).then(result=>{
         this.alert.notify('บันทึกสำเร็จ');

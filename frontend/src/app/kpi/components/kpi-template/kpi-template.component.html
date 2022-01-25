@@ -7,7 +7,7 @@
                         <div class="tile">
                             <h3 class="tile-title">เพิ่มข้อมูเทมเพลต เพิ่ม | ลบ | แก้ไข</h3>
                             <div class="tile-body">
-                                <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                                <form [formGroup]="Form" (ngSubmit)="onSubmit()" [noValidate]="false">
                                     <div class="form-group">
                                         <label for="indi_name_id">ชื่อตัวชี้วัด</label>
                                         <select class="form-control" id="indi_name_id" formControlName="indi_name_id">     
@@ -119,7 +119,7 @@
                                     <tbody>
                                         <tr *ngFor="let item of ListkpiTpl; index as i">
                                             <td>{{item.idg_id}}{{item.indi_name_id}}</td>                                            
-                                            <td>{{item.idt_name_th}}</td>                                            
+                                            <td>{{item.idn_name_th}}</td>                                            
                                             <td>{{item.fq_name_th}}</td>                                            
                                             <td>{{item.active_date}}</td>                                            
                                             <td>{{item.status}}</td>  

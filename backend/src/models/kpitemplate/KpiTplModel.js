@@ -103,7 +103,7 @@ class KpiTplModel {
             message: "ไม่สามารถเว้นว่างได้",
         },
       },
-      freq_store_id:{
+      frequency_id:{
         presence: {
             allowEmpty: false,
             message: "ไม่สามารถเว้นว่างได้",
@@ -166,8 +166,10 @@ class KpiTplModel {
     const errors = this._validate(value, this.validate_rules);
     if(errors) throw {errors};
     // บันทึกข้อมูล
-    const result = await this._database.query(
-      "INSERT INTO kpi_tpl (label, objective, formular, txt_a, txt_b,diag_a, diag_b,measure, benchmark, howtooper, ref, active_date, edit_date, edit_note, note, dep_care_id, indi_name_id, freq_store_id, status) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    const sql = `
+    INSERT INTO kpi_tpl (label, objective, formular, txt_a, txt_b,diag_a, diag_b,measure, benchmark, howtooper, ref, active_date, edit_date, edit_note, note, dep_care_id, indi_name_id, frequency_id, status) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    `;
+    const result = await this._database.query(sql ,
       [
         value['label'],
         value['objective'],
@@ -186,7 +188,7 @@ class KpiTplModel {
         value['note'],
         value['dep_care_id'],
         value['indi_name_id'],
-        value['freq_store_id'],
+        value['frequency_id'],
         value['status']
       ]
     );

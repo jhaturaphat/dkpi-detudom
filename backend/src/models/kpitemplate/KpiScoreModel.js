@@ -8,8 +8,10 @@ class KpiScoreModel {
     this.validate_rules = { };
   }
 
-  async findAll(year) {
-
+  // ดึงข้อมูลด้วย ปี พ.ศ.
+  async findAll(value) {
+    var year = new Date(`${value}-10-01 00:00:00`);
+    // console.log(year);
     const sql = `
     SELECT 
     indi.*,
@@ -57,9 +59,16 @@ class KpiScoreModel {
     ) AS score ON kpi_tpl.id = score.kpi_tpl_id
 		GROUP BY kpi_tpl.id;
     `;
-   return await this._database.query(sql,[year]);
+
+   const result = await this._database.query(sql,[year]);
+    let new_arr = result.map(e=>{
+      return {...e, Year:year}
+    })
+
+    return new_arr;
   }
 
+  // ดึงข้อมูลด้วย ปี และ รหัส
   async findOne(id, year) {  
     console.log(id, year);  
     const sql = `

@@ -9,7 +9,7 @@ class KpiChartModel {
     }
 
     async findOne(id, year) {  
-      console.log(id, year);  
+      // console.log(id, year);  
       const sql = `
       SELECT 
           ks.id,
@@ -35,19 +35,20 @@ class KpiChartModel {
           WHERE ks.kpi_range_year_year_id = YEAR(?) AND ks.kpi_tpl_id = ?
       `;
       const result =  await this._database.query(sql,[year, id]);
-      let chartJs = {
-        year:'',
-        label:'',
-        data:''
-      };    
+         
       const label = result.map((e,i,arr) =>e.prefix);  
       const data = result.map((e,i,arr) =>e.score);  
-      
-      chartJs.year = result[0].year_id + 543;
-      chartJs.label = label;
-      chartJs.data = data;
-      
-      return chartJs;
+
+      const chart =  result.map(e=>{
+        return {...e, label, data}
+      })[0];
+      delete chart.kri_name_th
+      delete chart.prefix
+      delete chart.day
+      delete chart.id
+      delete chart.loop_id
+      delete chart.score
+      return chart;
     }
     
   }
