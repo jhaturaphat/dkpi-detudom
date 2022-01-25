@@ -36,7 +36,7 @@ export class KpiTemplateComponent implements OnInit {
       diag_b:['', []],
       measure:['', [Validators.required]],
       benchmark:['', []],
-      howtooper:['', [Validators.required]],
+      howtooper:['', []],
       ref:['', [Validators.required]],
       active_date:['', [Validators.required]],
       edit_date:['', []],
