@@ -35,9 +35,8 @@
                                 <td>{{item.freqname_th}}</td>
                                 <td>
                                     <i class="fa fa-line-chart text-success"></i> | 
-                                    <i class="fa fa-save text-danger"></i> | 
-                                    <i class="fa fa-edit text-danger"></i> |
-                                    <i class="fa fa-trash text-danger"></i> |                                     
+                                    <i class="fa fa-save text-danger" (click)="openModal(template, item)"></i> | 
+                                    <i class="fa fa-edit text-danger"></i>                                                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -47,3 +46,7 @@
         </div>
     </div>
 </app-content>
+
+<ng-template #template>
+    <app-keep-score [modalRef]='modalRef' [itemsKpi]='itemsKpi'></app-keep-score>
+</ng-template>

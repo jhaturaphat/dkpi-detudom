@@ -10,8 +10,7 @@ class KpiScoreModel {
 
   // ดึงข้อมูลด้วย ปี พ.ศ.
   async findAll(value) {
-    var year = new Date(`${value}-10-01 00:00:00`);
-    // console.log(year);
+    var year = new Date(`${value}-10-01 00:00:00`);    
     const sql = `
     SELECT 
     indi.*,
@@ -19,9 +18,9 @@ class KpiScoreModel {
     dep_care.name_th as depname_th,
     freq.name_th as freqname_th
     FROM kpi_tpl
-    INNER JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
-    INNER JOIN frequency as freq ON kpi_tpl.frequency_id = freq.id
-    INNER JOIN (
+    LEFT JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
+    LEFT JOIN frequency as freq ON kpi_tpl.frequency_id = freq.id
+    LEFT JOIN (
         SELECT 
         idn.id as idn_id,
         idn.name_th as idn_name_th,
@@ -33,7 +32,7 @@ class KpiScoreModel {
         INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
         INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
     ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
-    INNER JOIN ( 
+    LEFT JOIN ( 
       SELECT 
         ks.id,
         ks.loop_id,
@@ -61,16 +60,16 @@ class KpiScoreModel {
     `;
 
    const result = await this._database.query(sql,[year]);
-    let new_arr = result.map(e=>{
-      return {...e, Year:year}
+    let new_result = result.map(e=>{
+      return {...e, year:parseInt(value, 10), year_th:parseInt(value, 10) + 543}
     })
 
-    return new_arr;
+    return new_result;
   }
 
   // ดึงข้อมูลด้วย ปี และ รหัส
-  async findOne(id, year) {  
-    console.log(id, year);  
+  async findOne(id, yyyy) {   
+    var year = new Date(`${yyyy}-10-01 00:00:00`);       
     const sql = `
     SELECT 
         ks.id,
@@ -94,21 +93,10 @@ class KpiScoreModel {
         INNER JOIN kpi_condition AS kcd ON ks.kpi_condition_id = kcd.id
         INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
         WHERE ks.kpi_range_year_year_id = YEAR(?) AND ks.kpi_tpl_id = ?
+        ORDER BY kri.loop_id ASC
     `;
-    const result =  await this._database.query(sql,[year, id]);
-    let chartJs = {
-      year:'',
-      label:'',
-      data:''
-    };    
-    const label = result.map((e,i,arr) =>e.prefix);  
-    const data = result.map((e,i,arr) =>e.score);  
+    return await this._database.query(sql,[year, id]);
     
-    chartJs.year = result[0].year_id + 543;
-    chartJs.label = label;
-    chartJs.data = data;
-    
-    return chartJs;
   }
 
   async save(value) { 

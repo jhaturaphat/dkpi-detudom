@@ -23,6 +23,7 @@ class KpiChartModel {
           kry.date_begin,
           kry.date_end,
           kry.status,
+          kri.id as kri_id,
           kri.name_th as kri_name_th,
           kri.prefix,
           kri.day,
@@ -35,13 +36,15 @@ class KpiChartModel {
           WHERE ks.kpi_range_year_year_id = YEAR(?) AND ks.kpi_tpl_id = ?
       `;
       const result =  await this._database.query(sql,[year, id]);
-         
-      const label = result.map((e,i,arr) =>e.prefix);  
-      const data = result.map((e,i,arr) =>e.score);  
+      
+      const kri_item_id = result.map(e=>e.kri_id);
+      const label = result.map(e=>e.prefix);  
+      const data = result.map(e =>e.score);  
 
       const chart =  result.map(e=>{
-        return {...e, label, data}
+        return {...e, kri_item_id, label, data}
       })[0];
+      delete chart.kri_id
       delete chart.kri_name_th
       delete chart.prefix
       delete chart.day

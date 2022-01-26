@@ -9,7 +9,7 @@ export interface IKpiTpl {
     diag_a: string,
     diag_b: string,
     measure: string,
-    benchmark:string ,
+    benchmark:string,
     howtooper: string,
     ref:string,
     active_date: string,
@@ -57,7 +57,9 @@ export interface IKpiScore{
     status:string,
     frequency_id:string,
     depname_th:string,
-    freqname_th:string
+    freqname_th:string,
+    year?:number
+    year_th?:number
 }
 
 export interface IKpiRangeYear {

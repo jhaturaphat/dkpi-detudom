@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IKpiRangeYear, IKpiScore } from 'src/app/shared/interfaces/kpi.interface';
 import { KpiRangeYearService } from 'src/app/shared/services/kpiRangeYear.service';
 import { KpiScoreService } from 'src/app/shared/services/KpiScore.service'
@@ -12,17 +13,24 @@ export class KpiScoreComponent implements OnInit {
 
   constructor(
     private yearService:KpiRangeYearService,
-    private scoreService:KpiScoreService
+    private scoreService:KpiScoreService,
+    private modalService: BsModalService
   ) { }
 
+  modalRef?: BsModalRef;
   year:IKpiRangeYear[] = []  
   year_id:string = 'ปีงบประมาณ';
   kpiScore:IKpiScore[] = [];
+  itemsKpi?:IKpiScore;
+
+
   ngOnInit(): void {
+    // ดึงข้อมูล ปี มาแสดง Dorpdown ปีงบประมาณ
     this.yearService.findAll().then(result => {
       this.year = result;
     });
 
+    // ดึงข้อมูล Kpi template มาแสดงที่ตาราง จัดเก็บ KPI Score
     const year = new Date(Date.now()).getFullYear().toString(); 
     this.kpiScoreYear(year);
   }
@@ -31,13 +39,24 @@ export class KpiScoreComponent implements OnInit {
   kpiScoreYear(year?:string){
     this.scoreService.findAll(year).then(result=>{
       this.kpiScore = result;
+      console.log(result);
+      
     }).catch(err=>{
       console.log(err.error.errors);      
     })
   }
 
-  kpiSearchYear(item:IKpiRangeYear){
+  kpiSearchYear(item:IKpiRangeYear){    
     this.year_id = item.year_id + 543;    
     this.kpiScoreYear(item.year_id);
+  }
+
+  openModal(template: TemplateRef<any>, item:IKpiScore) {
+    this.itemsKpi = item;
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+      );
+    
   }
 }

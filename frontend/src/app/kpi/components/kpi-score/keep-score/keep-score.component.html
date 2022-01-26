@@ -1,0 +1,39 @@
+    <div class="bs-component">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action active">
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+          <h4 class="list-group-item-heading">
+            จัดเก็บ KPI ปีงบประมาณ {{itemsKpi?.year_th}} ตัวชี้วัดราย {{itemsKpi?.freqname_th}}
+          </h4>
+          <p class="list-group-item-text">
+            {{itemsKpi?.idn_name_th}}
+          </p>
+          
+        </div>
+        <div class="list-group-item list-group-item-action">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>เดือน</th>
+                <th>เป้าคะแนน</th>
+                <th>คะแนน</th>
+                <th>เงื่อนไข</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of itemScore">
+                <td>{{item.kri_name_th}}</td>
+                <td>{{item.target_score}}</td>
+                <td [ngClass]='item.score >= item.target_score ? "text-primary" :"text-danger "'>
+                  {{item.score}} <i [ngClass]='item.score >= item.target_score ? "fa fa-check" :"fa fa-exclamation-triangle"'></i>
+                </td>
+                <td>{{item.sym_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    

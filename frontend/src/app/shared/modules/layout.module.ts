@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
  
 
 
@@ -27,9 +28,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    TooltipModule,
-    TabsModule,
-    BsDropdownModule
+    TooltipModule.forRoot(),
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports:[    
     HttpClientModule,
@@ -40,7 +42,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     FormsModule,
     TooltipModule,
     TabsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    ModalModule
   ],
   providers:[
     
