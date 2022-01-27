@@ -12,54 +12,61 @@ class KpiScoreModel {
   async findAll(value) {
     var year = new Date(`${value}-10-01 00:00:00`);    
     const sql = `
-    SELECT 
-    indi.*,
-    kpi_tpl.*,
-    dep_care.name_th as depname_th,
-    freq.name_th as freqname_th
-    FROM kpi_tpl
-    LEFT JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
-    LEFT JOIN frequency as freq ON kpi_tpl.frequency_id = freq.id
-    LEFT JOIN (
-        SELECT 
-        idn.id as idn_id,
-        idn.name_th as idn_name_th,
-        idn.name_en as idn_name_en,
-        idt.name_th as idt_name_th,
-        idg.id as idg_id,
-        idg.name_th as idg_name_th
-        FROM indi_name AS idn
-        INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
-        INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
-    ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
-    LEFT JOIN ( 
-      SELECT 
-        ks.id,
-        ks.loop_id,
-        ks.target_score,
-        ks.score_unit,
-        ks.score,
-        ks.kpi_tpl_id,
-        kry.year_label,
-        kry.year_id,
-        kry.date_begin,
-        kry.date_end,
-        kry.status,
-        kri.name_th as kri_name_th,
-        kri.prefix as kri_prefix,
-        kri.day,
-        kcd.symbol,
-        kcd.name_th as sym_name
-        FROM kpi_score AS ks
-        INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id
-        INNER JOIN kpi_condition AS kcd ON ks.kpi_condition_id = kcd.id
-        INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
-        WHERE ks.kpi_range_year_year_id = YEAR(?)
-    ) AS score ON kpi_tpl.id = score.kpi_tpl_id
-		GROUP BY kpi_tpl.id;
+    SELECT * 
+		FROM(
+		SELECT 
+		indi.*,
+		kpi_tpl.*,
+		dep_care.name_th as depname_th,
+		freq.name_th as freqname_th
+		FROM kpi_tpl
+		LEFT JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
+		LEFT JOIN frequency as freq ON kpi_tpl.frequency_id = freq.id
+		LEFT JOIN (
+				SELECT 
+				idn.id as idn_id,
+				idn.name_th as idn_name_th,
+				idn.name_en as idn_name_en,
+				idt.name_th as idt_name_th,
+				idg.id as idg_id,
+				idg.name_th as idg_name_th
+				FROM indi_name AS idn
+				INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
+				INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
+		) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
+		LEFT JOIN ( 
+			SELECT 	
+				ks.id,
+				ks.loop_id,
+				ks.target_score,
+				ks.score_unit,
+				ks.score,
+				ks.kpi_tpl_id,
+				kry.year_label,
+				kry.year_id,
+				kry.date_begin,
+				kry.date_end,
+				kry.status,
+				kri.id as kri_id,
+				kri.name_th as kri_name_th,
+				kri.prefix as kri_prefix,
+				kri.day,
+				kcd.symbol,
+				kcd.name_th as sym_name
+				FROM kpi_score AS ks
+				INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id
+				INNER JOIN kpi_condition AS kcd ON ks.kpi_condition_id = kcd.id
+				INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
+				WHERE ks.kpi_range_year_year_id = YEAR(?)
+		) AS score ON kpi_tpl.id = score.kpi_tpl_id
+			GROUP BY kpi_tpl.id
+		) as kpi
+LEFT JOIN (
+		SELECT  kpi_score.kpi_tpl_id, COUNT(kpi_range_year_year_id) as total_keep  FROM kpi_score WHERE kpi_range_year_year_id = YEAR(?)  GROUP BY kpi_tpl_id
+) AS total ON kpi.id = total.kpi_tpl_id
     `;
 
-   const result = await this._database.query(sql,[year]);
+   const result = await this._database.query(sql,[year, year]);
     let new_result = result.map(e=>{
       return {...e, year:parseInt(value, 10), year_th:parseInt(value, 10) + 543}
     })
@@ -83,6 +90,7 @@ class KpiScoreModel {
         kry.date_begin,
         kry.date_end,
         kry.status,
+        kri.id as kri_id,
         kri.name_th as kri_name_th,
         kri.prefix,
         kri.day,

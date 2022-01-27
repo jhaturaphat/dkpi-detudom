@@ -7,10 +7,11 @@ import { LayoutModule } from './shared/modules/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    AppRoutingComponent
+    AppRoutingComponent,  
   ],
   imports: [
     BrowserModule,  

@@ -12,7 +12,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
- 
+import { IconPipe } from 'src/app/pipes/icon.pipe';
+
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HeaderComponent,
     MenuLeftComponent,
     ContentComponent,
-    ToggleMenuDirective
+    ToggleMenuDirective,
+    IconPipe
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
   ],
-  exports:[    
+  exports:[   
+    IconPipe, 
     HttpClientModule,
     HeaderComponent,
     MenuLeftComponent,  

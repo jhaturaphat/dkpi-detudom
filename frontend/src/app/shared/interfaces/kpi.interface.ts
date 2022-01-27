@@ -20,6 +20,7 @@ export interface IKpiTpl {
     frequency_id:string,
     fq_name_th?:string,
     status: string,
+    total_keep?:number,
     idn_id?:any,
     idn_name_th?:string,
     idn_name_en?:string,
@@ -55,6 +56,7 @@ export interface IKpiScore{
     dep_care_id:number,
     indi_name_id:string,
     status:string,
+    total_keep?:number,
     frequency_id:string,
     depname_th:string,
     freqname_th:string,
@@ -70,4 +72,12 @@ export interface IKpiRangeYear {
     status:string,
     create_at?:string,
     update_at?:string
+}
+
+export interface IkpiRangeItem {
+    id: string;
+    name_th: string;
+    prefix: string;
+    day: number;
+    loop_id: number;
 }

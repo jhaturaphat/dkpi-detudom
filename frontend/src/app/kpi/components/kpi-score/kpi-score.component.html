@@ -32,7 +32,7 @@
                                 <td>{{item.idg_id}}{{item.idn_id}}</td>
                                 <td>{{item.idn_name_th}}</td>
                                 <td>{{item.depname_th}}</td>                                                     
-                                <td>{{item.freqname_th}}</td>
+                                <td>{{item.freqname_th}} <span [innerHTML]="item.total_keep | icon:item.frequency_id"></span></td>
                                 <td>
                                     <i class="fa fa-line-chart text-success"></i> | 
                                     <i class="fa fa-save text-danger" (click)="openModal(template, item)"></i> | 

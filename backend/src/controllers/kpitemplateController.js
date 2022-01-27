@@ -4,10 +4,12 @@ const KpiTplModel = require('../models/kpitemplate/KpiTplModel');
 const KpiScoreModel = require('../models/kpitemplate/KpiScoreModel');
 const KpiRangeYearModel = require('../models/kpitemplate/KpiRangeYearModel');
 const KpiChartModel = require('../models/kpitemplate/KpiChartModel');
+const KpiRangeItemModel = require('../models/kpitemplate/KpiRangItemModel');
 
 const model = new KpiTplModel();
 const score = new KpiScoreModel();
 const year = new KpiRangeYearModel();
+const range = new KpiRangeItemModel();
 const chart = new KpiChartModel();
 
 router.get('/template',(req, res)=> res.sendAsyncApi(model.findAll()));
@@ -24,6 +26,9 @@ router.get('/year', (req, res)=> res.sendAsyncApi(year.findAll()));
 
 // Chart
 router.get('/chart/:id/:year', (req, res)=> res.sendAsyncApi(chart.findOne(req.params.id, req.params.year)))
+
+// 
+router.get('/range',(req, res)=> res.sendAsyncApi(range.findAll()));
 
 
 module.exports = router;
