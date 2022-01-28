@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { IKpiRangeYear, IKpiScore } from 'src/app/shared/interfaces/kpi.interface';
+import { IKpiRangeYear, IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
 import { KpiRangeYearService } from 'src/app/shared/services/kpiRangeYear.service';
 import { KpiScoreService } from 'src/app/shared/services/KpiScore.service'
 
@@ -20,8 +20,8 @@ export class KpiScoreComponent implements OnInit {
   modalRef?: BsModalRef;
   year:IKpiRangeYear[] = []  
   year_id:string = 'ปีงบประมาณ';
-  kpiScore:IKpiScore[] = [];
-  itemsKpi?:IKpiScore;
+  kpiScore:IKpiScoreItem[] = [];
+  itemsKpi?:IKpiScoreItem;
 
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class KpiScoreComponent implements OnInit {
     this.kpiScoreYear(item.year_id);
   }
 
-  openModal(template: TemplateRef<any>, item:IKpiScore) {
+  openModal(template: TemplateRef<any>, item:IKpiScoreItem) {
     this.itemsKpi = item;
     this.modalRef = this.modalService.show(
       template,

@@ -94,6 +94,7 @@ LEFT JOIN (
         kri.name_th as kri_name_th,
         kri.prefix,
         kri.day,
+        kcd.id as symbol_id,
         kcd.symbol,
         kcd.name_th as sym_name
         FROM kpi_score AS ks

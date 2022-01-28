@@ -8,7 +8,7 @@
             จัดเก็บ KPI ปีงบประมาณ {{itemsKpi?.year_th}} ตัวชี้วัดราย {{itemsKpi?.freqname_th}}
           </h4>
           <p class="list-group-item-text">
-            {{itemsKpi?.idn_name_th}}
+            {{itemsKpi?.idg_id}}{{itemsKpi?.idn_id}} {{itemsKpi?.idn_name_th}}
           </p>          
         </div>
         <div class="list-group-item list-group-item-action">
@@ -36,37 +36,44 @@
       </div>
     </div>
 
-
-    <div class="row">
-      <div class="col-md-12">        
-          
-            <form action="">
+<br>
+    <div class="modal-body">      
+            <div class="row">
               <div class="col-md-12">
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text">เดือน</span></div>
-                        <select name="" id="">
-                          <option value="">---โปรดเลือก----</option>
-                        </select>                   
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                                     
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">                        
+                            <div class="input-group">
+                              <div class="input-group-prepend"><span class="input-group-text">เดือน</span></div>
+                              <select name="" id="" class="form-control" formControlName="kpi_range_item_id">
+                                <option value="">---โปรดเลือก----</option>
+                                <option [value]=item.id *ngFor="let item of itemRange">
+                                  {{item.name_th}}
+                                </option>
+                              </select>                   
+                            </div>
+                      </div>                      
+                    </div>                   
+                    <!--  -->                                         
+                      <div class="col-md-4 col-lg-4">
+                        <div class="form-group">                          
+                              <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">คะแนน</span></div>
+                                <input class="form-control" id="score" type="number" formControlName="score">
+                              </div>
+                        </div>
                       </div>
-                </div>
+                    
+                    <!--  -->
+                  <div class="col-md-4 col-lg-4">
+                    <button class="btn btn-primary">บันทึก</button>
+                  </div>
+                </form>
               </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text">คะแนน</span></div>
-                        <input class="form-control" id="exampleInputAmount" type="number" placeholder="Amount">
-                      </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <button class="btn btn-primary">บันทึก</button>
-              </div>
-            </form>
-                  
-      </div>
+            </div>
+                  <br>
+      
     </div> 
     
   

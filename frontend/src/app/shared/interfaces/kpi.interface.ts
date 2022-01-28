@@ -30,7 +30,7 @@ export interface IKpiTpl {
 }
 
 
-export interface IKpiScore{
+export interface IKpiScoreItem{
     id:number,
     idn_id:string,
     idn_name_th:string,
@@ -56,6 +56,7 @@ export interface IKpiScore{
     dep_care_id:number,
     indi_name_id:string,
     status:string,
+    symbol_id:number,
     total_keep?:number,
     frequency_id:string,
     depname_th:string,
@@ -81,3 +82,4 @@ export interface IkpiRangeItem {
     day: number;
     loop_id: number;
 }
+
