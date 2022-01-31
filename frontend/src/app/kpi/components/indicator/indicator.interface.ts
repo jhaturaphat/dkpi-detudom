@@ -17,3 +17,9 @@ export interface INamekpi {
     name_en?:string,
     indi_type_id?: string
 }
+
+export interface ICondition{
+    id:number,
+    symbol:string,
+    name_th:string
+}

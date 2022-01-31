@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { IGroupkpi, INamekpi, ITypekpi } from 'src/app/kpi/components/indicator/indicator.interface';
+import { ICondition, IGroupkpi, INamekpi, ITypekpi } from 'src/app/kpi/components/indicator/indicator.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -62,6 +62,11 @@ export class IndicatorService {
   }
   onNameDelete(model:INamekpi){
     return lastValueFrom(this.http.delete(this.url+'/name/'+model.id))
+  }
+
+  //ดึงข้อมูลจากตาราง kpi_condition
+  findCondition(){
+    return lastValueFrom(this.http.get(this.url+'/condition')) as Promise<ICondition[]>;
   }
   
 

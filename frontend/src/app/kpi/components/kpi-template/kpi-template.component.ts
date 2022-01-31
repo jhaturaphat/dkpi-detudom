@@ -5,6 +5,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 import { IndicatorService } from 'src/app/shared/services/indicator.service';
 import { ItemsKpiService } from 'src/app/shared/services/items-kpi.service';
 import { KpiTemplateService } from 'src/app/shared/services/kpiTemplate.service';
+import { ICondition } from '../indicator/indicator.interface';
 
 declare const $:any;
 
@@ -36,7 +37,7 @@ export class KpiTemplateComponent implements OnInit {
       diag_b:['', []],
       measure:['', [Validators.required]],
       benchmark:['', []],
-      howtooper:['', []],
+      kpi_condition_id:['', []],
       ref:['', [Validators.required]],
       active_date:['', [Validators.required]],
       edit_date:['', []],
@@ -53,6 +54,7 @@ export class KpiTemplateComponent implements OnInit {
   nameKpi:any = "";
   frequency:any = '';
   depCare:any = '';
+  condition:ICondition[] = [];
   ListkpiTpl:IKpiTpl[] = [];
   UpdateState:boolean = false;
 
@@ -98,6 +100,15 @@ export class KpiTemplateComponent implements OnInit {
       this.alert.someting_wrong(err.error.errors.sqlMessage);
     })
   }
+
+  kpiCondition(){
+    this.IndicatorService.findCondition().then(result=>{
+      this.condition = result;
+    }).catch(err=>{
+      console.log(err.error.errors);
+      
+    })
+  }
   over():void{
     this.ItemKpiService.findAllDepCare().then(result=>{
       this.depCare = result;      
@@ -122,7 +133,7 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['diag_b'].setValue(item.diag_b);
     form.controls['measure'].setValue(item.measure);
     form.controls['benchmark'].setValue(item.benchmark);
-    form.controls['howtooper'].setValue(item.howtooper);
+    form.controls['kpi_condition_id'].setValue(item.kpi_condition_id);
     form.controls['ref'].setValue(item.ref);
     form.controls['active_date'].setValue(item.active_date);
     form.controls['edit_date'].setValue(item.edit_date);
@@ -159,7 +170,7 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['diag_b'].setValue('');
     form.controls['measure'].setValue('');
     form.controls['benchmark'].setValue('');
-    form.controls['howtooper'].setValue('');
+    form.controls['kpi_condition_id'].setValue('');
     form.controls['ref'].setValue('');
     form.controls['active_date'].setValue('');
     form.controls['edit_date'].setValue('');
@@ -188,6 +199,8 @@ export class KpiTemplateComponent implements OnInit {
     // ดึงข้อมูลผู้รับผิดชอบ
     this.over();
     
+    // ดึงข้อมูลตาราง kpi_condition
+    this.kpiCondition();
   }
 
 }

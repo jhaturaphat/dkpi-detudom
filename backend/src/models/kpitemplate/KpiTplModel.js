@@ -59,7 +59,7 @@ class KpiTplModel {
           allowEmpty: true,
         },
       },
-      howtooper:{
+      kpi_condition_id:{
         presence: {
             allowEmpty: true,
         },
@@ -167,7 +167,7 @@ class KpiTplModel {
     if(errors) throw {errors};
     // บันทึกข้อมูล
     const sql = `
-    INSERT INTO kpi_tpl (label, objective, formular, txt_a, txt_b,diag_a, diag_b,measure, benchmark, howtooper, ref, active_date, edit_date, edit_note, note, dep_care_id, indi_name_id, frequency_id, status) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    INSERT INTO kpi_tpl (label, objective, formular, txt_a, txt_b,diag_a, diag_b,measure, benchmark, kpi_condition_id, ref, active_date, edit_date, edit_note, note, dep_care_id, indi_name_id, frequency_id, status) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     `;
     const result = await this._database.query(sql ,
       [
@@ -180,7 +180,7 @@ class KpiTplModel {
         value['diag_b'],
         value['measure'],
         value['benchmark'],
-        value['howtooper'],
+        value['kpi_condition_id'],
         value['ref'],
         value['active_date'],
         value['edit_date'],
@@ -202,7 +202,7 @@ class KpiTplModel {
     if(errors) throw {errors};
     // บันทึกข้อมูล
     const result = await this._database.query(
-      "UPDATE kpi_tpl SET label=?, objective=?, formular=?, txt_a=?, txt_b=?,diag_a=?, diag_b=?,measure=?, benchmark=?, howtooper=?, ref=?, active_date=?, edit_date=?, edit_note=?, note=?, dep_care_id=?, indi_name_id=?, freq_store_id=?, status=? WHERE id=?",
+      `UPDATE kpi_tpl SET label=?, objective=?, formular=?, txt_a=?, txt_b=?,diag_a=?, diag_b=?,measure=?, benchmark=?, kpi_condition_id=?, ref=?, active_date=?, edit_date=?, edit_note=?, note=?, dep_care_id=?, indi_name_id=?, frequency_id=?, status=? WHERE id=?`,
       [
         value['label'],
         value['objective'],
@@ -213,7 +213,7 @@ class KpiTplModel {
         value['diag_b'],
         value['measure'],
         value['benchmark'],
-        value['howtooper'],
+        value['kpi_condition_id'],
         value['ref'],
         value['active_date'],
         value['edit_date'],
@@ -221,7 +221,7 @@ class KpiTplModel {
         value['note'],
         value['dep_care_id'],
         value['indi_name_id'],
-        value['freq_store_id'],
+        value['frequency_id'],
         value['status'],
         id
       ]

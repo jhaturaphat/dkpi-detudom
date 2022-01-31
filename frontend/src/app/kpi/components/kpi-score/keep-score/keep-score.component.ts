@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { IkpiRangeItem, IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
+import { IkpiRangeItem, IKpiRangeYear, IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { KpiRangeItem } from 'src/app/shared/services/KpiRangeItem.server';
 import { KpiScoreService } from 'src/app/shared/services/KpiScore.service';
@@ -28,6 +28,7 @@ export class KeepScoreComponent implements OnInit {
 
   @Input('modalRef') modalRef?: BsModalRef; //รับค่าจาก Component แม่ kpi-score.component.ts
   @Input('itemsKpi') itemsKpi?:IKpiScoreItem; //รับค่าจาก Component แม่ kpi-score.component.ts
+  @Input('year_id') year_id?:any;
 
   form:FormGroup;
   itemScore:any[] = []
@@ -53,7 +54,7 @@ export class KeepScoreComponent implements OnInit {
   loadRangeItem(){
     this.KpiRanItService.findAll().then(result =>{
       this.itemRange = result;
-      console.log('โหลด item kpi',result);      
+      //console.log('โหลด item kpi',result);      
     }).catch(err=> {
       this.alert.someting_wrong(err.error.errors.sqlMessage)
       console.log(err.error.errors);      
@@ -64,7 +65,14 @@ export class KeepScoreComponent implements OnInit {
     if(!this.form.valid) return this.alert.someting_wrong();     
     const value = this.form.value;
     value.symbol_id = this.itemScore[0].symbol_id; //เพิ่มเงื่อนไข
-    console.log(value);
+    value.year = this.year_id = 543;
+    this.KpiScoreService.save(value).then(result => {
+      console.log(result);
+      this.alert.notify('บันทึกสำเร็จ');
+    }).catch(err=>{
+      console.log(err.error.errors);
+      this.alert.someting_wrong(err.error.errors.sqlMessage);
+    })
   }
   
   onEdit(item:any){

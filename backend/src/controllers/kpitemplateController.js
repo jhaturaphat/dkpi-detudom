@@ -20,6 +20,7 @@ router.delete('/template/:id',(req, res)=> res.sendAsyncApi(model.delete(req.par
 // คะแนน
 router.get('/score/:year',(req, res)=> res.sendAsyncApi(score.findAll(req.params.year)));
 router.get('/score/:id/:year',(req, res)=> res.sendAsyncApi(score.findOne(req.params.id, req.params.year)));
+router.post('/score', (req, res)=> res.sendAsyncApi(score.save(req.body)));
 
 // items
 router.get('/year', (req, res)=> res.sendAsyncApi(year.findAll()));

@@ -109,6 +109,7 @@ LEFT JOIN (
   }
 
   async save(value) { 
+    const result = await this._database.query(`INSERT INTO kpi_score () VALUES ()`)
   }
 
   async update(id, value) {

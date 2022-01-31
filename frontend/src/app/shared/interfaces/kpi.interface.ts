@@ -26,7 +26,8 @@ export interface IKpiTpl {
     idn_name_en?:string,
     idt_name_th?:string,
     idg_id?:any,
-    idg_name_th?:string,    
+    idg_name_th?:string, 
+    kpi_condition_id:number   
 }
 
 

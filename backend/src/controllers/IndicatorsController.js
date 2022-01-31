@@ -3,6 +3,7 @@ const router = require('express').Router();
 const GroupModel = require('../models/indicators/GroupModel')
 const NameModel = require('../models/indicators/NameModel');
 const Typemodel = require('../models/indicators/TypeModel');
+const ConditionModel = require('../models/indicators/ConditionModel');
 
 const Group = new GroupModel();
 router.get('/group',(req, res) => res.sendAsyncApi(Group.findAll()));
@@ -26,5 +27,7 @@ router.post('/name',(req, res) => res.sendAsyncApi(Name.save(req.body)));
 router.put('/name/:id',(req, res) => res.sendAsyncApi(Name.update(req.params.id,req.body)));
 router.delete('/name/:id',(req, res) => res.sendAsyncApi(Name.delete(req.params.id)));
 
+const Condition = new ConditionModel();
+router.get('/condition', (req, res)=> res.sendAsyncApi(Condition.findAll()));
 
 module.exports = router;

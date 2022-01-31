@@ -59,8 +59,10 @@
                                         <input type="text" id="benchmark" class="form-control" formControlName="benchmark">
                                     </div>
                                     <div class="form-group">
-                                        <label for="howtooper">วิธีการแปลผล</label>
-                                        <input type="text" id="howtooper" class="form-control" formControlName="howtooper">
+                                        <label for="kpi_condition_id">วิธีการแปลผล</label>                                        
+                                        <select  class="form-control" id="kpi_condition_id" formControlName="kpi_condition_id">
+                                            <option *ngFor="let item of condition" [value]=item.id>{{item.name_th}}</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="ref">ที่มา Referance</label>
