@@ -63,7 +63,8 @@ export interface IKpiScoreItem{
     depname_th:string,
     freqname_th:string,
     year?:number
-    year_th?:number
+    year_th?:number,
+    kpi_condition_id:number   
 }
 
 export interface IKpiRangeYear {
@@ -82,5 +83,17 @@ export interface IkpiRangeItem {
     prefix: string;
     day: number;
     loop_id: number;
+}
+
+export interface IKpiScore {
+    id?:number,
+    loop_id?:number,
+    target_score:number,
+    score_unit:string,
+    score:number,
+    kpi_tpl_id:number,
+    kpi_range_year_year_id:string,
+    kpi_range_item_id:string,
+    year_th?:string
 }
 

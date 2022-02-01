@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { IkpiRangeItem, IKpiRangeYear, IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
+import { IkpiRangeItem, IKpiRangeYear, IKpiScore, IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { KpiRangeItem } from 'src/app/shared/services/KpiRangeItem.server';
 import { KpiScoreService } from 'src/app/shared/services/KpiScore.service';
@@ -17,12 +17,14 @@ export class KeepScoreComponent implements OnInit {
     private KpiScoreService:KpiScoreService,
     private alert:AlertService,
     private KpiRanItService:KpiRangeItem,
-    formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private renderer: Renderer2
   ) { 
     // สร้างฟอร์ม
     this.form = formBuilder.group({
       kpi_range_item_id:['',[Validators.required]],
-      score:['',[Validators.required]],      
+      score:['',[Validators.required]],
+      score_unit:['', [Validators.required]]      
     });
   }
 
@@ -30,8 +32,11 @@ export class KeepScoreComponent implements OnInit {
   @Input('itemsKpi') itemsKpi?:IKpiScoreItem; //รับค่าจาก Component แม่ kpi-score.component.ts
   @Input('year_id') year_id?:any;
 
+  @ViewChild('formscore', { static: true }) formscore?:ElementRef; 
+
+
   form:FormGroup;
-  itemScore:any[] = []
+  itemScore:any;
   itemRange:IkpiRangeItem[] = [];
 
 // เริ่มต้นฟอร์ม
@@ -39,6 +44,7 @@ export class KeepScoreComponent implements OnInit {
     console.log(this.itemsKpi);   
     this.KpiScoreService.findOne(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{
       this.itemScore = result
+      this.checkRange(result);
       console.log('itemScore',result);
       
     }).catch(err=>{
@@ -61,11 +67,15 @@ export class KeepScoreComponent implements OnInit {
     });
   }
 
-  onSubmit(){
-    if(!this.form.valid) return this.alert.someting_wrong();     
-    const value = this.form.value;
-    value.symbol_id = this.itemScore[0].symbol_id; //เพิ่มเงื่อนไข
-    value.year = this.year_id = 543;
+  onSubmit(){    
+    if(!this.form.valid) return this.alert.someting_wrong('ข้อมูลกรอกมาไม่ครบ');     
+    const value = this.form.value;    
+    value.kpi_tpl_id = this.itemsKpi?.id;
+    value.year = this.itemsKpi?.year;
+    value.kpi_condition_id = this.itemsKpi?.kpi_condition_id;
+    value.target_score = this.itemScore[0].target_score;
+    value.kpi_range_year_year_id = this.itemsKpi?.year;
+    console.log(value);    
     this.KpiScoreService.save(value).then(result => {
       console.log(result);
       this.alert.notify('บันทึกสำเร็จ');
@@ -74,9 +84,16 @@ export class KeepScoreComponent implements OnInit {
       this.alert.someting_wrong(err.error.errors.sqlMessage);
     })
   }
-  
+    
   onEdit(item:any){
 
+  }
+
+  checkRange(item:any[]):any{
+    let el = this.formscore?.nativeElement; 
+    if(item.length == 12) return 'd-none';
+    if(item.length == 4) return 'd-none';
+    if(item.length == 1) return 'd-none';
   }
 
 }

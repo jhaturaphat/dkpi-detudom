@@ -50,12 +50,9 @@ class KpiScoreModel {
 				kri.id as kri_id,
 				kri.name_th as kri_name_th,
 				kri.prefix as kri_prefix,
-				kri.day,
-				kcd.symbol,
-				kcd.name_th as sym_name
+				kri.day
 				FROM kpi_score AS ks
-				INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id
-				INNER JOIN kpi_condition AS kcd ON ks.kpi_condition_id = kcd.id
+				INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id				
 				INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
 				WHERE ks.kpi_range_year_year_id = YEAR(?)
 		) AS score ON kpi_tpl.id = score.kpi_tpl_id
@@ -93,13 +90,9 @@ LEFT JOIN (
         kri.id as kri_id,
         kri.name_th as kri_name_th,
         kri.prefix,
-        kri.day,
-        kcd.id as symbol_id,
-        kcd.symbol,
-        kcd.name_th as sym_name
+        kri.day        
         FROM kpi_score AS ks
-        INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id
-        INNER JOIN kpi_condition AS kcd ON ks.kpi_condition_id = kcd.id
+        INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id        
         INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
         WHERE ks.kpi_range_year_year_id = YEAR(?) AND ks.kpi_tpl_id = ?
         ORDER BY kri.loop_id ASC
@@ -108,17 +101,35 @@ LEFT JOIN (
     
   }
 
-  async save(value) { 
-    const result = await this._database.query(`INSERT INTO kpi_score () VALUES ()`)
+  async findId(id){
+    return await this._database.query('SELECT * FROM kpi_score WHERE id = ?', id);
   }
 
+  async save(value) { 
+    console.log(value);
+    const result = await this._database.query(`INSERT INTO kpi_score (target_score, score_unit, score, kpi_tpl_id, kpi_range_item_id, kpi_range_year_year_id) VALUES (?,?,?,?,?)`,
+    [
+      value['target_score'],
+      value['score_unit'],
+      value['score'],
+      value['kpi_tpl_id'],
+      value['kpi_range_item_id'],
+      value['kpi_range_year_year_id']
+    ]
+    );
+    return await this.findId(result.insertId);
+  }
+
+  // 
   async update(id, value) {
   }
 
+  // 
   async delete(id) {
     return await this._database.query();
   }
 
+  // 
   async findKpi(value){
         
   }

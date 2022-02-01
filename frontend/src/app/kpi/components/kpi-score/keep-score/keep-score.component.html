@@ -15,20 +15,26 @@
           <table class="table">
             <thead>
               <tr>
+                <th>#</th>
                 <th>เดือน</th>
                 <th>เป้าคะแนน</th>
                 <th>คะแนน</th>
                 <th>เงื่อนไข</th>
+                <th><i class="fa fa-cogs"></i></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of itemScore">
+              <tr *ngFor="let item of itemScore; let i = index">
+                <td>{{i + 1}}</td>
                 <td>{{item.kri_name_th}}</td>
                 <td>{{item.target_score}}</td>
                 <td [ngClass]='item.score >= item.target_score ? "text-primary" :"text-danger "'>
                   {{item.score}} <i [ngClass]='item.score >= item.target_score ? "fa fa-check" :"fa fa-exclamation-triangle"'></i>
                 </td>
                 <td>{{item.sym_name}}</td>
+                <td>
+                  <i class="fa fa-edit" (click)="onEdit(item)"></i>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -37,7 +43,7 @@
     </div>
 
 <br>
-    <div class="modal-body">      
+    <div class="modal-body" #formscore>      
             <div class="row">
               <div class="col-md-12">
                 <form (ngSubmit)="onSubmit()" [formGroup]="form">
@@ -54,22 +60,7 @@
                               </select>                   
                             </div>
                       </div>                      
-                    </div>  
-                    
-                    <!--  -->
-                    <div class="col-md-4 col-lg-4">
-                      <div class="form-group">                        
-                            <div class="input-group">
-                              <div class="input-group-prepend"><span class="input-group-text">เดือน</span></div>
-                              <select name="" id="" class="form-control" formControlName="kpi_range_item_id">
-                                <option value="">---โปรดเลือก----</option>
-                                <option [value]=item.id *ngFor="let item of itemRange">
-                                  {{item.name_th}}
-                                </option>
-                              </select>                   
-                            </div>
-                      </div>                      
-                    </div> 
+                    </div>                      
                     
                     <!--  -->                                         
                       <div class="col-md-4 col-lg-4">
@@ -77,6 +68,19 @@
                               <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text">คะแนน</span></div>
                                 <input class="form-control" id="score" type="number" formControlName="score">
+                              </div>
+                        </div>
+                      </div>
+
+                      <!--  -->                                         
+                      <div class="col-md-4 col-lg-4">
+                        <div class="form-group">                          
+                              <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">หน่วยนับ</span></div>                                
+                                <select class="form-control" id="score_unit" formControlName="score_unit">
+                                  <option value="คะแนน">คะแนน</option>
+                                  <option value="เปอร์เซ็นต์">เปอร์เซ็นต์</option>
+                                </select>
                               </div>
                         </div>
                       </div>
