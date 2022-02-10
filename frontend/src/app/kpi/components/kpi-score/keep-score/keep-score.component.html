@@ -52,7 +52,7 @@
                       <div class="form-group">                        
                             <div class="input-group">
                               <div class="input-group-prepend"><span class="input-group-text">เดือน</span></div>
-                              <select name="" id="" class="form-control" formControlName="kpi_range_item_id">
+                              <select #mySelect class="form-control" formControlName="kpi_range_item_id" (change)="onChange(mySelect.value)">
                                 <option value="">---โปรดเลือก----</option>
                                 <option [value]=item.id *ngFor="let item of itemRange">
                                   {{item.name_th}}
@@ -60,7 +60,17 @@
                               </select>                   
                             </div>
                       </div>                      
-                    </div>                      
+                    </div>    
+                    
+                    <!--  -->                                         
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">                          
+                            <div class="input-group">
+                              <div class="input-group-prepend"><span class="input-group-text">เป้าคะแนน</span></div>
+                              <input class="form-control" id="target_score" type="number" formControlName="target_score">
+                            </div>
+                      </div>
+                    </div>
                     
                     <!--  -->                                         
                       <div class="col-md-4 col-lg-4">

@@ -1,3 +1,4 @@
+
 /* You can add global styles to this file, and also import other style files */
 .app-header__logo{
     font-family: 'tahoma' !important;
@@ -12,4 +13,8 @@
   
   .ng-invalid:not(form)  {
     border-left: 5px solid orangered; /* red */
+  }
+
+  *{
+    border-radius:0 !important;
   }

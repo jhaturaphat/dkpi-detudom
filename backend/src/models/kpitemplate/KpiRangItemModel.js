@@ -8,8 +8,8 @@ class KpiRangeItem{
         this.validate_rules = { };
     }
 
-    async findAll(){
-        return await this._database.query("SELECT * FROM kpi_range_item ORDER BY loop_id ASC");
+    async findAll(value){
+        return await this._database.query("SELECT * FROM kpi_range_item WHERE frequency_id = ? ORDER BY loop_id ASC",[value]);
     }
 }
 

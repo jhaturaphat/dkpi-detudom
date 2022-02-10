@@ -24,6 +24,7 @@ export class KeepScoreComponent implements OnInit {
     this.form = formBuilder.group({
       kpi_range_item_id:['',[Validators.required]],
       score:['',[Validators.required]],
+      target_score:['',[Validators.required]],
       score_unit:['', [Validators.required]]      
     });
   }
@@ -41,7 +42,7 @@ export class KeepScoreComponent implements OnInit {
 
 // เริ่มต้นฟอร์ม
   ngOnInit(): void {    
-    console.log(this.itemsKpi);   
+    console.log('itemsKpi',this.itemsKpi);   
     this.KpiScoreService.findOne(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{
       this.itemScore = result
       this.checkRange(result);
@@ -58,7 +59,7 @@ export class KeepScoreComponent implements OnInit {
   }
 // โหลด item kpi
   loadRangeItem(){
-    this.KpiRanItService.findAll().then(result =>{
+    this.KpiRanItService.findAll(this.itemsKpi?.frequency_id).then(result =>{
       this.itemRange = result;
       //console.log('โหลด item kpi',result);      
     }).catch(err=> {
@@ -73,11 +74,12 @@ export class KeepScoreComponent implements OnInit {
     value.kpi_tpl_id = this.itemsKpi?.id;
     value.year = this.itemsKpi?.year;
     value.kpi_condition_id = this.itemsKpi?.kpi_condition_id;
-    value.target_score = this.itemScore[0].target_score;
+    // value.target_score = this.itemScore[0].target_score | 100;  //กำหนดค่าเริ่มต้นเป็น 100 คะแนน
     value.kpi_range_year_year_id = this.itemsKpi?.year;
-    console.log(value);    
+
     this.KpiScoreService.save(value).then(result => {
-      console.log(result);
+      // console.log(result);
+      this.loadRangeItem();
       this.alert.notify('บันทึกสำเร็จ');
     }).catch(err=>{
       console.log(err.error.errors);
@@ -87,6 +89,10 @@ export class KeepScoreComponent implements OnInit {
     
   onEdit(item:any){
 
+  }
+
+  onChange(deviceValue:any) {
+    console.log(deviceValue);
   }
 
   checkRange(item:any[]):any{

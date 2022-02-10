@@ -16,7 +16,7 @@ export class KpiRangeItem {
       url = environment.apiUrl+'/kpi';
 
       //ความถี่ในการจัดเก็บ  
-  findAll(){
-    return lastValueFrom(this.http.get(this.url+'/range')) as Promise<IkpiRangeItem[]>;
+  findAll(frequency_id:any){
+    return lastValueFrom(this.http.get(this.url+'/range/'+frequency_id)) as Promise<IkpiRangeItem[]>;
   }
 }

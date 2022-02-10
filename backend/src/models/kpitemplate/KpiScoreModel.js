@@ -107,7 +107,7 @@ LEFT JOIN (
 
   async save(value) { 
     console.log(value);
-    const result = await this._database.query(`INSERT INTO kpi_score (target_score, score_unit, score, kpi_tpl_id, kpi_range_item_id, kpi_range_year_year_id) VALUES (?,?,?,?,?)`,
+    const result = await this._database.query(`INSERT INTO kpi_score (target_score, score_unit, score, kpi_tpl_id, kpi_range_item_id, kpi_range_year_year_id) VALUES (?,?,?,?,?,?)`,
     [
       value['target_score'],
       value['score_unit'],

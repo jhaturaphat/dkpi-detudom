@@ -29,7 +29,7 @@ router.get('/year', (req, res)=> res.sendAsyncApi(year.findAll()));
 router.get('/chart/:id/:year', (req, res)=> res.sendAsyncApi(chart.findOne(req.params.id, req.params.year)))
 
 // 
-router.get('/range',(req, res)=> res.sendAsyncApi(range.findAll()));
+router.get('/range/:frequency_id',(req, res)=> res.sendAsyncApi(range.findAll(req.params.frequency_id)));
 
 
 module.exports = router;
