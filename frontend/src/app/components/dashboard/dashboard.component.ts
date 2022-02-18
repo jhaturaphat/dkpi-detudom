@@ -17,7 +17,9 @@ export class DashboardComponent implements OnInit {
     this.loadChart();
   }
 
+  
   private loadChart(){
+    // lineChartDemo
     var data = {
       labels: ["January", "February", "March", "April", "May"],
       datasets: [
@@ -43,6 +45,11 @@ export class DashboardComponent implements OnInit {
         }
       ]
     };
+
+    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+    var lineChart = new Chart(ctxl).Line(data);
+
+    // pieChartDemo
     var pdata = [
       {
         value: 300,
@@ -56,10 +63,7 @@ export class DashboardComponent implements OnInit {
         highlight: "#FF5A5E",
         label: "In-Progress"
       }
-    ]
-    
-    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(data);
+    ]; 
     
     var ctxp = $("#pieChartDemo").get(0).getContext("2d");
     var pieChart = new Chart(ctxp).Pie(pdata);

@@ -34,7 +34,7 @@
                                 <td>{{item.depname_th}}</td>                                                     
                                 <td>{{item.freqname_th}} <span [innerHTML]="item.total_keep | icon:item.frequency_id"></span></td>
                                 <td>
-                                    <i class="fa fa-line-chart text-success"></i> | 
+                                    <i class="fa fa-line-chart text-success" (click)="openChartModal(chart_template, item)"></i> | 
                                     <i class="fa fa-save text-danger" (click)="openModal(template, item)"></i> | 
                                     <i class="fa fa-edit text-danger"></i>                                                                    
                                 </td>
@@ -49,4 +49,8 @@
 
 <ng-template #template>
     <app-keep-score [modalRef]='modalRef' [itemsKpi]='itemsKpi' [year_id]='year_id'></app-keep-score>
+</ng-template>
+
+<ng-template #chart_template >
+    <app-chart [modalRef]='modalRef' [itemsKpi]='itemsKpi'></app-chart>
 </ng-template>

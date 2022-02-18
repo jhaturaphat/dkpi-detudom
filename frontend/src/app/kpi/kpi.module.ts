@@ -13,6 +13,7 @@ import { DepcareComponent } from './components/depcare/depcare.component';
 
 import { KpiScoreComponent } from './components/kpi-score/kpi-score.component';
 import { KeepScoreComponent } from './components/kpi-score/keep-score/keep-score.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { KeepScoreComponent } from './components/kpi-score/keep-score/keep-score
     NamekpiComponent,
     KpiTemplateComponent,
     DepcareComponent,    
-    KpiScoreComponent, KeepScoreComponent,
+    KpiScoreComponent, 
+    KeepScoreComponent, 
+    ChartComponent,
   ],
   imports: [
     CommonModule,
@@ -31,8 +34,15 @@ import { KeepScoreComponent } from './components/kpi-score/keep-score/keep-score
     LayoutModule  
   ],
   exports:[
-    KpiComponent,
+    KpiComponent,    
+    TypekpiComponent,
+    GroupkpiComponent,
+    NamekpiComponent,
     KpiTemplateComponent,
+    DepcareComponent,    
+    KpiScoreComponent, 
+    KeepScoreComponent, 
+    ChartComponent,
   ]
 })
 export class KpiModule { }

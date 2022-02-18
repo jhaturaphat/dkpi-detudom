@@ -36,8 +36,7 @@ class KpiScoreModel {
 		) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
 		LEFT JOIN ( 
 			SELECT 	
-				ks.id,
-				ks.loop_id,
+				ks.id,				
 				ks.target_score,
 				ks.score_unit,
 				ks.score,
@@ -47,6 +46,7 @@ class KpiScoreModel {
 				kry.date_begin,
 				kry.date_end,
 				kry.status,
+        kri.loop_id,
 				kri.id as kri_id,
 				kri.name_th as kri_name_th,
 				kri.prefix as kri_prefix,
@@ -76,8 +76,7 @@ LEFT JOIN (
     var year = new Date(`${yyyy}-10-01 00:00:00`);       
     const sql = `
     SELECT 
-        ks.id,
-        ks.loop_id,
+        ks.id,        
         ks.target_score,
         ks.score_unit,
         ks.score,
@@ -87,6 +86,7 @@ LEFT JOIN (
         kry.date_begin,
         kry.date_end,
         kry.status,
+        kri.loop_id,
         kri.id as kri_id,
         kri.name_th as kri_name_th,
         kri.prefix,

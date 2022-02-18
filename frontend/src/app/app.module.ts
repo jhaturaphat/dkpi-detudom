@@ -5,6 +5,7 @@ import { AppRoutingModule, AppRoutingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './shared/modules/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { KpiModule } from './kpi/kpi.module';
 
 
 
@@ -15,8 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,  
+    BrowserAnimationsModule,
     AppRoutingModule, 
-    LayoutModule, BrowserAnimationsModule
+    LayoutModule,
+    KpiModule     
   ],
   exports: [],
   providers: [],

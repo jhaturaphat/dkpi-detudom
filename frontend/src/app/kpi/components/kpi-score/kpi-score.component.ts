@@ -59,4 +59,12 @@ export class KpiScoreComponent implements OnInit {
       );
     
   }
+  openChartModal(template: TemplateRef<any>, item:any) {
+    this.itemsKpi = item;
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+      );
+    
+  }
 }

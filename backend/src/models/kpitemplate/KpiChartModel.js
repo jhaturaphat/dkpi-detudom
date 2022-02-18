@@ -8,50 +8,29 @@ class KpiChartModel {
       this.validate_rules = { };
     }
 
-    async findOne(id, year) {  
+    async find(id, year) {  
       // console.log(id, year);  
       const sql = `
       SELECT 
-          ks.id,
-          ks.loop_id,
-          ks.target_score,
-          ks.score_unit,
-          ks.score,
-          ks.kpi_tpl_id,
-          kry.year_label,
-          kry.year_id,
-          kry.date_begin,
-          kry.date_end,
-          kry.status,
-          kri.id as kri_id,
-          kri.name_th as kri_name_th,
-          kri.prefix,
-          kri.day,
-          kcd.symbol,
-          kcd.name_th as sym_name
-          FROM kpi_score AS ks
-          INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id
-          INNER JOIN kpi_condition AS kcd ON ks.kpi_condition_id = kcd.id
-          INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
-          WHERE ks.kpi_range_year_year_id = YEAR(?) AND ks.kpi_tpl_id = ?
+      score.score,
+      score.target_score,
+      kri.name_th,
+      kri.prefix,
+      kri.loop_id
+      FROM kpi_score AS score
+      LEFT JOIN kpi_range_item AS kri ON score.kpi_range_item_id = kri.id
+      WHERE score.kpi_tpl_id =  ?
+      AND score.kpi_range_year_year_id = ?
       `;
-      const result =  await this._database.query(sql,[year, id]);
+      return await this._database.query(sql,[id, year]);
+      // const result =  await this._database.query(sql,[id, year]);
+      // const label = result.map(e=>e.name_th);  
+      // const data = result.map(e =>e.score);  
+      // const chart = result.map(e=>{
+      //  return {...e, label, data}
+      // })[0]
+      // return chart;
       
-      const kri_item_id = result.map(e=>e.kri_id);
-      const label = result.map(e=>e.prefix);  
-      const data = result.map(e =>e.score);  
-
-      const chart =  result.map(e=>{
-        return {...e, kri_item_id, label, data}
-      })[0];
-      delete chart.kri_id
-      delete chart.kri_name_th
-      delete chart.prefix
-      delete chart.day
-      delete chart.id
-      delete chart.loop_id
-      delete chart.score
-      return chart;
     }
     
   }

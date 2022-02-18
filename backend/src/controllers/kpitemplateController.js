@@ -11,7 +11,9 @@ const score = new KpiScoreModel();
 const year = new KpiRangeYearModel();
 const range = new KpiRangeItemModel();
 const chart = new KpiChartModel();
-
+router.get('/',(req, res)=>{
+    res.json({message:'Hello KPI'});
+})
 router.get('/template',(req, res)=> res.sendAsyncApi(model.findAll()));
 router.get('/template/:id',(req, res)=> res.sendAsyncApi(model.findOne(req.params.id)));
 router.post('/template',(req, res)=> res.sendAsyncApi(model.save(req.body)));
@@ -26,7 +28,7 @@ router.post('/score', (req, res)=> res.sendAsyncApi(score.save(req.body)));
 router.get('/year', (req, res)=> res.sendAsyncApi(year.findAll()));
 
 // Chart
-router.get('/chart/:id/:year', (req, res)=> res.sendAsyncApi(chart.findOne(req.params.id, req.params.year)))
+router.get('/chart/:id/:year', (req, res)=> res.sendAsyncApi(chart.find(req.params.id, req.params.year)))
 
 // 
 router.get('/range/:frequency_id',(req, res)=> res.sendAsyncApi(range.findAll(req.params.frequency_id)));

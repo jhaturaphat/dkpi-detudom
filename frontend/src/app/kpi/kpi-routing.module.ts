@@ -9,6 +9,7 @@ import { KpiTemplateComponent } from './components/kpi-template/kpi-template.com
 import { DepcareComponent } from './components/depcare/depcare.component';
 
 import { KpiScoreComponent } from './components/kpi-score/kpi-score.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 const routes: Routes = [
   { path: '', component: KpiComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: KpiUrl.KpiTemplate, component: KpiTemplateComponent },
   { path: KpiUrl.DepCare, component: DepcareComponent },
   { path: KpiUrl.KpiScore, component: KpiScoreComponent },
+  { path: KpiUrl.KpiChart, component: ChartComponent },
 ];
 
 @NgModule({
