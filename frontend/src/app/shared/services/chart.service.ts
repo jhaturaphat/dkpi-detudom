@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import Chart from 'chart.js/auto';
 import { lastValueFrom } from "rxjs";
 import { environment } from "src/environments/environment";
+import { IKpiScoreItem } from "../interfaces/kpi.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -21,14 +22,14 @@ export class ChartService {
     }
 
 
-    LineChart(title:any, label:string[], data:number[], ctx:any){                
+    LineChart(itemsKpi:IKpiScoreItem, label:string[], data:number[], ctx:any, ){                
         return new Chart(ctx, {
             type: 'line',
             data: {
               labels: label,
               datasets: [{ 
                   data: data,
-                  label: "คะแนน",
+                  label: ''+itemsKpi.year_th,
                   borderColor: "#3e95cd",
                   fill: false
                 }
@@ -38,7 +39,11 @@ export class ChartService {
               plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: itemsKpi.idt_name_th +'  '+ itemsKpi.year_th
+                },
+                subtitle: {
+                    display: true,
+                    text: itemsKpi.idn_name_th
                 }
               }
             }

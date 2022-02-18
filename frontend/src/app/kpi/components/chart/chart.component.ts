@@ -1,7 +1,7 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import Chart from 'chart.js/auto';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { IChart } from 'src/app/shared/interfaces/IChart.interface';
+
 import { IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { ChartService } from 'src/app/shared/services/chart.service';
@@ -38,7 +38,7 @@ export class ChartComponent implements OnInit {
     //สร้างการฟ
     const label = this.data.map(e=>e.name_th);
     const data = this.data.map(e=>e.score);
-    this.chart.LineChart(this.itemsKpi?.idn_name_th,label, data, this.ctx); 
+    this.chart.LineChart(this.itemsKpi!, label, data, this.ctx); 
     }, 100);
     
   }
