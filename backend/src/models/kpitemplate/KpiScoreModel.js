@@ -105,8 +105,7 @@ LEFT JOIN (
     return await this._database.query('SELECT * FROM kpi_score WHERE id = ?', id);
   }
 
-  async save(value) { 
-    console.log(value);
+  async save(value) {     
     const result = await this._database.query(`INSERT INTO kpi_score (target_score, score_unit, score, kpi_tpl_id, kpi_range_item_id, kpi_range_year_year_id) VALUES (?,?,?,?,?,?)`,
     [
       value['target_score'],
@@ -122,6 +121,18 @@ LEFT JOIN (
 
   // 
   async update(id, value) {
+    const result = await this._database.query(`UPDATE kpi_score SET target_score=?, score_unit=?, score=?, kpi_tpl_id=?, kpi_range_item_id=?, kpi_range_year_year_id=? WHERE id=?`,
+    [
+      value['target_score'],
+      value['score_unit'],
+      value['score'],
+      value['kpi_tpl_id'],
+      value['kpi_range_item_id'],
+      value['kpi_range_year_year_id'],
+      id
+    ]
+    );
+    return await this.findId(result.insertId);
   }
 
   // 

@@ -18,10 +18,10 @@ export class KeepScoreComponent implements OnInit {
     private alert:AlertService,
     private KpiRanItService:KpiRangeItem,
     private formBuilder:FormBuilder,
-    private renderer: Renderer2
+    
   ) { 
     // สร้างฟอร์ม
-    this.form = formBuilder.group({
+    this.formG = this.formBuilder.group({
       kpi_range_item_id:['',[Validators.required]],
       score:['',[Validators.required]],
       target_score:['',[Validators.required]],
@@ -35,24 +35,28 @@ export class KeepScoreComponent implements OnInit {
 
   @ViewChild('formscore', { static: true }) formscore?:ElementRef; 
 
-
-  form:FormGroup;
+  id:any = 0;
+  formStatus:boolean = false;
+  formG:FormGroup;
   itemScore:any;
   itemRange:IkpiRangeItem[] = [];
 
 // เริ่มต้นฟอร์ม
   ngOnInit(): void {    
     console.log('itemsKpi',this.itemsKpi);   
+    this.loadScore();
+  }
+
+  loadScore(){
     this.KpiScoreService.findOne(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{
-      this.itemScore = result
-      this.checkRange(result);
-      console.log('itemScore',result);
-      
+      this.itemScore = result      
+      console.log('itemScore',result);      
     }).catch(err=>{
       console.log(err.error.errors);    
       this.alert.someting_wrong(err.error.errors.sqlMessage);
     })
   }
+
   // โหลด ข้อมูลหลัง สร้าง element เสร็จ
   ngAfterViewInit(){
     this.loadRangeItem();
@@ -69,26 +73,47 @@ export class KeepScoreComponent implements OnInit {
   }
 
   onSubmit(){    
-    if(!this.form.valid) return this.alert.someting_wrong('ข้อมูลกรอกมาไม่ครบ');     
-    const value = this.form.value;    
+    if(!this.formG.valid) return this.alert.someting_wrong('ข้อมูลกรอกมาไม่ครบ');     
+
+    const value = this.formG.value;    
     value.kpi_tpl_id = this.itemsKpi?.id;
     value.year = this.itemsKpi?.year;
     value.kpi_condition_id = this.itemsKpi?.kpi_condition_id;
     // value.target_score = this.itemScore[0].target_score | 100;  //กำหนดค่าเริ่มต้นเป็น 100 คะแนน
     value.kpi_range_year_year_id = this.itemsKpi?.year;
 
-    this.KpiScoreService.save(value).then(result => {
-      // console.log(result);
-      this.loadRangeItem();
-      this.alert.notify('บันทึกสำเร็จ');
-    }).catch(err=>{
-      console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
-    })
+    if(this.formStatus){
+      this.KpiScoreService.update(this.id, value).then(result => {      
+        this.loadScore();
+        this.loadRangeItem();
+        this.alert.notify('แก้ไขสำเร็จ');
+      }).catch(err=>{
+        console.error(err.message);
+        this.alert.someting_wrong(err.error.errors.sqlMessage);
+      });
+    }else{
+      this.KpiScoreService.save(value).then(result => {      
+        this.loadScore();
+        this.loadRangeItem();
+        this.alert.notify('บันทึกสำเร็จ');
+      }).catch(err=>{
+        console.error(err.message);
+        this.alert.someting_wrong(err.error.errors.sqlMessage);
+      });
+    }
+
+    
+
   }
     
-  onEdit(item:any){
-
+  onEdit(item:any){    
+    this.formStatus = true;
+    const form = this.formG;
+    this.id = item.id;
+    form.controls['kpi_range_item_id'].setValue(item.kri_id);
+    form.controls['score'].setValue(item.score);
+    form.controls['target_score'].setValue(item.target_score);
+    form.controls['score_unit'].setValue(item.score_unit);
   }
 
   onChange(deviceValue:any) {

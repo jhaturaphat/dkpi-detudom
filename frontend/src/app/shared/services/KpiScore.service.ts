@@ -21,4 +21,8 @@ export class KpiScoreService{
     save(body:IKpiScore) {
         return lastValueFrom(this.http.post(this.url+'/score', body)) as Promise<IKpiScore>
     }
+
+    update(id:number, body:IKpiScore){
+        return lastValueFrom(this.http.put(this.url+'/score/'+id, body)) as Promise<IKpiScore>
+    }
 }

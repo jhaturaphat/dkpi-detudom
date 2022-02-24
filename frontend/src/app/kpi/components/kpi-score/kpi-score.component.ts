@@ -10,7 +10,6 @@ import { KpiScoreService } from 'src/app/shared/services/KpiScore.service'
   styleUrls: ['./kpi-score.component.css']
 })
 export class KpiScoreComponent implements OnInit {
-
   constructor(
     private yearService:KpiRangeYearService,
     private scoreService:KpiScoreService,

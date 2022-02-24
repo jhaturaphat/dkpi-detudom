@@ -21,6 +21,7 @@ class KpiChartModel {
       LEFT JOIN kpi_range_item AS kri ON score.kpi_range_item_id = kri.id
       WHERE score.kpi_tpl_id =  ?
       AND score.kpi_range_year_year_id = ?
+      ORDER BY kri.loop_id
       `;
       return await this._database.query(sql,[id, year]);
       // const result =  await this._database.query(sql,[id, year]);

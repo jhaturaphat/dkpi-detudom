@@ -43,7 +43,7 @@ export class ChartService {
                 },
                 subtitle: {
                     display: true,
-                    text: itemsKpi.idn_name_th
+                    text: itemsKpi.idn_name_th 
                 }
               }
             }

@@ -46,7 +46,7 @@
     <div class="modal-body" #formscore>      
             <div class="row">
               <div class="col-md-12">
-                <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                <form (ngSubmit)="onSubmit()" [formGroup]="formG">
                     <!--  -->
                     <div class="col-md-4 col-lg-4">
                       <div class="form-group">                        
@@ -97,7 +97,8 @@
                     
                     <!--  -->
                   <div class="col-md-4 col-lg-4">
-                    <button class="btn btn-primary">บันทึก</button>
+                    <button class="btn btn-primary" [disabled]="!formG.valid" *ngIf="!formStatus">บันทึก</button>
+                    <button class="btn btn-primary" [disabled]="!formG.valid" *ngIf="formStatus">แก้ไข</button>
                   </div>
                 </form>
               </div>
