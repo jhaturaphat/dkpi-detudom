@@ -18,19 +18,19 @@
 .history/*
 
 # misc
-/frontend/.angular/cache
-/frontend//.sass-cache
-/frontend//connect.lock
-/frontend//coverage
-/frontend/libpeerconnection.log
-/frontend/npm-debug.log
-/frontend/yarn-error.log
-/frontend/testem.log
-/frontend/typings
+frontend/.angular/cache
+frontend//.sass-cache
+frontend//connect.lock
+frontend//coverage
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/testem.log
+frontend/typings
 
 # System Files
-/frontend/.DS_Store
-/frontend/Thumbs.db
+frontend/.DS_Store
+frontend/Thumbs.db
 
 #
-*/backend/.env
+backend/.env
