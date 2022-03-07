@@ -23,6 +23,7 @@ class KpiDatabase {
             });
         });
     }
-} 
+}
+ 
 
 module.exports = {KpiDatabase}

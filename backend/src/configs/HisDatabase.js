@@ -5,12 +5,12 @@ class HisDatabase {
 
     constructor() {
         this.connection = mysql.createPool({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASS,
-            database: process.env.DB_DATABASES,
-            charset: process.env.DB_CHARSET,
-            port:process.env.DB_PORT
+            host: process.env.DB_HIS_HOST,
+            user: process.env.DB_HIS_USER,
+            password: process.env.DB_HIS_PASS,
+            database: process.env.DB_HIS_DATABASES,
+            charset: process.env.DB_HIS_CHARSET,
+            port:process.env.DB_HIS_PORT
         });
     }
 
