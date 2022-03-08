@@ -12,6 +12,10 @@ class HisDatabase {
             charset: process.env.DB_HIS_CHARSET,
             port:process.env.DB_HIS_PORT
         });
+        // แก้ภาษาต่างดาว
+        this.connection.on('connection', function (connection) {
+            connection.query('SET NAMES "utf8"');            
+        });
     }
 
     // Custom ฟังชั่นก์ Query ข้อมูลใหม่
