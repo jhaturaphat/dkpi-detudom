@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IKpiRangeYear, IKpiScoreItem } from 'src/app/shared/interfaces/kpi.interface';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { KpiRangeYearService } from 'src/app/shared/services/kpiRangeYear.service';
 import { KpiScoreService } from 'src/app/shared/services/KpiScore.service'
 
@@ -13,7 +14,8 @@ export class KpiScoreComponent implements OnInit {
   constructor(
     private yearService:KpiRangeYearService,
     private scoreService:KpiScoreService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private alert: AlertService
   ) { }
 
   modalRef?: BsModalRef;
@@ -27,6 +29,9 @@ export class KpiScoreComponent implements OnInit {
     // ดึงข้อมูล ปี มาแสดง Dorpdown ปีงบประมาณ
     this.yearService.findAll().then(result => {
       this.year = result;
+    }).catch((err)=>{
+      this.alert.someting_wrong(err.error)
+      console.log(err);   
     });
 
     // ดึงข้อมูล Kpi template มาแสดงที่ตาราง จัดเก็บ KPI Score

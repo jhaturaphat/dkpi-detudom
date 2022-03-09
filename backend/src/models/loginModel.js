@@ -17,7 +17,7 @@ class LoginModel {
        
         const payload = {
             name: data[0].loginname,
-            scopes: "customer:read"
+            scopes: ["customer:create","customer:read"]
           };
           
         if(!data.length) return {message:"Username or Password is invalid."}    
