@@ -65,6 +65,9 @@ export class GroupkpiComponent implements OnInit {
   private indiAll(){
     this.indiService.onGroupAll().then((items)=> {
       this.indiGroup = items;      
+    }).catch(err=>{
+      console.log(err);
+      
     })
   }
 

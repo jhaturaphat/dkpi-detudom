@@ -10,7 +10,7 @@ export class AlertService {
     notify(message: string = "Null", type: string = 'success') {
         $.notify({
             // options
-            title: 'แจ้งเตือนจากระบบ : ',
+            title: 'แจ้งเตือนจากระบบ :',
             message: message,
         }, {
                 // settings
