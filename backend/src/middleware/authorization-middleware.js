@@ -9,11 +9,11 @@ module.exports = (credentials = [])=>{
 
         //มองหา JWT in Header
         const {authorization} = req.headers        
-        if(!authorization) return res.status(401).send("ไม่มีสิทธิ์เข้าถึง: access denied");        
+        if(!authorization) return res.status(401).send("ไม่มีสิทธิ์เข้าถึง: 401 Unauthorized");        
         // ตรวจสอบ JWT Bearer         
         const tokenBody = authorization.split(' ')[1];        
         jwt.verify(tokenBody, process.env.SECRET_KEY, (err, decoded)=>{
-            if(err) return res.status(401).send("Error: Access Denied 1");
+            if(err) return res.status(401).send("Error: 401 Unauthorized");
             // ไม่มีข้อผิดพลาด JWT ดี!
             // ตรวจสอบข้อมูลประจำตัวที่ถูกส่งผ่านใน Header
             if(credentials.length > 0){  
@@ -23,7 +23,7 @@ module.exports = (credentials = [])=>{
                     credentials.some(cred => decoded.scopes.indexOf(cred) >= 0)){
                     next();
                 }else{
-                    return res.status(401).send("Error: Access Denied 2");
+                    return res.status(403).send("Error: 403 Forbidden");
                 }
             }else{
                 // ไม่จำเป็นต้องมีข้อมูลประจำตัวผู้ใช้ได้รับอนุญาต
