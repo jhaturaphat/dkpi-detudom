@@ -46,7 +46,7 @@ export class KpiScoreComponent implements OnInit {
       console.log(result);
       
     }).catch(err=>{
-      console.log(err.error.errors);      
+      console.log(err.error);      
     })
   }
 

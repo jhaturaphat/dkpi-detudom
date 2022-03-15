@@ -20,9 +20,8 @@ class LoginModel {
         }
 
         const payload = {
-            name: data[0].loginname,
-            scopes: ["customer:create"]
-            // scopes: ["customer:create","customer:read"]
+            name: data[0].loginname,            
+            scopes: ["create","read","update","delete"]
         };
 
          const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn:"2h"}); 

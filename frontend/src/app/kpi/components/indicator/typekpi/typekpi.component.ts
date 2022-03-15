@@ -54,8 +54,8 @@ export class TypekpiComponent implements OnInit {
         this.indiAll();  
         this.onReset();  
       }).catch((err)=>{
-        console.log(err.error.errors); 
-        this.alert.notify(err.error.errors.sqlMessage, 'danger');
+        console.log(err.error); 
+        this.alert.notify(err.error, 'danger');
       });      
     }else{
       this.service.onTypeSave(this.Form.value).then((item)=>{
@@ -63,8 +63,8 @@ export class TypekpiComponent implements OnInit {
         this.indiAll();  
         this.onReset();    
       }).catch((err)=>{
-        console.log(err.error.errors); 
-        this.alert.notify(err.error.errors.sqlMessage, 'danger');
+        console.log(err.error); 
+        this.alert.notify(err.error, 'danger');
       })
     }
     
@@ -93,8 +93,8 @@ export class TypekpiComponent implements OnInit {
         this.indiAll();
         this.alert.notify("สำเร็จ");    
       }).catch(err=>{
-        console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.log(err.error);
+        this.alert.someting_wrong(err.error);
       })
     });
   }

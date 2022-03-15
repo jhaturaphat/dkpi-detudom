@@ -27,6 +27,7 @@ frontend/npm-debug.log
 frontend/yarn-error.log
 frontend/testem.log
 frontend/typings
+frontend/dkpi
 
 # System Files
 frontend/.DS_Store

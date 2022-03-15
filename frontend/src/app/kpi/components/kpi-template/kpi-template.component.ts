@@ -74,16 +74,16 @@ export class KpiTemplateComponent implements OnInit {
         this.alert.notify('บันทึกสำเร็จ');
         this.findAll();   
       }).catch(err=>{
-        console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.log(err.error);
+        this.alert.someting_wrong(err.error);
       })
     }else{
       this.service.save(this.Form.value).then(result=>{
         this.alert.notify('บันทึกสำเร็จ');
         this.findAll();      
       }).catch(err=>{
-        console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.log(err.error);
+        this.alert.someting_wrong(err.error);
       });
     } 
    
@@ -97,7 +97,7 @@ export class KpiTemplateComponent implements OnInit {
       this.ListkpiTpl = result;      
     }).catch(err=>{
       console.log(err.error.erros);
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
+      this.alert.someting_wrong(err.error);
     })
   }
 
@@ -105,7 +105,7 @@ export class KpiTemplateComponent implements OnInit {
     this.IndicatorService.findCondition().then(result=>{
       this.condition = result;
     }).catch(err=>{
-      console.log(err.error.errors);
+      console.log(err.error);
       
     })
   }
@@ -113,8 +113,8 @@ export class KpiTemplateComponent implements OnInit {
     this.ItemKpiService.findAllDepCare().then(result=>{
       this.depCare = result;      
     }).catch(err=>{
-      console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
+      console.log(err.error);
+      this.alert.someting_wrong(err.error);
     });
   }
 
@@ -151,8 +151,8 @@ export class KpiTemplateComponent implements OnInit {
           this.alert.notify('ลบรายการสำเร็จ');
           this.findAll();
       }).catch(err=>{
-          console.log(err.error.errors);
-          this.alert.someting_wrong(err.error.errors.sqlMessage);
+          console.log(err.error);
+          this.alert.someting_wrong(err.error);
         });
       })   
   }
@@ -186,15 +186,15 @@ export class KpiTemplateComponent implements OnInit {
     this.IndicatorService.onNameAll().then(result=>{       
       this.nameKpi = result
     }).catch(err=>{
-      console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
+      console.log(err.error);
+      this.alert.someting_wrong(err.error);
     });
     // ดึงข้อมูลความถี่ในการจัดเก็บ
     this.ItemKpiService.onFindAllFreqStore().then(result=>{
       this.frequency = result;      
     }).catch(err=>{
-      console.log(err.error.errors);
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
+      console.log(err.error);
+      this.alert.someting_wrong(err.error);
     });
     // ดึงข้อมูลผู้รับผิดชอบ
     this.over();

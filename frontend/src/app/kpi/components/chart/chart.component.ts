@@ -28,7 +28,7 @@ export class ChartComponent implements OnInit {
     this.chart.findChart(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{          
       this.data = result;            
     }).catch(err=>{
-      this.alert.someting_wrong(err.errors.error.message);
+      this.alert.someting_wrong(err.error);
     });   
   }
 

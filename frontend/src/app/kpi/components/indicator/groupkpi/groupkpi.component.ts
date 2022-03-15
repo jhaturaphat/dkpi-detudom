@@ -46,8 +46,8 @@ export class GroupkpiComponent implements OnInit {
         this.indiAll();  
         this.onReset();  
       }).catch((err)=>{
-        console.log(err.error.errors); 
-        this.alert.notify(err.error.errors.sqlMessage, 'danger');
+        console.log(err); 
+        this.alert.notify(err.error, 'danger');
       })
     }else{
       this.indiService.onGroupSave(this.Form.value).then((item)=>{
@@ -55,8 +55,8 @@ export class GroupkpiComponent implements OnInit {
         this.indiAll();  
         this.onReset();     
       }).catch((err)=>{
-        console.log(err.error.errors); 
-        this.alert.notify(err.error.errors.sqlMessage, 'danger');
+        console.log(err); 
+        this.alert.notify(err.error, 'danger');
       })
     }
     
@@ -86,8 +86,8 @@ export class GroupkpiComponent implements OnInit {
         this.indiAll();
         this.alert.notify("สำเร็จ");    
       }).catch(err=>{
-        console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.log(err);
+        this.alert.someting_wrong(err.error);
       })
     });
     

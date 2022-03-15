@@ -35,7 +35,7 @@ export class DepcareComponent implements OnInit {
     this.service.findAllDepCare().then(result=>{
       this.items = result;
     }).catch(err=>{
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
+      this.alert.someting_wrong(err.error);
     })
   }
   onSubmit():void{
@@ -48,7 +48,7 @@ export class DepcareComponent implements OnInit {
         this.onReset();
       }).catch(err=>{
         console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);        
+        this.alert.someting_wrong(err.error);        
       });
     }else{
       this.service.onSaveDepCare(this.Form.value).then(result=>{
@@ -57,7 +57,7 @@ export class DepcareComponent implements OnInit {
         this.onReset();
       }).catch(err=>{
         console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);        
+        this.alert.someting_wrong(err.error);        
       });
     }
   }
@@ -85,7 +85,7 @@ export class DepcareComponent implements OnInit {
         this.alert.notify("ลบข้อมูลสำเร็จ");    
       }).catch(err=>{
         console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        this.alert.someting_wrong(err.error);
       })
     });
   }

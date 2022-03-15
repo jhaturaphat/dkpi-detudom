@@ -35,8 +35,8 @@ export class NamekpiComponent implements OnInit {
       console.log(result);
                 
     }).catch(err=>{
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
-      console.log(err.error.errors);      
+      this.alert.someting_wrong(err.error);
+      console.log(err.error);      
     })
   }
 
@@ -46,8 +46,8 @@ export class NamekpiComponent implements OnInit {
       console.log(result);
       
     }).catch(err=>{
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
-      console.log(err.error.errors);      
+      this.alert.someting_wrong(err.error);
+      console.log(err.error);      
     })
   }
 
@@ -61,8 +61,8 @@ export class NamekpiComponent implements OnInit {
         this.findAll();  
         this.onReset();  
       }).catch((err)=>{
-        console.log(err.error.errors); 
-        this.alert.notify(err.error.errors.sqlMessage, 'danger');
+        console.log(err.error); 
+        this.alert.notify(err.error, 'danger');
       })
 
     }else{
@@ -72,8 +72,8 @@ export class NamekpiComponent implements OnInit {
         this.findAll();
         this.onReset();
       }).catch(err=>{
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
-        console.log(err.error.errors); 
+        this.alert.someting_wrong(err.error);
+        console.log(err.error); 
       });
     }
     
@@ -104,8 +104,8 @@ export class NamekpiComponent implements OnInit {
         this.findAll();
         this.alert.notify("ลบข้อสำเร็จ");    
       }).catch(err=>{
-        console.log(err.error.errors);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.log(err.error);
+        this.alert.someting_wrong(err.error);
       })
     });
   }

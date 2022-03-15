@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, tap } from "rxjs";
+import { catchError, Observable, tap } from "rxjs";
 import { LoginService } from "./login.service";
 
 @Injectable()
@@ -20,8 +20,10 @@ export class AuthInterceptor implements HttpInterceptor {
                 headers: req.headers.set("Authorization",`Bearer ${token}`)
             });
             return next.handle(cloned).pipe(tap(()=> {},
-            (err:any)=>{
+            (err:any)=>{                
                 if(err instanceof HttpErrorResponse){
+                    
+                    
                     if(err.status !== 401){
                         return
                     }

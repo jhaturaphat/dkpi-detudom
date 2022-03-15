@@ -53,7 +53,7 @@ export class KeepScoreComponent implements OnInit {
       console.log('itemScore',result);      
     }).catch(err=>{
       console.log(err.error.errors);    
-      this.alert.someting_wrong(err.error.errors.sqlMessage);
+      this.alert.someting_wrong(err.error);
     })
   }
 
@@ -67,7 +67,7 @@ export class KeepScoreComponent implements OnInit {
       this.itemRange = result;
       //console.log('โหลด item kpi',result);      
     }).catch(err=> {
-      this.alert.someting_wrong(err.error.errors.sqlMessage)
+      this.alert.someting_wrong(err.error)
       console.log(err.error.errors);      
     });
   }
@@ -88,8 +88,8 @@ export class KeepScoreComponent implements OnInit {
         this.loadRangeItem();
         this.alert.notify('แก้ไขสำเร็จ');
       }).catch(err=>{
-        console.error(err.message);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.error(err.error);
+        this.alert.someting_wrong(err.error);
       });
     }else{
       this.KpiScoreService.save(value).then(result => {      
@@ -97,8 +97,8 @@ export class KeepScoreComponent implements OnInit {
         this.loadRangeItem();
         this.alert.notify('บันทึกสำเร็จ');
       }).catch(err=>{
-        console.error(err.message);
-        this.alert.someting_wrong(err.error.errors.sqlMessage);
+        console.error(err.error);
+        this.alert.someting_wrong(err.error);
       });
     }
 
