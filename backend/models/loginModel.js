@@ -19,6 +19,7 @@ class LoginModel {
             throw new Error("Username or password is invlid")
         }
 
+        
         const payload = {
             name: data[0].loginname,            
             scopes: ["create","read","update","delete"]

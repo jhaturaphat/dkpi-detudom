@@ -29,8 +29,7 @@ export class LoginComponent implements OnInit {
     
   }
   onSubmit(){      
-      this.loginService.onLogin(this.Form.value).then(result=>{
-        console.log(result);  
+      this.loginService.onLogin(this.Form.value).then(result=>{        
         this.alert.notify("เข้าสู่ระบบสำเร็จ")  
         this.loginService.setToken(result.token as string)    
         this.router.navigate(['/',AppUrl.Dashboard])
@@ -42,8 +41,8 @@ export class LoginComponent implements OnInit {
 
   private initalCreateFormData(){
     this.Form = this.formBuilder.group({
-      username:['somkid', Validators.required],
-      password:['_somkid_', Validators.required],
+      username:['', Validators.required],
+      password:['', Validators.required],
       remember:[false]
     })
   }

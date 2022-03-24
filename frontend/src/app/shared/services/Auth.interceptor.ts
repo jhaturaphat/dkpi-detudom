@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { catchError, Observable, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { LoginService } from "./login.service";
 
 @Injectable()
@@ -15,26 +15,28 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = this.loginService.getToken();
-        if(token.length > 0){
+        if(token){
             const cloned = req.clone({
                 headers: req.headers.set("Authorization",`Bearer ${token}`)
-            });
-            return next.handle(cloned).pipe(tap(()=> {},
-            (err:any)=>{                
-                if(err instanceof HttpErrorResponse){
-                    
-                    
-                    if(err.status !== 401){
-                        return
-                    }
-                    this.router.navigate(['login']);
+            });            
+                return next.handle(cloned).pipe(tap((event: HttpEvent<any>)=> {
+                    if(event instanceof HttpErrorResponse){       
+                        if(event.status !== 401){                                                      
+                            return
+                        }
+                        // ถ้า access_token หมดอายุให้ไปที่หน้า login
+                        this.router.navigate(['login']);
+                    }     
                 }
-            }
-            ))
+            ));         
         }
         else{
+            //  ถ้าในเครื่องไม่มี access_token ให้ไปที่หน้า login
+            this.router.navigate(['login']);
             return next.handle(req)
         }
     }
 
 }
+
+// https://stackoverflow.com/questions/61075812/angular-9-httpinterceptor-cannot-read-property-length-of-null
