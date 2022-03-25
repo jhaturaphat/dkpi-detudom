@@ -27,7 +27,8 @@ export class LoginService {
         return localStorage.getItem(this.access_token) as string;
     }
 
-    clearToken(){
-        localStorage.removeItem(this.access_token)
+    clearToken():boolean{
+        localStorage.removeItem(this.access_token);
+        return true;
     }
 }
