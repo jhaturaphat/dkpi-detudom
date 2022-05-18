@@ -15,9 +15,10 @@ export class HeaderComponent implements OnInit {
     private router:Router
     ) { }
 
+  login:boolean = false;
   AppUrl = AppUrl;
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   onLogOut():void{
@@ -25,5 +26,4 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/',AppUrl.Dashboard])
     }
   }
-
 }

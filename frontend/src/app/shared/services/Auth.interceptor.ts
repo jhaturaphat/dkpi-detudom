@@ -38,6 +38,10 @@ export class AuthInterceptor implements HttpInterceptor {
         }
     }
 
+    canCache(req: HttpRequest<any>):boolean {
+        return req.urlWithParams.includes('')
+    }
+
 }
 
 // https://stackoverflow.com/questions/61075812/angular-9-httpinterceptor-cannot-read-property-length-of-null

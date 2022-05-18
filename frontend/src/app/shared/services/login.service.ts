@@ -15,19 +15,23 @@ export class LoginService {
     private access_token = "access_token";
     private url = environment.apiUrl+'/authen/login';
     
-    onLogin(model:ILogin){
+    onGetLogin(){
+        
+    }
+
+    onLogin(model:ILogin) {
         return lastValueFrom(this.http.post(this.url, model)) as Promise<ILogin>
     }
 
-    setToken(token:string){
-        localStorage.setItem(this.access_token, token)
+    setToken(token:string) {
+        localStorage.setItem(this.access_token, token);
     }
 
-    getToken():string{
+    getToken():string {
         return localStorage.getItem(this.access_token) as string;
     }
 
-    clearToken():boolean{
+    clearToken():boolean {
         localStorage.removeItem(this.access_token);
         return true;
     }
