@@ -35,10 +35,10 @@ export class ChartComponent implements OnInit {
   ngAfterViewInit() {
     setTimeout(()=>{
       this.ctx = <HTMLElement>document.getElementById('line-chart');
-    //สร้างการฟ
-    const label = this.data.map(e=>e.name_th);
-    const data = this.data.map(e=>e.score);
-    this.chart.LineChart(this.itemsKpi!, label, data, this.ctx); 
+      //สร้างการฟ
+      const label = this.data.map(e=>e.name_th);
+      const data = this.data.map(e=>e.score);
+      this.chart.LineChart(this.itemsKpi!, label, data, this.ctx); 
     }, 100);
     
   }

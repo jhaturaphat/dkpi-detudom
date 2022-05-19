@@ -5,6 +5,7 @@ const KpiScoreModel = require('../models/kpitemplate/KpiScoreModel');
 const KpiRangeYearModel = require('../models/kpitemplate/KpiRangeYearModel');
 const KpiChartModel = require('../models/kpitemplate/KpiChartModel');
 const KpiRangeItemModel = require('../models/kpitemplate/KpiRangItemModel');
+const KpiUnitModel = require('../models/kpitemplate/KpiUnitModel');
 
 const authorize = require("../middleware/authorization-middleware")
 const admin = ["create","read","update","delete"]
@@ -15,6 +16,7 @@ const score = new KpiScoreModel();
 const year = new KpiRangeYearModel();
 const range = new KpiRangeItemModel();
 const chart = new KpiChartModel();
+const unit = new KpiUnitModel();
 
 
 router.get('/',(req, res)=>{
@@ -39,6 +41,9 @@ router.get('/chart/:id/:year', (req, res)=> res.sendAsyncApi(chart.find(req.para
 
 // 
 router.get('/range/:frequency_id',(req, res)=> res.sendAsyncApi(range.findAll(req.params.frequency_id)));
+
+//หน่วยนับ
+router.get('/unit',(req, res)=> res.sendAsyncApi(unit.findAll()));
 
 
 module.exports = router;

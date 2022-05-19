@@ -97,3 +97,7 @@ export interface IKpiScore {
     year_th?:string
 }
 
+export interface IKpiUnit {
+    unit_id:number,
+    unit_name:string
+}

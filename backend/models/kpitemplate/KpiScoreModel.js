@@ -41,6 +41,7 @@ class KpiScoreModel {
 				ks.score_unit,
 				ks.score,
 				ks.kpi_tpl_id,
+        ks.score_unit_id,
 				kry.year_label,
 				kry.year_id,
 				kry.date_begin,
@@ -50,10 +51,12 @@ class KpiScoreModel {
 				kri.id as kri_id,
 				kri.name_th as kri_name_th,
 				kri.prefix as kri_prefix,
-				kri.day
+				kri.day,
+        su.*
 				FROM kpi_score AS ks
 				INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id				
 				INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
+        INNER JOIN score_unit AS su ON ks.score_unit_id = su.unit_id
 				WHERE ks.kpi_range_year_year_id = YEAR(?)
 		) AS score ON kpi_tpl.id = score.kpi_tpl_id
 			GROUP BY kpi_tpl.id
@@ -81,6 +84,7 @@ LEFT JOIN (
         ks.score_unit,
         ks.score,
         ks.kpi_tpl_id,
+        ks.score_unit_id,
         kry.year_label,
         kry.year_id,
         kry.date_begin,
@@ -90,10 +94,12 @@ LEFT JOIN (
         kri.id as kri_id,
         kri.name_th as kri_name_th,
         kri.prefix,
-        kri.day        
+        kri.day,
+        su.*        
         FROM kpi_score AS ks
         INNER JOIN kpi_range_year AS kry ON ks.kpi_range_year_year_id = kry.year_id        
         INNER JOIN kpi_range_item AS kri ON ks.kpi_range_item_id = kri.id
+        INNER JOIN score_unit AS su ON ks.score_unit_id = su.unit_id
         WHERE ks.kpi_range_year_year_id = YEAR(?) AND ks.kpi_tpl_id = ?
         ORDER BY kri.loop_id ASC
     `;
@@ -106,14 +112,14 @@ LEFT JOIN (
   }
 
   async save(value) {     
-    const result = await this._database.query(`INSERT INTO kpi_score (target_score, score_unit, score, kpi_tpl_id, kpi_range_item_id, kpi_range_year_year_id) VALUES (?,?,?,?,?,?)`,
+    const result = await this._database.query(`INSERT INTO kpi_score (target_score, score, kpi_tpl_id, kpi_range_item_id, kpi_range_year_year_id,score_unit_id) VALUES (?,?,?,?,?,?)`,
     [
-      value['target_score'],
-      value['score_unit'],
+      value['target_score'],      
       value['score'],
       value['kpi_tpl_id'],
       value['kpi_range_item_id'],
-      value['kpi_range_year_year_id']
+      value['kpi_range_year_year_id'],
+      value['score_unit_id'],
     ]
     );
     return await this.findId(result.insertId);
@@ -121,14 +127,14 @@ LEFT JOIN (
 
   // 
   async update(id, value) {
-    const result = await this._database.query(`UPDATE kpi_score SET target_score=?, score_unit=?, score=?, kpi_tpl_id=?, kpi_range_item_id=?, kpi_range_year_year_id=? WHERE id=?`,
+    const result = await this._database.query(`UPDATE kpi_score SET target_score=?,  score=?, kpi_tpl_id=?, kpi_range_item_id=?, kpi_range_year_year_id=?, score_unit_id=? WHERE id=?`,
     [
-      value['target_score'],
-      value['score_unit'],
+      value['target_score'],      
       value['score'],
       value['kpi_tpl_id'],
       value['kpi_range_item_id'],
       value['kpi_range_year_year_id'],
+      value['score_unit_id'],
       id
     ]
     );

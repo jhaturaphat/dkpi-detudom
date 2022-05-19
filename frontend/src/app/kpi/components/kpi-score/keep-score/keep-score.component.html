@@ -66,7 +66,7 @@
                     <div class="col-md-4 col-lg-4">
                       <div class="form-group">                          
                             <div class="input-group">
-                              <div class="input-group-prepend"><span class="input-group-text">เป้าคะแนน</span></div>
+                              <div class="input-group-prepend"><span class="input-group-text">เป้าหมาย</span></div>
                               <input class="form-control" id="target_score" type="number" formControlName="target_score">
                             </div>
                       </div>
@@ -87,9 +87,9 @@
                         <div class="form-group">                          
                               <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text">หน่วยนับ</span></div>                                
-                                <select class="form-control" id="score_unit" formControlName="score_unit">
-                                  <option value="คะแนน">คะแนน</option>
-                                  <option value="เปอร์เซ็นต์">เปอร์เซ็นต์</option>
+                                <select class="form-control" id="score_unit_id" formControlName="score_unit_id">
+                                  <option value="">---โปรดเลือก----</option>
+                                  <option *ngFor="let item of kpiUnit" [value]=item.unit_id>{{item.unit_name}}</option>                                  
                                 </select>
                               </div>
                         </div>
