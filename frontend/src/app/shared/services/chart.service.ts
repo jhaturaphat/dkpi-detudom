@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IKpiScoreItem } from '../interfaces/kpi.interface';
 
-Chart.register(...registerables);
+Chart.register(ChartDataLabels);
 @Injectable({
   providedIn: 'root',
 })
@@ -31,16 +32,19 @@ export class ChartService {
       data: {
         labels: label,
         datasets: [
-          {
-            data: data,
-            label: '' + itemsKpi.year_th,
-            borderColor: '#3e95cd',
-            fill: true, 
+          {            
+            data: data,            
+            label: '' + itemsKpi.year_th,            
+            fill: true,
+            datalabels:{
+              display:true
+            }, 
           },
+          
         ],
-      },
-      options: {
-        plugins: {
+      },      
+      options: {        
+        plugins: {          
           legend: { 
             display: true,
             position: 'right',
@@ -60,3 +64,6 @@ export class ChartService {
     });
   }
 }
+
+// https://www.chartjs.org/
+// https://v2_0_0--chartjs-plugin-datalabels.netlify.app/

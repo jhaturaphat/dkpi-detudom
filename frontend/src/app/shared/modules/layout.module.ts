@@ -14,8 +14,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { IconPipe } from 'src/app/pipes/icon.pipe';
 
-// Chartjs
-import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -36,8 +34,7 @@ import { NgChartsModule } from 'ng2-charts';
     TooltipModule.forRoot(),
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
-    NgChartsModule
+    ModalModule.forRoot()
   ],
   exports:[   
     IconPipe, 
@@ -50,8 +47,7 @@ import { NgChartsModule } from 'ng2-charts';
     TooltipModule,
     TabsModule,
     BsDropdownModule,
-    ModalModule,
-    NgChartsModule
+    ModalModule
   ],
   providers:[
     
