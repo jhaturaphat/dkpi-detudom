@@ -28,6 +28,7 @@ frontend/yarn-error.log
 frontend/testem.log
 frontend/typings
 frontend/dkpi
+dpki.mwb.bak
 
 # System Files
 frontend/.DS_Store
@@ -36,3 +37,4 @@ frontend/Thumbs.db
 #
 */.env
 backend/.env
+

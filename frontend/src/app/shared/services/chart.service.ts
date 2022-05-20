@@ -35,7 +35,7 @@ export class ChartService {
             data: data,
             label: '' + itemsKpi.year_th,
             borderColor: '#3e95cd',
-            fill: true,
+            fill: true, 
           },
         ],
       },
