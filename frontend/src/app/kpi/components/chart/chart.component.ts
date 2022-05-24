@@ -38,7 +38,9 @@ export class ChartComponent implements OnInit {
       //สร้างการฟ
       const label = this.data.map(e=>e.name_th);
       const data = this.data.map(e=>e.score);
-      this.chart.LineChart(this.itemsKpi!, label, data, this.ctx); 
+      const target = this.data[0].target_score;
+      
+      this.chart.LineChart(this.itemsKpi!, label, data, this.ctx, target); 
     }, 100);
     
   }

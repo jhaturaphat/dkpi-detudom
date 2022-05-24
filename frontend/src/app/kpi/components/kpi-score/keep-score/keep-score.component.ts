@@ -50,8 +50,9 @@ export class KeepScoreComponent implements OnInit {
 
   loadScore(){
     this.KpiScoreService.findOne(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{
-      this.itemScore = result      
-      console.log('itemScore',result);      
+      this.itemScore = result;
+      this.formStatus = false;  // Reset สถานะ from
+      // console.log('itemScore',result);      
     }).catch(err=>{
       console.log(err.error.errors);    
       this.alert.someting_wrong(err.error);
@@ -113,14 +114,17 @@ export class KeepScoreComponent implements OnInit {
         this.alert.someting_wrong(err.error);
       });
     }
+  }
 
-    
-
+  ResetForm(){
+    this.formStatus = false;
+    const form = this.formG;
+    form.controls['kpi_range_item_id'].setValue('');
+    form.controls['score'].setValue(""); 
   }
     
   onEdit(item:any){  
-    console.log(item);
-      
+    // console.log(item);      
     this.formStatus = true;
     const form = this.formG;
     this.id = item.id;
@@ -131,7 +135,13 @@ export class KeepScoreComponent implements OnInit {
   }
 
   onChange(deviceValue:any) {
-    console.log(deviceValue);
+    // console.log(deviceValue);    
+    // ตรวจสอบการบันทึกซ้ำ
+    const items = this.itemScore.find((e:any) => e.kri_id === deviceValue);   
+    if(items){
+      this.ResetForm()
+      return this.alert.someting_wrong(items.kri_name_th +"ได้ถูกบันทึกแล้ว");
+    } 
   }
 
   checkRange(item:any[]):any{

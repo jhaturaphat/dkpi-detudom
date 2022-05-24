@@ -5,6 +5,8 @@ class KpiDatabase {
 
     constructor() {
         this.connection = mysql.createPool({
+            connectionLimit: 10,
+            acquireTimeout: 30000, //30 secs
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
             password: process.env.DB_PASS,
