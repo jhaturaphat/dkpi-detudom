@@ -9,73 +9,119 @@
       <li class="breadcrumb-item"><a href="#">รายงานตัวชี้วัด</a></li>
     </ul>
   </div>
+
+  <!-- Dashboard -->
   <div class="row">
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-3" *ngFor="let item of totalTpl">
       <div class="widget-small primary coloured-icon"><i class="icon fa fa-dashboard fa-3x"></i>
         <div class="info">
-          <h4>จำนวนตัวชี้วัดรายเดือน</h4>
-          <p><b>500</b></p> 
+          <h4>{{item.label}}</h4>
+          <p><b>{{item.value}}</b></p> 
         </div>        
       </div>
     </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="widget-small info coloured-icon"><i class="icon fa fa-dashboard fa-3x"></i>
-        <div class="info">
-          <h4>จำนวนตัวชี้วัดรายไตรมาส</h4>
-          <p><b>500</b></p> 
+  </div>
+  <!-- Chart -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="tile">        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo1"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="widget-small warning coloured-icon"><i class="icon fa fa-dashboard fa-3x"></i>
-        <div class="info">
-          <h4>จำนวนตัวชี้วัดรายปี</h4> 
-          <p><b>500</b></p>          
+    <div class="col-md-4">
+      <div class="tile">        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo2"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="widget-small danger coloured-icon"><i class="icon fa fa-dashboard fa-3x"></i>
-        <div class="info">
-          <h4>จำนวนตัวชี้วัดทั้งหมด</h4>
-          <p><b>500</b></p>
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo3"></canvas>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="tile">
-        <h3 class="tile-title">Monthly Sales</h3>
+        
         <div class="embed-responsive embed-responsive-16by9">
-          <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+          <canvas class="embed-responsive-item" id="lineChartDemo4"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="tile">
-        <h3 class="tile-title">Support Requests</h3>
+        
         <div class="embed-responsive embed-responsive-16by9">
-          <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
+          <canvas class="embed-responsive-item" id="lineChartDemo5"></canvas>
         </div>
       </div>
     </div>
-  </div> 
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo6"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="tile">
-        <h3 class="tile-title">Monthly Sales</h3>
-        <div class="embed-responsive embed-responsive-16by9">          
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="tile">
-        <h3 class="tile-title">Support Requests</h3>
+        
         <div class="embed-responsive embed-responsive-16by9">
-          
+          <canvas class="embed-responsive-item" id="lineChartDemo7"></canvas>
         </div>
       </div>
     </div>
-  </div> 
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo8"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo9"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo10"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="pieChartDemo11"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tile">
+        
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="pieChartDemo12"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-content>

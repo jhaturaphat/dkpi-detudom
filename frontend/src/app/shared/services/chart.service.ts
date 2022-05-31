@@ -17,12 +17,22 @@ export class ChartService {
 
   url = environment.apiUrl + '/kpi';
 
+  findTotalTpl(){
+    return lastValueFrom(this.http.get(this.url + '/totaltpl/')) as Promise<any[]>;
+  }
+
   findChart(id: any, year: any) {
     return lastValueFrom(
       this.http.get(this.url + '/chart/' + id + '/' + year)
     ) as Promise<any[]>;
   }
 
+  topChartList(){
+    return lastValueFrom(this.http.get(environment.apiUrl+'/chart/top-chart-list')) as Promise<any[]>;
+  }
+  topChart(year:any, model:any){
+    return lastValueFrom(this.http.post(environment.apiUrl+'/chart/top-chart/'+year, model)) as Promise<any[]>;
+  }
   
 
   LineChart( itemsKpi: IKpiScoreItem,label: string[],data: number[], ctx: any, target_score?: string ) {

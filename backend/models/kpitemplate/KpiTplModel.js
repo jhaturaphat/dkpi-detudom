@@ -232,6 +232,30 @@ class KpiTplModel {
   async delete(id) {
     return await this._database.query("DELETE FROM kpi_tpl WHERE id=?",[id]);
   }
+
+  async totaltpl(){
+    const result =  await this._database.query("SELECT frequency_id FROM kpi_tpl");
+    
+    const month = {
+      label: 'จำนวนตัวชี้วัดรายเดือน',
+      value: result.filter(e=>e.frequency_id==='M').length
+    }
+    
+    const quarter = {
+      label: 'จำนวนตัวชี้วัดรายไตรมาส',
+      value: result.filter(e=>e.frequency_id==='Q').length
+    }   
+    const year = {
+      label: 'จำนวนตัวชี้วัดรายปี',
+      value: result.filter(e=>e.frequency_id==='Y').length
+    }    
+    const all = {
+      label:'จำนวนตัวชี้วัดทั้งหมด',
+      value: result.length  
+    } 
+    const totalkpi = []; totalkpi.push(month,quarter,year, all);
+    return totalkpi;
+  }
 }
 
 module.exports = KpiTplModel;

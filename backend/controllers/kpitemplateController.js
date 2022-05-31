@@ -27,6 +27,7 @@ router.get('/template/:id',(req, res)=> res.sendAsyncApi(model.findOne(req.param
 router.post('/template',authorize(admin),(req, res)=> res.sendAsyncApi(model.save(req.body)));
 router.put('/template/:id',authorize(admin),(req, res)=> res.sendAsyncApi(model.update(req.params.id, req.body)));
 router.delete('/template/:id',authorize(admin),(req, res)=> res.sendAsyncApi(model.delete(req.params.id, req.body)));
+router.get('/totaltpl',(req,res)=> res.sendAsyncApi(model.totaltpl()))
 // คะแนน
 router.get('/score/:year',(req, res)=> res.sendAsyncApi(score.findAll(req.params.year)));
 router.get('/score/:id/:year',(req, res)=> res.sendAsyncApi(score.findOne(req.params.id, req.params.year)));
@@ -44,6 +45,8 @@ router.get('/range/:frequency_id',(req, res)=> res.sendAsyncApi(range.findAll(re
 
 //หน่วยนับ
 router.get('/unit',(req, res)=> res.sendAsyncApi(unit.findAll()));
+
+
 
 
 module.exports = router;
