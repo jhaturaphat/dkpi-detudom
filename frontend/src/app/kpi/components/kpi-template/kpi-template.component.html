@@ -123,7 +123,7 @@
                                             <td>{{item.idg_id}}{{item.indi_name_id}}</td>                                            
                                             <td>{{item.idn_name_th}}</td>                                            
                                             <td>{{item.fq_name_th}}</td>                                            
-                                            <td>{{item.active_date}}</td>                                            
+                                            <td>{{item.active_date | date:'YYY-mm-dd':'+0007'}}</td>                                            
                                             <td>{{item.status}}</td>  
                                             <td>
                                                 <i class="fa fa-edit text-primary" (click)="onUpdate(item)"></i> |                               

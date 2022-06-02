@@ -239,8 +239,7 @@ class KpiTplModel {
     const month = {
       label: 'จำนวนตัวชี้วัดรายเดือน',
       value: result.filter(e=>e.frequency_id==='M').length
-    }
-    
+    }    
     const quarter = {
       label: 'จำนวนตัวชี้วัดรายไตรมาส',
       value: result.filter(e=>e.frequency_id==='Q').length
