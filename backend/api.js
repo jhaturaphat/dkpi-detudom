@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors())
+app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 app.use(require('./configs/config'));// สร้าง Function ใหม่ให้กับ express

@@ -12,7 +12,7 @@ declare const JSsideBar:any;
 export class AppComponent implements OnInit{
   title = 'forntend';
  
-  ngOnInit() {
+  ngOnInit() {    
     JSsideBar.loadScript()
   }
 }

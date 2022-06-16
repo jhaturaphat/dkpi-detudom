@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
             });            
                 return next.handle(cloned).pipe(tap((event: HttpEvent<any>)=> {
                     if(event instanceof HttpErrorResponse){       
-                        if((event.status !== 401)){                                                    
+                        if((event.status !== 401)){                                                                           
                             return
                         }else{// ถ้า access_token หมดอายุให้ไปที่หน้า login
                             this.router.navigate(['login']);

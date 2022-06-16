@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { IKpiTpl } from 'src/app/shared/interfaces/kpi.interface';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { IndicatorService } from 'src/app/shared/services/indicator.service';
 import { ItemsKpiService } from 'src/app/shared/services/items-kpi.service';
 import { KpiTemplateService } from 'src/app/shared/services/kpiTemplate.service';
 import { ICondition } from '../indicator/indicator.interface';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { thLocale } from 'ngx-bootstrap/locale';
+defineLocale('th', thLocale);
 
 declare const $:any;
 
@@ -14,17 +19,19 @@ declare const $:any;
   templateUrl: './kpi-template.component.html',
   styleUrls: ['./kpi-template.component.css']
 })
+
+
 export class KpiTemplateComponent implements OnInit {
 
-
-
   constructor(
+    private localeService: BsLocaleService,
     private IndicatorService:IndicatorService,
     private ItemKpiService:ItemsKpiService,
     private service:KpiTemplateService,
     private alert:AlertService,
     private formBuilder: FormBuilder,    
   ) {
+    this.localeService.use("th");
     this.Form = this.formBuilder.group({    
       // id:['',[]],  
       indi_name_id:['',[Validators.required]],  
@@ -64,9 +71,8 @@ export class KpiTemplateComponent implements OnInit {
   
 
   onSubmit():void{       
-    if(!this.Form.valid){
-      console.log(this.Form);
-      
+    console.log(this.Form.value);
+    if(!this.Form.valid){       
       return this.alert.someting_wrong();  
     }  
     if(this.UpdateState){
@@ -91,14 +97,16 @@ export class KpiTemplateComponent implements OnInit {
   
   private findAll():void{
     this.UpdateState = false;
-    this.resetForm();
-    this.loadIndicator();    
+    this.resetForm();        
     this.service.findAll().then(result=>{
+      // console.log('ListkpiTpl รายการข้อมูเทมเพลต', result);      
       this.ListkpiTpl = result;      
     }).catch(err=>{
       console.log(err.error.erros);
       this.alert.someting_wrong(err.error);
-    })
+    });
+
+    this.loadIndicator();
   }
 
   kpiCondition(){
@@ -182,9 +190,11 @@ export class KpiTemplateComponent implements OnInit {
   }
 
   loadIndicator():void{
-    // ดึงข้อมูลชื่อตัวชี้วัด
-    this.IndicatorService.onNameAll().then(result=>{       
-      this.nameKpi = result
+    // ดึงข้อมูลชื่อตัวชี้วัดเลือกเอาตัวที่ยังไม้ได้เพิ่มในรายการ
+    this.IndicatorService.onNameAll().then(result=>{         
+      let item = this.ListkpiTpl.map((e:any)=> e.idn_id);
+      this.nameKpi = result.filter((e:any)=>!item.includes(e.id));
+
     }).catch(err=>{
       console.log(err.error);
       this.alert.someting_wrong(err.error);

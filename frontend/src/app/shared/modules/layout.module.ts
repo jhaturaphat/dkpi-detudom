@@ -13,6 +13,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { IconPipe } from 'src/app/pipes/icon.pipe';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -34,7 +35,8 @@ import { IconPipe } from 'src/app/pipes/icon.pipe';
     TooltipModule.forRoot(),
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   exports:[   
     IconPipe, 
@@ -47,7 +49,8 @@ import { IconPipe } from 'src/app/pipes/icon.pipe';
     TooltipModule,
     TabsModule,
     BsDropdownModule,
-    ModalModule
+    ModalModule,
+    BsDatepickerModule
   ],
   providers:[
     
