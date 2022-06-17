@@ -4,17 +4,32 @@
             <div class="tile">                
                 <div class="tile-title-w-btn">
                     <h3 class="title">จัดเก็บ KPI Score</h3>
-                    <div class="btn-group" dropdown>
-                        <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                                aria-controls="dropdown-animated">
-                          {{year_id}} <span class="caret"></span>
-                        </button>
-                        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
-                            <li role="menuitem" *ngFor="let item of year">
-                              <a class="dropdown-item" (click)="kpiSearchYear(item)">{{item.year_id+543}}</a>
-                            </li>   
-                        </ul>
-                    </div>
+                    <div class="bs-component">
+                        <div class="btn-group mr-1" dropdown>
+                            <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                    aria-controls="dropdown-animated">
+                              {{yearDopdown.id}} <span class="caret"></span>
+                            </button>
+                            <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+                                <li role="menuitem" *ngFor="let item of year">
+                                  <a class="dropdown-item" (click)="kpiSearchYear(item)">{{item.year_id}}</a>
+                                </li>                               
+                            </ul>
+                        </div>  
+                        <div class="btn-group" dropdown>
+                            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                    aria-controls="dropdown-basic">
+                                    {{depCareDopdown.text}} <span class="caret"></span>
+                            </button>
+                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                                role="menu" aria-labelledby="button-basic">
+                                <li role="menuitem" *ngFor="let item of depCare">
+                                    <a class="dropdown-item" (click)="setDepcareTxt(item)">{{item.name_th}}</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>                  
                 </div>            
                 <div class="tile-body">
                     <table class="table">
@@ -48,7 +63,7 @@
 </app-content>
 
 <ng-template #template>
-    <app-keep-score [modalRef]='modalRef' [itemsKpi]='itemsKpi' [year_id]='year_id'></app-keep-score>
+    <app-keep-score [modalRef]='modalRef' [itemsKpi]='itemsKpi' [year_id]='yearDopdown.id'></app-keep-score>
 </ng-template>
 
 <ng-template #chart_template>       

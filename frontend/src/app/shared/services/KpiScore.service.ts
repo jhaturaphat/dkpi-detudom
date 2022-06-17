@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { lastValueFrom } from "rxjs";
 import { environment } from "src/environments/environment";
-import { IKpiScore, IKpiScoreItem } from "../interfaces/kpi.interface";
+import { IDepCare, IKpiScore, IKpiScoreItem } from "../interfaces/kpi.interface";
 
 @Injectable({
     providedIn:'root'
@@ -25,4 +25,5 @@ export class KpiScoreService{
     update(id:number, body:IKpiScore){
         return lastValueFrom(this.http.put(this.url+'/score/'+id, body)) as Promise<IKpiScore>
     }
+
 }

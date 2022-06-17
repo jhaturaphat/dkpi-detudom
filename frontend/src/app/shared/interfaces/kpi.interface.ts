@@ -97,6 +97,12 @@ export interface IKpiScore {
     year_th?:string
 }
 
+export interface IDepCare {
+    id:number,
+    name_th:string,
+    name_en:string
+}
+
 export interface IKpiUnit {
     unit_id:number,
     unit_name:string
