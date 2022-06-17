@@ -30,6 +30,7 @@ router.delete('/template/:id',authorize(admin),(req, res)=> res.sendAsyncApi(mod
 router.get('/totaltpl',(req,res)=> res.sendAsyncApi(model.totaltpl()))
 // คะแนน
 router.get('/score/:year',(req, res)=> res.sendAsyncApi(score.findAll(req.params.year)));
+router.get('/score/:year/:depcare',(req, res)=> res.sendAsyncApi(score.findWith(req.params.year, req.params.depcare)));
 router.get('/score/:id/:year',(req, res)=> res.sendAsyncApi(score.findOne(req.params.id, req.params.year)));
 router.post('/score',authorize(admin), (req, res)=> res.sendAsyncApi(score.save(req.body)));
 router.put('/score/:id',authorize(admin), (req, res)=> res.sendAsyncApi(score.update(req.params.id, req.body)));

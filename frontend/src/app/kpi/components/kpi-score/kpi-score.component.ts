@@ -34,22 +34,12 @@ export class KpiScoreComponent implements OnInit {
   kpiScore:IKpiScoreItem[] = [];
   itemsKpi?:IKpiScoreItem;
   depCare:IDepcare[] = []
-  depCareTxt:string = "หน่วยงานผู้รับผิดชอบ"
-  // kpiSearch:any = {
-  //   year_id: this.year_id,
-  //   depCareTxt: this.depCareTxt
-  // }
+  
 
 
   ngOnInit(): void {
-    // ดึงข้อมูล ปี มาแสดง Dorpdown ปีงบประมาณ
-    this.yearService.findAll().then(result => {
-      this.year = result;
-    }).catch((err)=>{
-      this.alert.someting_wrong(err.error)
-      console.log(err);   
-    });
 
+    this.dropdownYear();
     this.kpiDepCare();
 
     // ดึงข้อมูล Kpi template มาแสดงที่ตาราง จัดเก็บ KPI Score    
@@ -57,27 +47,44 @@ export class KpiScoreComponent implements OnInit {
     this.kpiScoreYear(this.yearDopdown.id);
   }
 
+  // ดึงข้อมูล ปี มาแสดง Dorpdown ปีงบประมาณ
+  dropdownYear():void{    
+    this.yearService.findAll().then(result => {
+      this.year = result;
+    }).catch((err)=>{
+      this.alert.someting_wrong(err.error)
+      console.log(err);   
+    });
+  }
 
   kpiScoreYear(year?:string){
-    this.scoreService.findAll(year).then(result=>{
-      this.kpiScore = result;
-      console.log(result);
-      
-    }).catch(err=>{
-      console.log(err.error);      
-    })
+    if(this.depCareDopdown.id) {
+      this.scoreService.findAll(year, this.depCareDopdown.id).then(result=>{
+        this.kpiScore = result; 
+      }).catch(err=>{
+        console.log(err.error);      
+      })
+    } else{
+      this.scoreService.findAll(year).then(result=>{
+        this.kpiScore = result; 
+      }).catch(err=>{
+        console.log(err.error);      
+      })
+    } 
+    
   }
 
   kpiSearchYear(item:IKpiRangeYear){    
-    this.yearDopdown.id = item.year_id; 
-    // this.kpiSearch.year_id = item.year_id;
+    this.yearDopdown.id = item.year_id;     
     this.kpiScoreYear(item.year_id);
   }
 
-  setDepcareTxt(item:any){
+  setDepcare(item:any){
     this.depCareDopdown.id = item.id
-    this.depCareDopdown.text = item.name_th
-    this.depCareTxt = item.name_th;
+    this.depCareDopdown.text = item.name_th   
+    
+    this.kpiScoreYear(this.yearDopdown.id);
+    
   }
 
   kpiDepCare():void{

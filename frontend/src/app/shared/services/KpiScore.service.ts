@@ -12,8 +12,13 @@ export class KpiScoreService{
     constructor(private http:HttpClient){ }   
     url = environment.apiUrl+'/kpi';
 
-    findAll(year:any){  
-        return lastValueFrom(this.http.get(this.url+'/score/'+year)) as Promise<IKpiScoreItem[]>
+    findAll(year:any,  depcare_id?:any){   
+        if(depcare_id){
+            return lastValueFrom(this.http.get(this.url+'/score/'+year+'/'+depcare_id)) as Promise<IKpiScoreItem[]>
+        }else{
+            return lastValueFrom(this.http.get(this.url+'/score/'+year)) as Promise<IKpiScoreItem[]>
+        }            
+        
     }
     findOne(id:any, year:any){       
         return lastValueFrom(this.http.get(this.url+'/score/'+id+'/'+year)) as Promise<IKpiScoreItem[]>
