@@ -48,31 +48,39 @@
               <div class="col-md-12">
                 <form (ngSubmit)="onSubmit()" [formGroup]="formG">
                     <!--  -->
-                    <div class="col-md-4 col-lg-4">
-                      <div class="form-group">                        
-                            <div class="input-group">
-                              <div class="input-group-prepend"><span class="input-group-text">เดือน</span></div>
-                              <select #mySelect class="form-control" formControlName="kpi_range_item_id" (change)="onChange(mySelect.value)">
-                                <option value="">---โปรดเลือก----</option>
-                                <option [value]=item.id *ngFor="let item of itemRange">
-                                  {{item.name_th}}
-                                </option>
-                              </select>                   
-                            </div>
-                      </div>                      
-                    </div>    
-                    
-                    <!--  -->                                         
-                    <div class="col-md-4 col-lg-4">
-                      <div class="form-group">                          
-                            <div class="input-group">
-                              <div class="input-group-prepend"><span class="input-group-text">เป้าหมาย</span></div>
-                              <input class="form-control" id="target_score" type="number" formControlName="target_score">
-                            </div>
+                    <div class="row">
+                      <div class="col-md-4 col-lg-4">
+                        <div class="form-group">                        
+                              <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">เดือน</span></div>
+                                <select #mySelect class="form-control" formControlName="kpi_range_item_id" (change)="onChange(mySelect.value)">
+                                  <option value="">---โปรดเลือก----</option>
+                                  <option [value]=item.id *ngFor="let item of itemRange">
+                                    {{item.name_th}}
+                                  </option>
+                                </select>                   
+                              </div>
+                        </div>                      
                       </div>
-                    </div>
-                    
-                    <!--  -->                                         
+                      <!--  -->
+                      <div class="col-md-4 col-lg-4">
+                        <div class="form-group">                          
+                              <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">เป้าหมาย</span></div>
+                                <input class="form-control" id="target_score" type="number" formControlName="target_score">
+                              </div>
+                        </div>
+                      </div>
+                      <!--  -->                                         
+                      <div class="col-md-4 col-lg-4">
+                        <div class="form-group">                          
+                              <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">คะแนน</span></div>
+                                <input class="form-control" id="score" type="number" formControlName="score">
+                              </div>
+                        </div>
+                      </div>
+                      <!--  -->                                         
                       <div class="col-md-4 col-lg-4">
                         <div class="form-group">                          
                               <div class="input-group">
@@ -94,6 +102,12 @@
                               </div>
                         </div>
                       </div>
+                    </div>  
+                    <!--end row 1 -->                   
+                    <!--  -->                                         
+                    
+                    
+                    
                     
                     <!--  -->
                   <div class="col-md-4 col-lg-4">

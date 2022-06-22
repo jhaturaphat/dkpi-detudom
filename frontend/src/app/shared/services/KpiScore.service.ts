@@ -21,7 +21,7 @@ export class KpiScoreService{
         
     }
     findOne(id:any, year:any){       
-        return lastValueFrom(this.http.get(this.url+'/score/'+id+'/'+year)) as Promise<IKpiScoreItem[]>
+        return lastValueFrom(this.http.get(this.url+'/keep/score'+id+'/'+year)) as Promise<IKpiScoreItem[]>
     }
     save(body:IKpiScore) {
         return lastValueFrom(this.http.post(this.url+'/score', body)) as Promise<IKpiScore>

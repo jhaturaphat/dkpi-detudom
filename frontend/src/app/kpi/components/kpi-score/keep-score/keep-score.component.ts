@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IkpiRangeItem, IKpiScoreItem, IKpiUnit } from 'src/app/shared/interfaces/kpi.interface';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { KeepScoreService } from 'src/app/shared/services/KeepScore.service';
 import { KpiRangeItem } from 'src/app/shared/services/KpiRangeItem.server';
 import { KpiScoreService } from 'src/app/shared/services/KpiScore.service';
 import { KpiUnitService } from 'src/app/shared/services/KpiUnit.service';
@@ -19,7 +20,8 @@ export class KeepScoreComponent implements OnInit {
     private alert:AlertService,
     private KpiRanItService:KpiRangeItem,
     private formBuilder:FormBuilder,
-    private KpiUnit:KpiUnitService
+    private KpiUnit:KpiUnitService,
+    private KeepScoreService:KeepScoreService,
   ) { 
     // สร้างฟอร์ม
     this.formG = this.formBuilder.group({
@@ -39,36 +41,42 @@ export class KeepScoreComponent implements OnInit {
   id:any = 0;
   formStatus:boolean = false;
   formG:FormGroup;
-  itemScore:any;
-  itemRange:IkpiRangeItem[] = [];
+  itemScore:any; //ต้องกรองออก
+  itemRange:IkpiRangeItem[] = []; //ต้องกรองออก
   kpiUnit:IKpiUnit[] = [];
 // เริ่มต้นฟอร์ม
   ngOnInit(): void {    
-    console.log('itemsKpi',this.itemsKpi);   
+    console.log('itemsKpi on page keep-score.component',this.itemsKpi);   
     this.loadScore();
   }
 
+  // โหลด ข้อมูลหลัง สร้าง element เสร็จ
+  ngAfterViewInit(){    
+    this.loadKpiUnit();
+  }
+
   loadScore(){
-    this.KpiScoreService.findOne(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{
+    this.KeepScoreService.findOne(this.itemsKpi?.id, this.itemsKpi?.year).then(result=>{
       this.itemScore = result;
       this.formStatus = false;  // Reset สถานะ from
-      // console.log('itemScore',result);      
+      this.loadRangeItem();
+      // console.log('itemScore',result);            
     }).catch(err=>{
       console.log(err.error.errors);    
       this.alert.someting_wrong(err.error);
     })
   }
 
-  // โหลด ข้อมูลหลัง สร้าง element เสร็จ
-  ngAfterViewInit(){
-    this.loadRangeItem();
-    this.loadKpiUnit();
-  }
+  
 // โหลด item kpi
   loadRangeItem(){
     this.KpiRanItService.findAll(this.itemsKpi?.frequency_id).then(result =>{
       this.itemRange = result;
-      //console.log('โหลด item kpi',result);      
+      if(this.itemScore){
+        let item = this.itemScore.map((e:any)=>e.kri_id);
+        this.itemRange = result.filter((e:any)=> !item.includes(e.id)) 
+      }      
+      console.log('this.itemRange', this.itemRange);  
     }).catch(err=> {
       this.alert.someting_wrong(err.error)
       console.log(err.error.errors);      
