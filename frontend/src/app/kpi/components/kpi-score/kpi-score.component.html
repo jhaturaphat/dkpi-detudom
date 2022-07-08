@@ -23,7 +23,7 @@
                             </button>
                             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                                 role="menu" aria-labelledby="button-basic">
-                                <li role="menuitem" *ngFor="let item of depCare">
+                                <li role="menuitem" *ngFor="let item of depCareList">
                                     <a class="dropdown-item" (click)="setDepcare(item)">{{item.name_th}}</a>
                                 </li>
                                 

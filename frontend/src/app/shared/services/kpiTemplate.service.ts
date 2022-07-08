@@ -11,8 +11,11 @@ export class KpiTemplateService{
     constructor(private http:HttpClient){ }   
     url = environment.apiUrl+'/kpi';
 
-    findAll(){
-        return lastValueFrom(this.http.get(this.url+'/template')) as Promise<IKpiTpl[]>
+    findAll(page:number, itemPerPage:number, depFind:number){
+        return lastValueFrom(this.http.get(this.url+'/template/'+page+'/'+itemPerPage+'/'+depFind)) as Promise<any>
+    }
+    findFilter(val:any){
+        return lastValueFrom(this.http.get(this.url+'/template/'+val)) as Promise<IKpiTpl[]>
     }
     findAllOne(id:any){
         return lastValueFrom(this.http.get(this.url+'/template/'+id)) as Promise<IKpiTpl[]>

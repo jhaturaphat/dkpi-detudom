@@ -112,7 +112,82 @@ class KpiTplModel {
     };
   }
 
-  async findAll() {
+  async findAll(page,itemPerPage, depFind) {   
+    let result = null;
+    let total= null;
+    let pageSize = 0;    
+    let sql;     
+    if(parseInt(depFind) > 0){
+      sql = `
+    SELECT 
+        kpi_tpl.*,
+        indi.*,
+        fq.name_th as fq_name_th
+      FROM kpi_tpl
+      INNER JOIN frequency AS fq ON kpi_tpl.frequency_id = fq.id
+      INNER JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
+      INNER JOIN (
+          SELECT 
+          idn.id as idn_id,
+          idn.name_th as idn_name_th,
+          idn.name_en as idn_name_en,
+          idt.name_th as idt_name_th,
+          idg.id as idg_id,
+          idg.name_th as idg_name_th
+          FROM indi_name AS idn
+          INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
+          INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
+      ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id  
+      WHERE dep_care.id = ? LIMIT ?,?    
+    `;
+      
+      result =  await this._database.query(sql, [depFind, parseInt(page), parseInt(itemPerPage)]);
+      total = await this._database.query("SELECT COUNT(*) as total FROM kpi_tpl WHERE dep_care_id = ?",[parseInt(depFind)]); 
+      pageSize = Math.ceil(parseInt(total[0].total) / parseInt(itemPerPage));
+    }else{
+      sql = `
+    SELECT 
+        kpi_tpl.*,
+        indi.*,
+        fq.name_th as fq_name_th
+      FROM kpi_tpl
+      INNER JOIN frequency AS fq ON kpi_tpl.frequency_id = fq.id
+      INNER JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
+      INNER JOIN (
+          SELECT 
+          idn.id as idn_id,
+          idn.name_th as idn_name_th,
+          idn.name_en as idn_name_en,
+          idt.name_th as idt_name_th,
+          idg.id as idg_id,
+          idg.name_th as idg_name_th
+          FROM indi_name AS idn
+          INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
+          INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
+      ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id  
+      LIMIT ?,?    
+    `;
+      
+      result =  await this._database.query(sql, [parseInt(page), parseInt(itemPerPage)]);
+      total = await this._database.query("SELECT COUNT(*) as total FROM kpi_tpl");
+      pageSize = Math.ceil(parseInt(total[0].total) / parseInt(itemPerPage));
+    }
+        
+     const totalItem = parseInt(total[0].total);
+    
+    return {
+      pagiConf:{
+        disabled:true,
+        totalItem, //จำนวนทั้งหมดในฐาน
+        pageSize,
+        page,
+        itemPerPage
+      },
+      result
+    }
+  }
+
+  async findFilter(value) {
     const sql = `
     SELECT 
         kpi_tpl.*,
@@ -120,6 +195,7 @@ class KpiTplModel {
         fq.name_th as fq_name_th
       FROM kpi_tpl
       INNER JOIN frequency AS fq ON kpi_tpl.frequency_id = fq.id
+      INNER JOIN dep_care ON kpi_tpl.dep_care_id = dep_care.id
       INNER JOIN (
           SELECT 
           idn.id as idn_id,
@@ -132,8 +208,9 @@ class KpiTplModel {
           INNER JOIN indi_type AS idt ON idn.indi_type_id = idt.id
           INNER JOIN indi_group AS  idg ON idt.indi_group_id = idg.id
       ) AS indi ON kpi_tpl.indi_name_id = indi.idn_id
+      WHERE dep_care.id = ?
     `;
-   return await this._database.query(sql);
+   return await this._database.query(sql,[value]);
   }
 
   async findOne(id) {

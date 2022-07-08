@@ -14,6 +14,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { IconPipe } from 'src/app/pipes/icon.pipe';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 
@@ -32,11 +33,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    // ngx-boostrap
     TooltipModule.forRoot(),
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   exports:[   
     IconPipe, 
@@ -46,11 +49,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ContentComponent,
     ReactiveFormsModule,
     FormsModule,
+    // ngx-boostrap
     TooltipModule,
     TabsModule,
     BsDropdownModule,
     ModalModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule
   ],
   providers:[
     

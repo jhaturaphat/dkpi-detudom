@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IKpiTpl } from 'src/app/shared/interfaces/kpi.interface';
 import { AlertService } from 'src/app/shared/services/alert.service';
@@ -10,6 +10,8 @@ import { ICondition } from '../indicator/indicator.interface';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { thLocale } from 'ngx-bootstrap/locale';
+import { IDepcare } from '../depcare/depcare.interface';
+import { KpiDepCareService } from 'src/app/shared/services/KpiDepCare.service';
 defineLocale('th', thLocale);
 
 declare const $:any;
@@ -23,18 +25,42 @@ declare const $:any;
 
 export class KpiTemplateComponent implements OnInit {
 
-  constructor(
+  depCareDopdown:any = {
+    id:'',
+    text:'หน่วยงานผู้รับผิดชอบ'
+  }
+  depCareList:IDepcare[] = [];
+  private id:any;
+  Form:FormGroup;
+  nameKpi:any = "";
+  frequency:any = '';
+  depCare:any = '';
+  condition:ICondition[] = [];
+  ListkpiTpl:IKpiTpl[] = [];
+  UpdateState:boolean = false; //ถ้ามีการคลิกแก้ไขฟอร์ม
+  // Pagination
+  pg:any = {
+    disabled : false,
+    totalItems : 11,
+    page : 0,
+    itemsPerPage : 5,
+    depFind: 0
+  } 
+
+
+  constructor(    
     private localeService: BsLocaleService,
     private IndicatorService:IndicatorService,
     private ItemKpiService:ItemsKpiService,
     private service:KpiTemplateService,
+    private depCareService: KpiDepCareService,
     private alert:AlertService,
     private formBuilder: FormBuilder,    
   ) {
     this.localeService.use("th");
     this.Form = this.formBuilder.group({    
       // id:['',[]],  
-      indi_name_id:['',[Validators.required]],  
+      indi_name_id:[{value: '', disabled: false},[Validators.required]],  
       label:['',[Validators.required]],
       objective:['', [Validators.required]],
       formular:['', [Validators.required]],
@@ -54,24 +80,17 @@ export class KpiTemplateComponent implements OnInit {
       frequency_id:['', [Validators.required]],
       status:['', [Validators.required]],
     });
-   }
 
-  private id:any;
-  Form:FormGroup;
-  nameKpi:any = "";
-  frequency:any = '';
-  depCare:any = '';
-  condition:ICondition[] = [];
-  ListkpiTpl:IKpiTpl[] = [];
-  UpdateState:boolean = false;
+   }
 
   ngOnInit(): void {    
     this.findAll();    
+    this.findDepCare();
   }
   
 
   onSubmit():void{       
-    console.log(this.Form.value);
+    // console.log(this.Form.value);
     if(!this.Form.valid){       
       return this.alert.someting_wrong();  
     }  
@@ -81,7 +100,7 @@ export class KpiTemplateComponent implements OnInit {
         this.findAll();   
       }).catch(err=>{
         console.log(err.error);
-        this.alert.someting_wrong(err.error);
+        this.alert.someting_wrong(err.errors);
       })
     }else{
       this.service.save(this.Form.value).then(result=>{
@@ -94,13 +113,19 @@ export class KpiTemplateComponent implements OnInit {
     } 
    
   }
+
+  pageChanged(event:any){    
+    this.pg.page = (event.page - 1) * this.pg.itemsPerPage;   
+    this.findAll();
+  }
   
   private findAll():void{
     this.UpdateState = false;
-    this.resetForm();        
-    this.service.findAll().then(result=>{
-      // console.log('ListkpiTpl รายการข้อมูเทมเพลต', result);      
-      this.ListkpiTpl = result;      
+    this.resetForm()
+    this.service.findAll(this.pg.page, this.pg.itemsPerPage, this.pg.depFind).then(result=>{
+      console.log('ListkpiTpl รายการข้อมูเทมเพลต', result.result);      
+      this.ListkpiTpl = result.result;    
+      this.pagiConf(result.pagiConf);
     }).catch(err=>{
       console.log(err.error.erros);
       this.alert.someting_wrong(err.error);
@@ -125,13 +150,19 @@ export class KpiTemplateComponent implements OnInit {
       this.alert.someting_wrong(err.error);
     });
   }
+  pagiConf(item:any){
+    this.pg.totalItems = item.totalItem;
+    this.pg.page = item.page;
+    this.pg.itemsPerPage = item.itemPerPage;
+  }
 
   onUpdate(item:IKpiTpl){
     this.UpdateState = true;    
     const form = this.Form;  
-    this.id = item.id;  
-    // form.controls['id'].setValue(item.id);
-    form.controls['indi_name_id'].setValue(item.indi_name_id);
+    console.log(form);
+    
+    // this.id = item.id;      
+    form.controls['indi_name_id'].setValue(item.indi_name_id);    
     form.controls['label'].setValue(item.label);
     form.controls['objective'].setValue(item.objective);
     form.controls['formular'].setValue(item.formular);
@@ -150,6 +181,9 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['dep_care_id'].setValue(item.dep_care_id);
     form.controls['frequency_id'].setValue(item.frequency_id);
     form.controls['status'].setValue(item.status);
+
+    console.log(this.Form.value);
+    
   }
 
   onDelete(item:IKpiTpl){   
@@ -167,7 +201,7 @@ export class KpiTemplateComponent implements OnInit {
 
   resetForm(){        
     const form = this.Form; 
-    // form.controls['id'].setValue('');
+    // form.controls['id'].setValue('');    
     form.controls['indi_name_id'].setValue('');
     form.controls['label'].setValue('');
     form.controls['objective'].setValue('');
@@ -211,6 +245,26 @@ export class KpiTemplateComponent implements OnInit {
     
     // ดึงข้อมูลตาราง kpi_condition
     this.kpiCondition();
+  }
+
+  // Section รายการข้อมูเทมเพลต
+
+  searchKpiScoe(item:any){
+    this.depCareDopdown.id = item.id
+    this.depCareDopdown.text = item.name_th  
+    this.pg.depFind = this.depCareDopdown.id;
+    
+    this.service.findFilter(this.depCareDopdown.id).then(res=>this.ListkpiTpl = res).catch(err=>{
+      console.log(err);  
+      this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง kpi_tpl ไม่ได้")   
+    })
+  }
+
+  findDepCare():void{
+    this.depCareService.findAll().then(result => this.depCareList = result).catch(err=>{
+      console.log(err);  
+      this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง dep_care ไม่ได้")    
+    })
   }
 
 }

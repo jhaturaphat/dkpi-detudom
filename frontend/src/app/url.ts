@@ -12,6 +12,6 @@ export const KpiUrl = {
     Name:'name',
     DepCare:'depcare',
     KpiTemplate:'template',
-    KpiScore:'storage',
+    KpiScore:'kpi-score',
     KpiChart:'kpi-chart'
 }

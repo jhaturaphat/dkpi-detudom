@@ -33,7 +33,7 @@ export class KpiScoreComponent implements OnInit {
   }
   kpiScore:IKpiScoreItem[] = [];
   itemsKpi?:IKpiScoreItem;
-  depCare:IDepcare[] = []
+  depCareList:IDepcare[] = []
   
 
 
@@ -89,7 +89,7 @@ export class KpiScoreComponent implements OnInit {
 
   kpiDepCare():void{
     this.depCareService.findAll().then(result=>{
-      this.depCare = result;
+      this.depCareList = result;
     }).catch(err=>{
       console.log(err);  
       this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง dep_care ไม่ได้")    

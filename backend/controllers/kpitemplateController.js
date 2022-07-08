@@ -22,7 +22,8 @@ const unit = new KpiUnitModel();
 router.get('/',(req, res)=>{
     res.json({message:'Hello KPI'});
 })
-router.get('/template',(req, res)=> res.sendAsyncApi(model.findAll()));
+router.get('/template/:page/:itemPerpage/:depFind',(req, res)=> res.sendAsyncApi(model.findAll(req.params.page, req.params.itemPerpage, req.params.depFind)));
+router.get('/template/:val',(req, res)=> res.sendAsyncApi(model.findFilter(req.params.val)));
 router.get('/template/:id',(req, res)=> res.sendAsyncApi(model.findOne(req.params.id)));
 router.post('/template',authorize(admin),(req, res)=> res.sendAsyncApi(model.save(req.body)));
 router.put('/template/:id',authorize(admin),(req, res)=> res.sendAsyncApi(model.update(req.params.id, req.body)));
