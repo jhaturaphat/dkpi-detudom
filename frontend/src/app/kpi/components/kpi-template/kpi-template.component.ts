@@ -12,6 +12,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { thLocale } from 'ngx-bootstrap/locale';
 import { IDepcare } from '../depcare/depcare.interface';
 import { KpiDepCareService } from 'src/app/shared/services/KpiDepCare.service';
+
 defineLocale('th', thLocale);
 
 declare const $:any;
@@ -90,7 +91,7 @@ export class KpiTemplateComponent implements OnInit {
   
 
   onSubmit():void{       
-    // console.log(this.Form.value);
+    console.log(this.Form.value['active_date']); 
     if(!this.Form.valid){       
       return this.alert.someting_wrong();  
     }  
@@ -159,7 +160,7 @@ export class KpiTemplateComponent implements OnInit {
   onUpdate(item:IKpiTpl){
     this.UpdateState = true;    
     const form = this.Form;  
-    console.log(form);
+    console.log(item);
     
     // this.id = item.id;      
     form.controls['indi_name_id'].setValue(item.indi_name_id);    
@@ -181,8 +182,6 @@ export class KpiTemplateComponent implements OnInit {
     form.controls['dep_care_id'].setValue(item.dep_care_id);
     form.controls['frequency_id'].setValue(item.frequency_id);
     form.controls['status'].setValue(item.status);
-
-    console.log(this.Form.value);
     
   }
 
@@ -228,7 +227,6 @@ export class KpiTemplateComponent implements OnInit {
     this.IndicatorService.onNameAll().then(result=>{         
       let item = this.ListkpiTpl.map((e:any)=> e.idn_id);
       this.nameKpi = result.filter((e:any)=>!item.includes(e.id));
-
     }).catch(err=>{
       console.log(err.error);
       this.alert.someting_wrong(err.error);
@@ -250,21 +248,21 @@ export class KpiTemplateComponent implements OnInit {
   // Section รายการข้อมูเทมเพลต
 
   searchKpiScoe(item:any){
-    this.depCareDopdown.id = item.id
-    this.depCareDopdown.text = item.name_th  
+    this.depCareDopdown.id = item.id;
+    this.depCareDopdown.text = item.name_th;
     this.pg.depFind = this.depCareDopdown.id;
     
     this.service.findFilter(this.depCareDopdown.id).then(res=>this.ListkpiTpl = res).catch(err=>{
       console.log(err);  
-      this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง kpi_tpl ไม่ได้")   
-    })
+      this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง kpi_tpl ไม่ได้");   
+    });
   }
 
   findDepCare():void{
     this.depCareService.findAll().then(result => this.depCareList = result).catch(err=>{
       console.log(err);  
-      this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง dep_care ไม่ได้")    
-    })
+      this.alert.someting_wrong("โปรแกรมดึงข้อมูลตาราง dep_care ไม่ได้");    
+    });
   }
 
 }

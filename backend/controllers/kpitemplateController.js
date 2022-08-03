@@ -38,17 +38,11 @@ router.get('/score/:year/:depcare',(req, res)=> res.sendAsyncApi(score.findWith(
 
 // items
 router.get('/year', (req, res)=> res.sendAsyncApi(year.findAll()));
-
 // Chart
 router.get('/chart/:id/:year', (req, res)=> res.sendAsyncApi(chart.find(req.params.id, req.params.year)))
-
 // 
 router.get('/range/:frequency_id',(req, res)=> res.sendAsyncApi(range.findAll(req.params.frequency_id)));
-
 //หน่วยนับ
 router.get('/unit',(req, res)=> res.sendAsyncApi(unit.findAll()));
-
-
-
 
 module.exports = router;
